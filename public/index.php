@@ -3,9 +3,24 @@
 class App
 {
 
-  function __construct($str = 'default')
+  protected $controller = '_404';
+
+  function __construct()
   {
-    print_r($this->getURL());
+
+    $arr = $this->getURL();
+
+    // ucfirst: capitalizes the first letter
+    $filename = "../app/controllers/" . ucfirst($arr[0]) . ".php";
+    if (file_exists($filename)) {
+      // require: if not found will shut down program
+      // include if not found will continue
+      require $filename;
+      $this->controller = $arr[0];
+    } else {
+      require "../app/controllers/" . $this->controller . ".php";
+    }
+    $mycontroller = new $this->controller();
   }
 
   private function getURL()
