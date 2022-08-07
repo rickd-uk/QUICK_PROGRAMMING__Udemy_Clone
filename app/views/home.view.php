@@ -1,0 +1,2 @@
+WELCOME
+<?= $title ?>

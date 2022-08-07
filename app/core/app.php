@@ -22,11 +22,11 @@ class App
     }
 
     $mycontroller = new $this->controller();
-    $mymethod = $arr[1];
+    $mymethod = $arr[1] ?? $arr[0];
 
     if (!empty($mymethod)) {
-      if (method_exists($mycontroller, $mymethod)) {
-        $this->method = $mymethod;
+      if (method_exists($mycontroller, strtolower($mymethod))) {
+        $this->method = strtolower($mymethod);
         unset($arr[1]);
       }
     }
@@ -44,9 +44,6 @@ class App
 
     // Split url params into array
     $arr = explode("/", $url);
-
-    // convert to lowercase
-    $arr[1] =  $arr[1] ? strtolower($arr[1]) : $arr[1];
 
     return $arr;
   }
