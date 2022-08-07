@@ -14,6 +14,9 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
   define('DB_USER', 'rick');
   define('DB_PW', '123456');
   define('DB_DRIVER', 'mysql');
+
+  // root path 
+  define('ROOT', 'http://localhost:8895/udemy/public');
 } else {
 
   // db config for web host
@@ -22,4 +25,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
   define('DB_USER', 'rick');
   define('DB_PW', '123456');
   define('DB_DRIVER', 'mysql');
+
+  // root path 
+  define('ROOT', 'https://www.website.com');
 }
