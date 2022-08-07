@@ -7,13 +7,13 @@ class Home
     echo "Home";
   }
 
-  public function edit($id = null)
+  public function edit()
   {
-    echo "edit " . $id;
+    echo "edit ";
   }
 
-  public function delete($id = null)
+  public function delete()
   {
-    echo "del " . $id;
+    echo "del ";
   }
 }
