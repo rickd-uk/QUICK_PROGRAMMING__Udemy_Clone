@@ -3,7 +3,7 @@
 // 404 page not found page
 class _404
 {
-  function __construct()
+  function index()
   {
     echo "Page not found!";
   }
