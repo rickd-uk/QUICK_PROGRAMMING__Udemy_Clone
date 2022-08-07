@@ -4,7 +4,7 @@ class Database
 {
   private function connect()
   {
-    $str = DB_DRIVER . ":hostname=" . DB_HOST . "dbname=" . DB_NAME;
+    $str = DB_DRIVER . ":hostname=" . DB_HOST . ";dbname=" . DB_NAME;
     return new PDO($str, DB_USER, DB_PW);
   }
 
@@ -16,8 +16,10 @@ class Database
     if ($stm) {
       $check = $stm->execute($data);
       if ($check) {
-        $type = PDO::FETCH_OBJ;
-        if ($type != 'obj') {
+
+        if ($type == 'obj') {
+          $type = PDO::FETCH_OBJ;
+        } else if ($type == 'arr') {
           $type = PDO::FETCH_ASSOC;
         }
         $result = $stm->fetchAll($type);
@@ -28,5 +30,20 @@ class Database
       }
     }
     return false;
+  }
+
+  public function create_tables()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS `users` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `email` varchar(100) NOT NULL,
+      `password` varchar(255) NOT NULL,
+      `date` date DEFAULT NULL,
+      PRIMARY KEY (`id`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ";
+
+    $this->query($query);
   }
 }
