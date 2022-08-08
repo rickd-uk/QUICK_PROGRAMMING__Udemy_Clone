@@ -47,6 +47,7 @@ class App
     // filter out any unwanted chars
     $url = filter_var($url, FILTER_SANITIZE_URL);
 
+    // mb_substr() for utf-8
     if (substr($url, -1) != '/') $url = $url . '/';
 
     // Split url params into array
