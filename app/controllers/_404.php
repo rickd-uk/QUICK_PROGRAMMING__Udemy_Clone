@@ -1,6 +1,8 @@
 <?php
 
-// 404 page not found page
+/**
+ * _404 class
+ */
 class _404 extends Controller
 {
   public function index()
