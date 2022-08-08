@@ -3,7 +3,7 @@
 
 
 // App Info
-define('APP_NAME', 'Udemy App');
+define('APP_NAME', 'Udemy+');
 define('APP_DESC', 'Free and paid tuts.');
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {

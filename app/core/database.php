@@ -37,11 +37,17 @@ class Database
     $query = "
     CREATE TABLE IF NOT EXISTS `users` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
+      `firstname` varchar(30) NOT NULL,
+      `lastname` varchar(30) NOT NULL,
       `email` varchar(100) NOT NULL,
       `password` varchar(255) NOT NULL,
       `date` date DEFAULT NULL,
-      PRIMARY KEY (`id`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+      PRIMARY KEY (`id`),
+      KEY `firstname` (`firstname`),
+      KEY `lastname` (`lastname`),
+      KEY `date` (`date`),
+      KEY `email` (`email`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
     ";
 
     $this->query($query);
