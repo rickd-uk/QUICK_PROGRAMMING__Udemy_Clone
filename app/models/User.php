@@ -9,6 +9,7 @@ class User
   protected $table = "users";
   public function validate($data)
   {
+
     $this->errors = [];
 
     if (empty($data['firstname'])) {
@@ -22,8 +23,7 @@ class User
     }
     if (empty($data['password'])) {
       $this->errors['password'] = "A password is required";
-    }
-    if ($data['password'] !== $data['retype_password']) {
+    } else   if ($data['password'] !== $data['retype_password']) {
       $this->errors['password'] = "Passwords must match";
     }
     if (empty($data['terms'])) {
