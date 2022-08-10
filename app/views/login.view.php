@@ -1,3 +1,5 @@
+<?php include 'functions.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Login - NiceAdmin Bootstrap Template</title>
+  <title><?= APP_NAME ?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,12 +31,6 @@
   <!-- Template Main CSS File -->
   <link href="<?= ROOT ?>/niceadmin/assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.3.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -68,20 +64,22 @@
                     <div class="alert alert-success text-center"><?= display_message('', true) ?></div>
                   <?php endif; ?>
 
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form method="POST" class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
-                        <!-- <span class="input-group-text" id="inputGroupPrepend">@</span> -->
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <span class="input-group-text" id="inputGroupPrepend">Email</span>
+                        <input value="<?= set_value('email') ?>" type="email" name="email" class="form-control <?= !empty($errors['email']) ? 'border-danger' : '' ?>" id="yourEmail" required>
+                        <div class="invalid-feedback">Please, enter your email!</div>
+
                       </div>
+                      <?php show_error_msg($errors, 'email'); ?>
                     </div>
+
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input value="<?= set_value('password') ?>" type="password" name="password" class="form-control" id="yourPassword" required1>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 

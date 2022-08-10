@@ -22,12 +22,11 @@ class Model extends Database
     $this->query($query, $data);
   }
 
-
-  public function where($data)
+  // $get '' by default which returns multiple records
+  // if $get is 'one' then one record is retrieved
+  public function where($data, $get = '')
   {
     $keys = array_keys($data);
-
-
     $query = "SELECT * FROM " . $this->table . " where ";
 
     foreach ($keys as $key) {
@@ -35,11 +34,18 @@ class Model extends Database
     }
     $query = trim($query, "&& ");
 
+    // if one record is required then limit it
+    if ($get === 'one') {
+      $query .= " ORDER BY id DESC LIMIT 1";
+    }
     $res = $this->query($query, $data);
 
     if (is_array($res)) {
-      return $res;
+
+      // if one record is needed then return first in array
+      return $get === 'one' ? $res[0] : $res;
     }
+
     return false;
   }
 }

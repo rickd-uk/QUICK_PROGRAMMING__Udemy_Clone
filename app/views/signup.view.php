@@ -1,4 +1,5 @@
 <?php include 'functions.php' ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -68,40 +69,40 @@
                   <form method="POST" class="row g-3 needs-validation" novalidate>
                     <div class="col-6">
                       <label for="yourName" class="form-label">First Name</label>
-                      <input value="<?= set_value('firstname') ?>" type="text" name="firstname" class="form-control <?= !empty($errors['firstname']) ? 'border-danger' : '' ?>" id="yourName" required1>
+                      <input value="<?= set_value('email') ?>" type="text" name="email" class="form-control <?= !empty($errors['email']) ? 'border-danger' : '' ?>" id="yourName" required>
                       <div class="invalid-feedback">Please, enter your first name!</div>
-                      <?php show_error_msg($errors, 'firstname'); ?>
+                      <div><?php show_error_msg($errors, 'email'); ?></div>
                     </div>
                     <div class="col-6">
                       <label for="yourName2" class="form-label">Last Name</label>
-                      <input value="<?= set_value('lastname') ?>" type="text" name="lastname" class="form-control <?= !empty($errors['lastname']) ? 'border-danger' : '' ?>" id="yourName2" required1>
+                      <input value="<?= set_value('lastname') ?>" type="text" name="lastname" class="form-control <?= !empty($errors['lastname']) ? 'border-danger' : '' ?>" id="yourName2" required>
                       <div class="invalid-feedback">Please, enter your last name!</div>
                       <?php show_error_msg($errors, 'lastname'); ?>
                     </div>
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>
-                      <input value="<?= set_value('email') ?>" type="email" name="email" class="form-control <?= !empty($errors['email']) ? 'border-danger' : '' ?>" id="yourEmail" required1>
+                      <input value="<?= set_value('email') ?>" type="email" name="email" class="form-control <?= !empty($errors['email']) ? 'border-danger' : '' ?>" id="yourEmail" required>
                       <div class="invalid-feedback">Please, enter your email!</div>
                       <?php show_error_msg($errors, 'email'); ?>
                     </div>
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input value="<?= set_value('password') ?>" type="password" name="password" class="form-control <?= !empty($errors['password']) ? 'border-danger' : '' ?>" id="yourPassword" required1>
+                      <input value="<?= set_value('password') ?>" type="password" name="password" class="form-control <?= !empty($errors['password']) ? 'border-danger' : '' ?>" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
 
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Retype Password</label>
-                      <input value="<?= set_value('retype_password') ?>" type="password" name="retype_password" class="form-control" id="retype_password" required1>
+                      <input value="<?= set_value('retype_password') ?>" type="password" name="retype_password" class="form-control" id="retype_password" required>
                       <div class="invalid-feedback">Please retype your password!</div>
                       <?php show_error_msg($errors, 'password'); ?>
                     </div>
 
                     <div class="col-12">
                       <div class="form-check">
-                        <input <?= set_value('terms') ? 'checked' : ''; ?> class="form-check-input" name="terms" type="checkbox" value="1" id="acceptTerms" required1>
+                        <input <?= set_value('terms') ? 'checked' : ''; ?> class="form-check-input" name="terms" type="checkbox" value="1" id="acceptTerms" required>
                         <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
                         <div class="invalid-feedback">You must agree before submitting.</div>
                         <?php show_error_msg($errors, 'terms'); ?>
