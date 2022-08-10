@@ -9,8 +9,6 @@
     </a>
 
     <nav id="navbar" class="navbar">
-
-
       <ul>
         <li><a href="<?= ROOT ?>">Blog</a></li>
         <li><a href="single-post">Single Post</a></li>

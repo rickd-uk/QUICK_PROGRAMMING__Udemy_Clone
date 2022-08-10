@@ -651,7 +651,4 @@
 
 </main><!-- End #main -->
 
-/**
-* @var Admin $this
-*/
 <?php $this->view('admin/footer', $data); ?>
