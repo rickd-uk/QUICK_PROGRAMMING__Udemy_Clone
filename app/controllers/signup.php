@@ -7,7 +7,8 @@ class Signup extends Controller
 {
   public function index()
   {
-    show($_POST);
+    $data['errors'] = [];
+
     $user = new User();
     if ($user->validate($_POST)) {
 
@@ -17,8 +18,7 @@ class Signup extends Controller
       $user->insert($_POST);
     }
 
-
-    show($user->errors);
+    $data['errors'] = $user->errors;
     $data['title'] = "Signup";
 
     $this->view('signup', $data);

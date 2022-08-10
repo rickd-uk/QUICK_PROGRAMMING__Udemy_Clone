@@ -16,17 +16,17 @@ class User extends Model
     $this->errors = [];
 
     if (empty($data['firstname'])) {
-      $this->errors['firstname'] = "A first name is required";
+      $this->errors['firstname'] = "Enter first name";
     }
     if (empty($data['lastname'])) {
-      $this->errors['lastname'] = "A last name is required";
+      $this->errors['lastname'] = "Enter last name";
     }
-    $query = "SELECT * FROM users WHERE email = :email limit 1";
+
     if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-      $this->errors['email'] = "An email is not valid";
+      $this->errors['email'] = "Email is incorrect";
     } else {
       // check email
-      if ($this->query($query, ['email' => $data['email']])) {
+      if ($this->where(['email' => $data['email']])) {
         $this->errors['email'] = "Email already exists";
       }
     }

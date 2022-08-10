@@ -67,24 +67,35 @@
                   <form method="POST" class="row g-3 needs-validation" novalidate>
                     <div class="col-6">
                       <label for="yourName" class="form-label">First Name</label>
-                      <input value="<?= set_value('firstname') ?>" type="text" name="firstname" class="form-control" id="yourName" required1>
+                      <input value="<?= set_value('firstname') ?>" type="text" name="firstname" class="form-control <?= !empty($errors['firstname']) ? 'border-danger' : '' ?>" id="yourName" required1>
                       <div class="invalid-feedback">Please, enter your first name!</div>
+                      <?php if (!empty($errors['firstname'])) : ?>
+                        <small class="text-danger"><?= $errors['firstname'] ?></small>
+                      <?php endif; ?>
                     </div>
                     <div class="col-6">
                       <label for="yourName2" class="form-label">Last Name</label>
-                      <input value="<?= set_value('lastname') ?>" type="text" name="lastname" class="form-control" id="yourName2" required1>
+                      <input value="<?= set_value('lastname') ?>" type="text" name="lastname" class="form-control <?= !empty($errors['lastname']) ? 'border-danger' : '' ?>" id="yourName2" required1>
                       <div class="invalid-feedback">Please, enter your last name!</div>
+                      <?php if (!empty($errors['lastname'])) : ?>
+                        <small class="text-danger"><?= $errors['lastname'] ?></small>
+                      <?php endif; ?>
                     </div>
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Email</label>
-                      <input value="<?= set_value('email') ?>" type="email" name="email" class="form-control" id="yourEmail" required1>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                      <input value="<?= set_value('email') ?>" type="email" name="email" class="form-control <?= !empty($errors['email']) ? 'border-danger' : '' ?>" id="yourEmail" required1>
+                      <?php if (!empty($errors['email'])) : ?>
+                        <small class="text-danger"><?= $errors['email'] ?></small>
+                      <?php endif; ?>
                     </div>
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input value="<?= set_value('password') ?>" type="password" name="password" class="form-control" id="yourPassword" required1>
+                      <input value="<?= set_value('password') ?>" type="password" name="password" class="form-control <?= !empty($errors['password']) ? 'border-danger' : '' ?>" id="yourPassword" required1>
                       <div class="invalid-feedback">Please enter your password!</div>
+                      <?php if (!empty($errors['password'])) : ?>
+                        <small class="text-danger"><?= $errors['password'] ?></small>
+                      <?php endif; ?>
                     </div>
 
                     <div class="col-12">

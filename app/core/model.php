@@ -2,7 +2,6 @@
 
 class Model extends Database
 {
-
   protected $table = "";
   public function insert($data)
   {
@@ -21,5 +20,26 @@ class Model extends Database
     $query .= "(" . implode(",", $keys) . ") VALUES (:" . implode(", :", $keys) . ")";
 
     $this->query($query, $data);
+  }
+
+
+  public function where($data)
+  {
+    $keys = array_keys($data);
+
+
+    $query = "SELECT * FROM " . $this->table . " where ";
+
+    foreach ($keys as $key) {
+      $query .= $key . "=:" . $key . " && ";
+    }
+    $query = trim($query, "&& ");
+
+    $res = $this->query($query, $data);
+
+    if (is_array($res)) {
+      return $res;
+    }
+    return false;
   }
 }
