@@ -8,12 +8,8 @@ class Login extends Controller
   public function index()
   {
     $data['title'] = "Login";
-
     $data['errors'] = [];
-
     $user = new User();
-
-
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       // validate
@@ -21,11 +17,12 @@ class Login extends Controller
         'email' => $_POST['email']
       ]), 'one');
 
-
-
       if ($row) {
         if ($row->password === $_POST['password']) {
-          $_SESSION['USER_DATA'] = $row->id;
+
+          //authenticate
+          Auth::authenticate($row);
+
           redirect('home');
         }
       }
