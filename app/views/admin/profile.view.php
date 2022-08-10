@@ -1,11 +1,11 @@
 /**
 * @var Admin $this
 */
-<?php
+<?php $this->view('admin/header', $data); ?>
 
-$this->view('admin/header', $data); ?>
 
-<main id="main" class="main">
+<?php if (!empty($row)) : ?>
+
 
   <div class="pagetitle">
     <h1>Profile</h1>
@@ -26,8 +26,8 @@ $this->view('admin/header', $data); ?>
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <img src="<?= ROOT ?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <h2>Kevin Anderson</h2>
-            <h3>Web Designer</h3>
+            <h2><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></h2>
+            <h3><?= display($row, 'role') ?></h3>
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -73,37 +73,37 @@ $this->view('admin/header', $data); ?>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                  <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                  <div class="col-lg-9 col-md-8"><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Company</div>
-                  <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                  <div class="col-lg-9 col-md-8"></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Job</div>
-                  <div class="col-lg-9 col-md-8">Web Designer</div>
+                  <div class="col-lg-9 col-md-8"></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Country</div>
-                  <div class="col-lg-9 col-md-8">USA</div>
+                  <div class="col-lg-9 col-md-8"></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Address</div>
-                  <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                  <div class="col-lg-9 col-md-8"></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Phone</div>
-                  <div class="col-lg-9 col-md-8">(436) 486-3538 x29071</div>
+                  <div class="col-lg-9 col-md-8"></div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Email</div>
-                  <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                  <div class="col-lg-9 col-md-8"><?= display($row, 'email') ?></div>
                 </div>
 
               </div>
@@ -296,6 +296,13 @@ $this->view('admin/header', $data); ?>
       </div>
     </div>
   </section>
+<?php else : ?>
+
+  <div class="alert alert-danger alert-dimissible fade show" role="alert">
+    Profile not found!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<?php endif; ?>
 
 </main><!-- End #main -->
 

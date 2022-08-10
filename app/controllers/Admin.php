@@ -17,15 +17,13 @@ class Admin extends Controller
 
   public function profile($id = null)
   {
+    $id = $id == null ? Auth::getId() : $id;
+
+    $user = new User();
+    $data['row'] = $user->where(['id' => $id], 'one');
+
     $data['title'] = "Profile";
 
     $this->view('admin/profile', $data);
-  }
-
-  public function header()
-  {
-    $data['title'] = "header";
-
-    $this->view('admin/header', $data);
   }
 }

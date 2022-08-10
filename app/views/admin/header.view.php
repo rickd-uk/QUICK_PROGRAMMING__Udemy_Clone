@@ -280,11 +280,31 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-
       <li class="nav-item">
         <a class="nav-link " href="<?= ROOT ?>/admin/courses">
           <i class="bi bi-camera-reels"></i>
-          <span>Courses</span>
+          <span>My Courses</span>
+        </a>
+      </li><!-- End Profile Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " href="<?= ROOT ?>/admin/lessons">
+          <i class="bi bi-person-video3"></i>
+          <span>Enrolled Courses</span>
+        </a>
+      </li><!-- End Profile Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " href="<?= ROOT ?>/admin/watch-history">
+          <i class="bi bi-hourglass-split"></i>
+          <span>Watch History</span>
+        </a>
+      </li><!-- End Profile Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " href="<?= ROOT ?>/admin/sales">
+          <i class="bi bi-cash-coin"></i>
+          <span>Sales</span>
         </a>
       </li><!-- End Profile Nav -->
 
@@ -304,9 +324,7 @@
           <span>Home</span>
         </a>
       </li><!-- End Profile Nav -->
-
-
-
     </ul>
-
   </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">

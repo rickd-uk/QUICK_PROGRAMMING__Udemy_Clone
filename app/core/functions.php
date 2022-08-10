@@ -52,3 +52,13 @@ function display_message($msg = '', $erase = false)
   }
   return false;
 }
+
+function esc($str)
+{
+  return nl2br(htmlspecialchars($str));
+}
+
+function display($row, $field)
+{
+  return esc($row->$field);
+}
