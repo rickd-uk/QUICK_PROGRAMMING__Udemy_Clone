@@ -3,7 +3,7 @@
 /**
  * users class
  */
-class User
+class User extends Model
 {
   public $errors = [];
   protected $table = "users";
@@ -21,8 +21,14 @@ class User
     if (empty($data['lastname'])) {
       $this->errors['lastname'] = "A last name is required";
     }
-    if (empty($data['email'])) {
-      $this->errors['email'] = "An email is required";
+    $query = "SELECT * FROM users WHERE email = :email limit 1";
+    if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+      $this->errors['email'] = "An email is not valid";
+    } else {
+      // check email
+      if ($this->query($query, ['email' => $data['email']])) {
+        $this->errors['email'] = "Email already exists";
+      }
     }
     if (empty($data['password'])) {
       $this->errors['password'] = "A password is required";
@@ -38,27 +44,5 @@ class User
     }
 
     return false;
-  }
-
-  public function insert($data)
-  {
-    // Remove unwanted cols
-    if (!empty($this->allowedCols)) {
-      foreach ($data as $key => $value) {
-        if (!in_array($key, $this->allowedCols)) {
-          unset($data[$key]);
-        }
-      }
-    }
-    $keys = array_keys($data);
-    // $values = array_values($data);
-
-    $query = "INSERT INTO users ";
-    $query .= "(" . implode(",", $keys) . ") VALUES (:" . implode(", :", $keys) . ")";
-
-    $db = new Database();
-    show($query);
-    show($data);
-    $db->query($query, $data);
   }
 }
