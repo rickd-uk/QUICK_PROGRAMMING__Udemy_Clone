@@ -29,6 +29,10 @@
   <link href="<?= ROOT ?>/zenblog/assets/css/variables.css" rel="stylesheet">
   <link href="<?= ROOT ?>/zenblog/assets/css/main.css" rel="stylesheet">
 
+  <link href="<?= ROOT ?>/css/main.css" rel="stylesheet">
+
+
+
   <!-- =======================================================
   * Template Name: ZenBlog - v1.1.0
   * Template URL: https://bootstrapmade.com/zenblog-bootstrap-blog-template/

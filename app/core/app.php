@@ -30,7 +30,6 @@ class App
     $mymethod = $arr[1] ?? $arr[0];
 
 
-
     if (!empty($mymethod)) {
       if (method_exists($mycontroller, strtolower($mymethod))) {
         $this->method = strtolower($mymethod);

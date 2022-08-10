@@ -24,17 +24,38 @@ class Auth
     }
   }
 
+  private static function session_data_exists()
+  {
+    return !empty($_SESSION['USER_DATA']) ? true : false;
+  }
+
+  private static function get_session_data()
+  {
+    return self::session_data_exists() ? $_SESSION['USER_DATA'] : false;
+  }
+
   public static function is_logged_in()
   {
-    if (!empty($_SESSION['USER_DATA'])) return true;
-    return false;
+    return self::session_data_exists();
   }
 
   public static function is_admin()
   {
-    if (!empty($_SESSION['USER_DATA'])) {
-      if ($_SESSION['USER_DATA']->role == 'admin') return true;
+    if (self::session_data_exists()) {
+      $_SESSION['USER_DATA']->role == 'admin' ? true : false;
     }
     return false;
+  }
+
+  public static function __callStatic($funcname, $arg2)
+  {
+    $key = str_replace("get", "", strtolower($funcname));
+    if (self::session_data_exists()) {
+      return self::get_session_data()->$key;
+    }
+    return '';
+  }
+  private static function getfirstname()
+  {
   }
 }
