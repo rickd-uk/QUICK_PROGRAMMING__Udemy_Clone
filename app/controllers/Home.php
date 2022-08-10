@@ -7,8 +7,9 @@ class Home extends Controller
 {
   public function index()
   {
-    // $db = new Database();
+    $db = new DB_Tasks();
     // $db->create_tables();
+    $db->create_user_table();
 
     $data['title'] = "Home";
 

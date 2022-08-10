@@ -10,6 +10,11 @@ class Admin extends Controller
     // $db = new Database();
     // $db->create_tables();
 
+    if (!Auth::is_logged_in()) {
+      display_message('Please login to view the admin section');
+      redirect('login');
+    }
+
     $data['title'] = "Dashboard";
 
     $this->view('admin/dashboard', $data);
@@ -17,6 +22,10 @@ class Admin extends Controller
 
   public function profile($id = null)
   {
+    if (!Auth::is_logged_in()) {
+      display_message('Please login to view the admin section');
+      redirect('login');
+    }
     $id = $id == null ? Auth::getId() : $id;
 
     $user = new User();
