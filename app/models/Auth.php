@@ -58,4 +58,7 @@ class Auth
   private static function getfirstname()
   {
   }
+  private static function getlastname()
+  {
+  }
 }
