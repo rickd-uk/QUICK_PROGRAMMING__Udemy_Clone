@@ -18,8 +18,8 @@ class Login extends Controller
       ]), 'one');
 
       if ($row) {
-        if ($row->password === $_POST['password']) {
 
+        if (password_verify($_POST['password'], $row->password)) {
           //authenticate
           Auth::authenticate($row);
 

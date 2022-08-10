@@ -69,9 +69,9 @@
                   <form method="POST" class="row g-3 needs-validation" novalidate>
                     <div class="col-6">
                       <label for="yourName" class="form-label">First Name</label>
-                      <input value="<?= set_value('email') ?>" type="text" name="email" class="form-control <?= !empty($errors['email']) ? 'border-danger' : '' ?>" id="yourName" required>
+                      <input value="<?= set_value('firstname') ?>" type="text" name="firstname" class="form-control <?= !empty($errors['firstname']) ? 'border-danger' : '' ?>" id="yourName" required>
                       <div class="invalid-feedback">Please, enter your first name!</div>
-                      <div><?php show_error_msg($errors, 'email'); ?></div>
+                      <div><?php show_error_msg($errors, 'firstname'); ?></div>
                     </div>
                     <div class="col-6">
                       <label for="yourName2" class="form-label">Last Name</label>

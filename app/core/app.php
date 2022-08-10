@@ -5,10 +5,11 @@ class App
   protected $controller = '_404';
   protected $method = 'index';
 
+  public static $page = "_404";
+
   function __construct()
   {
     $arr = $this->getURL();
-
 
     // ucfirst: capitalizes the first letter
     $filename = "../app/controllers/" . ucfirst($arr[0]) . ".php";
@@ -17,6 +18,7 @@ class App
       // include if not found will continue
       require $filename;
       $this->controller = $arr[0];
+      self::$page = ucfirst($arr[0]);
       unset($arr[0]);
     } else {
       require "../app/controllers/" . $this->controller . ".php";
