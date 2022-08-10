@@ -30,3 +30,25 @@ function set_value($key)
   }
   return '';
 }
+
+function redirect($link)
+{
+  header('Location: ' . ROOT . '/' . $link);
+  die();
+}
+
+function display_message($msg = '', $erase = false)
+{
+  if (!empty($msg)) {
+    $_SESSION['message'] = $msg;
+  } else {
+    if (!empty($_SESSION['message'])) {
+      $msg = $_SESSION['message'];
+      if ($erase) {
+        unset($_SESSION['message']);
+      }
+      return $msg;
+    }
+  }
+  return false;
+}
