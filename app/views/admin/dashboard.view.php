@@ -3,8 +3,6 @@
 */
 <?php Controller::view_static('admin/header', $data) ?>
 
-
-
 <div class="pagetitle">
   <h1>Dashboard</h1>
   <nav>
