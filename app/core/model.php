@@ -3,7 +3,8 @@
 class Model extends Database
 {
   protected $table = "";
-  public function insert($data)
+
+  private function remove_unwanted_cols($data)
   {
     // Remove unwanted cols
     if (!empty($this->allowedCols)) {
@@ -13,11 +14,39 @@ class Model extends Database
         }
       }
     }
+    return $data;
+  }
+  public function insert($data)
+  {
+    $this->remove_unwanted_cols($data);
+
+
     $keys = array_keys($data);
     // $values = array_values($data);
 
     $query = "INSERT INTO " . $this->table;
     $query .= "(" . implode(",", $keys) . ") VALUES (:" . implode(", :", $keys) . ")";
+
+    $this->query($query, $data);
+  }
+
+  public function update($id, $data)
+  {
+    $data = $this->remove_unwanted_cols($data);
+
+    $keys = array_keys($data);
+    $query = "UPDATE " . $this->table . " SET ";
+
+    foreach ($keys as $key) {
+      $query .= $key . "=:" . $key . ",";
+    }
+    $query = trim($query, ",");
+    $query .= " WHERE id = :id";
+
+    $data['id'] = $id;
+
+    // show($query);
+    // show_stop($data);
 
     $this->query($query, $data);
   }

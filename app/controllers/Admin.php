@@ -29,7 +29,12 @@ class Admin extends Controller
     $id = $id == null ? Auth::getId() : $id;
 
     $user = new User();
-    $data['row'] = $user->where(['id' => $id], 'one');
+    $data['row'] = $row = $user->where(['id' => $id], 'one');
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
+      $user->update($id, $_POST);
+      redirect('admin/profile/' . $id);
+    }
 
     $data['title'] = "Profile";
 

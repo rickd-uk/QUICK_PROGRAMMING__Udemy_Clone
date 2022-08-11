@@ -16,4 +16,15 @@ class Controller
       echo "could not find view file: " . $filename;
     }
   }
+  public static function view_static($view, $data = [])
+  {
+    extract($data);
+    $filename = "../app/views/" . $view . ".view.php";
+
+    if (file_exists($filename)) {
+      require $filename;
+    } else {
+      echo "could not find view file: " . $filename;
+    }
+  }
 }

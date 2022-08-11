@@ -1,12 +1,10 @@
 /**
 * @var Admin $this
 */
-<?php $this->view('admin/header', $data); ?>
+<?php Controller::view_static('admin/header') ?>
 
 
 <?php if (!empty($row)) : ?>
-
-
   <div class="pagetitle">
     <h1>Profile</h1>
     <nav>
@@ -118,11 +116,17 @@
                   <div class="row mb-3">
                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                     <div class="col-md-8 col-lg-9">
-                      <img src="<?= ROOT ?>/niceadmin/assets/img/profile-img.jpg" alt="Profile">
+
+
+                      <div class="d-flex">
+                        <img class="js-image-preview" src="<?= ROOT ?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" style="width:200px; max-width: 200px; height: 200px; object-fit: cover">
+                        <div class="js-filename m-2">Selected File: None</div>
+                      </div>
+
                       <div class="pt-2">
                         <label href="#" class="btn btn-primary btn-sm" title="Upload new profile image">
                           <i class="text-white bi bi-upload"></i>
-                          <input type="file" name="image" style="display: none;" />
+                          <input onchange="load_image(this.files[0])" type="file" name="image" style="display: none;" />
                         </label>
 
                       </div>
@@ -222,10 +226,10 @@
 
                   <div class="text-center">
                     <a href="<?= ROOT ?>/admin">
-                      <button type="button" class="btn btn-primary">Back</button>
+                      <button type="button" class="btn btn-primary float-start">Back</button>
                     </a>
 
-                    <button type="submit" class="btn btn-danger">Save Changes</button>
+                    <button type="submit" class="btn btn-danger float-end">Save Changes</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -323,4 +327,13 @@
 
 </main><!-- End #main -->
 
-<?php $this->view('admin/footer', $data); ?>
+<script>
+  function load_image(file) {
+    document.querySelector(".js-filename").innerHTML = "Select Files:" + file.name;
+
+    let myLink = window.URL.createObjectURL(file);
+    document.querySelector(".js-image-preview").src = myLink;
+  }
+</script>
+
+<?php Controller::view_static('admin/footer') ?>

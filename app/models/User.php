@@ -8,7 +8,10 @@ class User extends Model
   public $errors = [];
   protected $table = "users";
 
-  protected $allowedCols = ['email', 'firstname', 'lastname', 'password', 'role', 'date'];
+  protected $allowedCols = [
+    'email', 'firstname', 'lastname', 'password', 'role', 'date',
+    'about', 'company', 'job', 'country', 'address', 'phone', 'slug', 'image'
+  ];
 
   public function validate($data)
   {
