@@ -6,7 +6,8 @@
 class Admin extends Controller
 {
   private $destination = '';
-  private $files = '';
+  private $updated_image = false;
+
   public function index()
   {
     show_stop('ADMIN INDEX');
@@ -23,7 +24,7 @@ class Admin extends Controller
     $this->view('admin/dashboard', $data);
   }
 
-  private function save_image($user)
+  private function save_image($row, $user)
   {
     $dir = "uploads/images/";
     if (!file_exists($dir)) {
@@ -31,9 +32,9 @@ class Admin extends Controller
       file_put_contents($dir . "index.php", "");
       file_put_contents("uploads/index.php", "");
     }
-
     $allowed_images = ['image/jpeg', 'image/png'];
     $image = $_FILES['image'];
+
     if (!empty($image['name'])) {
       if ($image['error'] == 0) {
         if (in_array($image['type'], $allowed_images)) {
@@ -42,12 +43,19 @@ class Admin extends Controller
           move_uploaded_file($image['tmp_name'], $destination);
 
           $this->destination = $destination;
+
+          if (file_exists($row->image)) {
+            unlink($row->image);
+          }
+          $this->updated_image = true;
         } else {
           $user->errors['image'] = "This file type is not allowed";
         }
       } else {
         $user->errors['image'] = "Could not upload image";
       }
+    } else {
+      $this->updated_image = false;
     }
   }
 
@@ -67,15 +75,19 @@ class Admin extends Controller
     // if profile updated & data retrieved from db
     if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
 
-      $this->save_image($user);
-      $_POST['image'] = $this->destination;
+      if ($user->edit_validate($data)) {
+        $this->save_image($row, $user);
+        if ($this->updated_image) {
+          $_POST['image'] = $this->destination;
+        }
 
-      $user->update($id, $_POST);
-      redirect('admin/profile/' . $id);
+        $user->update($id, $_POST);
+        redirect('admin/profile/' . $id);
+      }
     }
 
     $data['title'] = "Profile";
-
+    $data['errors'] = $user->errors;
     $this->view('admin/profile', $data);
   }
 }

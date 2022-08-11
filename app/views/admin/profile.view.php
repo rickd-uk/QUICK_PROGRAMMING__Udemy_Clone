@@ -1,7 +1,7 @@
 /**
 * @var Admin $this
 */
-<?php Controller::view_static('admin/header') ?>
+<?php Controller::view_static('admin/header', $data) ?>
 
 
 <?php if (!empty($row)) : ?>
@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="<?= ROOT ?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="<?= ROOT ?>/<?= display($row, 'image') ?>" style="" alt="Profile" class="profile-image rounded-circle">
             <h2><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></h2>
             <h3><?= display($row, 'role') ?></h3>
             <div class="social-links mt-2">
@@ -119,7 +119,7 @@
 
 
                       <div class="d-flex">
-                        <img class="js-image-preview" src="<?= ROOT ?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" style="width:200px; max-width: 200px; height: 200px; object-fit: cover">
+                        <img class="js-image-preview" src="<?= ROOT ?>/<?= display($row, 'image') ?>" alt="Profile" style="width:200px; max-width: 200px; height: 200px; object-fit: cover">
                         <div class="js-filename m-2">Selected File: None</div>
                       </div>
 
