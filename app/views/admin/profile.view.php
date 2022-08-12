@@ -134,7 +134,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'firstname'); ?>
+                    <?php show_error_msg($errors, 'firstname'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -142,7 +142,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'lastname'); ?>
+                    <?php show_error_msg($errors, 'lastname'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -185,7 +185,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="phone" type="text" class="form-control" id="phone" value="<?= set_value('phone', $row->phone) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'phone'); ?>
+                    <?php show_error_msg($errors, 'phone'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -200,7 +200,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="twitter_link" type="text" class="form-control" id="twitter" value="<?= set_value('twitter_link', $row->twitter_link) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'twitter_link'); ?>
+                    <?php show_error_msg($errors, 'twitter_link'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -208,7 +208,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="facebook_link" type="text" class="form-control" id="facebook" value="<?= set_value('facebook_link', $row->facebook_link) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'facebook_link'); ?>
+                    <?php show_error_msg($errors, 'facebook_link'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -216,7 +216,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="instagram_link" type="text" class="form-control" id="instagram" value="<?= set_value('instagram_link', $row->instagram_link) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'instagram_link'); ?>
+                    <?php show_error_msg($errors, 'instagram_link'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -224,7 +224,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="linkedin_link" type="text" class="form-control" id="linkedin" value="<?= set_value('linkedin_link', $row->linkedin_link) ?>">
                     </div>
-                    <?php show_error_msg2($errors, 'linkedin_link'); ?>
+                    <?php show_error_msg($errors, 'linkedin_link'); ?>
                   </div>
 
                   <div class="text-center">

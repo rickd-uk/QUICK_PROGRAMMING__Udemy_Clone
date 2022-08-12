@@ -10,9 +10,7 @@ class Admin extends Controller
 
   public function index()
   {
-    show_stop('ADMIN INDEX');
-    // $db = new Database();
-    // $db->create_tables();
+
 
     if (!Auth::is_logged_in()) {
       display_message('Please login to view the admin section');
@@ -41,8 +39,11 @@ class Admin extends Controller
           // passed validation
           $destination = $dir . time() . "_" . $image['name'];
           move_uploaded_file($image['tmp_name'], $destination);
-
           $this->destination = $destination;
+
+          resize_image($destination);
+
+
 
           if (file_exists($row->image)) {
             unlink($row->image);
