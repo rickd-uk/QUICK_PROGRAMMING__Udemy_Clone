@@ -33,10 +33,22 @@ class User extends Model
   {
     $this->errors = [];
 
-    $this->check_field($data, 'firstname', 'Enter first name');
+    // $this->check_field($data, 'firstname', 'Enter first name');
+
+    if (empty($data['firstname'])) {
+      $this->errors['firstname'] = "Enter first name";
+    } else
+    if (!preg_match("/^[a-zA-Z]+$/", trim($data['firstname']))) {
+      $this->errors['firstname'] = "First name can only have letters (no spaces)";
+    }
+
     if (empty($data['lastname'])) {
       $this->errors['lastname'] = "Enter last name";
+    } else
+    if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
+      $this->errors['lastname'] = "Last name can only have letters (no spaces)";
     }
+
 
     if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
       $this->errors['email'] = "Email is incorrect";
@@ -65,14 +77,20 @@ class User extends Model
 
   public function edit_validate($data)
   {
-
     $this->errors = [];
 
     if (empty($data['firstname'])) {
       $this->errors['firstname'] = "Enter first name";
+    } else
+    if (!preg_match("/^[a-zA-Z]+$/", trim($data['firstname']))) {
+      $this->errors['firstname'] = "First name can only have letters (no spaces)";
     }
+
     if (empty($data['lastname'])) {
       $this->errors['lastname'] = "Enter last name";
+    } else
+    if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
+      $this->errors['lastname'] = "Last name can only have letters (no spaces)";
     }
 
     if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -83,6 +101,14 @@ class User extends Model
         $this->errors['email'] = "Email already exists";
       }
     }
+
+    if (!preg_match("/^(09|\+[0-9]{3})[0-9]{6}$/", trim($data['phone']))) {
+      if (!filter_var($data['phone'], FILTER_VALIDATE_URL)) {
+        $this->errors['phone'] = "";
+      }
+    }
+
+
     if (!empty($data['facebook_link'])) {
       if (!filter_var($data['facebook_link'], FILTER_VALIDATE_URL)) {
         $this->errors['facebook_link'] = "Facebook link is not valid";
@@ -103,6 +129,9 @@ class User extends Model
         $this->errors['linkedin_link'] = "Linkedin link is not valid";
       }
     }
+
+
+    // show_stop($this->errors);
 
     if (empty($this->errors)) {
       return true;

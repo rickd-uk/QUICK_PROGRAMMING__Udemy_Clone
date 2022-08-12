@@ -78,3 +78,12 @@ function str_to_url($url)
 
   return $url;
 }
+
+
+
+function show_error_msg2($errors, $field)
+{
+  if (!empty($errors[$field])) : ?>
+    <small class="text-danger"><?= $errors[$field] ?></small>
+<?php endif;
+}

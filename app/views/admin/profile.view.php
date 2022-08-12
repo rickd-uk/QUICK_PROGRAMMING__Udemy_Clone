@@ -1,8 +1,4 @@
-/**
-* @var Admin $this
-*/
 <?php Controller::view_static('admin/header', $data) ?>
-
 
 <?php if (!empty($row)) : ?>
   <div class="pagetitle">
@@ -27,7 +23,7 @@
             <h2><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></h2>
             <h3><?= display($row, 'role') ?></h3>
             <div class="social-links mt-2">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
               <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
@@ -138,6 +134,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'firstname'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -145,6 +142,7 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'lastname'); ?>
                   </div>
 
                   <div class="row mb-3">
@@ -164,64 +162,69 @@
                   <div class="row mb-3">
                     <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="job" type="text" class="form-control" id="Job" vvalue="<?= set_value('job', $row->job) ?>">
+                      <input name="job" type="text" class="form-control" id="job" vvalue="<?= set_value('job', $row->job) ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="country" type="text" class="form-control" id="Country" value="<?= set_value('country', $row->country) ?>">
+                      <input name="country" type="text" class="form-control" id="country" value="<?= set_value('country', $row->country) ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="address" type="text" class="form-control" id="Address" value="<?= set_value('address', $row->address) ?>">
+                      <input name="address" type="text" class="form-control" id="address" value="<?= set_value('address', $row->address) ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="phone" type="text" class="form-control" id="Phone" value="<?= set_value('phone', $row->phone) ?>">
+                      <input name="phone" type="text" class="form-control" id="phone" value="<?= set_value('phone', $row->phone) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'phone'); ?>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="<?= set_value('email', $row->email) ?>">
+                      <input name="email" type="email" class="form-control" id="email" value="<?= set_value('email', $row->email) ?>">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
+                      <input name="twitter_link" type="text" class="form-control" id="twitter" value="<?= set_value('twitter_link', $row->twitter_link) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'twitter_link'); ?>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
+                      <input name="facebook_link" type="text" class="form-control" id="facebook" value="<?= set_value('facebook_link', $row->facebook_link) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'facebook_link'); ?>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
+                      <input name="instagram_link" type="text" class="form-control" id="instagram" value="<?= set_value('instagram_link', $row->instagram_link) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'instagram_link'); ?>
                   </div>
 
                   <div class="row mb-3">
                     <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
+                      <input name="linkedin_link" type="text" class="form-control" id="linkedin" value="<?= set_value('linkedin_link', $row->linkedin_link) ?>">
                     </div>
+                    <?php show_error_msg2($errors, 'linkedin_link'); ?>
                   </div>
 
                   <div class="text-center">
@@ -328,6 +331,9 @@
 </main><!-- End #main -->
 
 <script>
+  var tab = tab || "default"
+
+
   function load_image(file) {
     document.querySelector(".js-filename").innerHTML = "Select Files:" + file.name;
 
