@@ -45,9 +45,6 @@ class Model extends Database
 
     $data['id'] = $id;
 
-    // show($query);
-    // show_stop($data);
-
     $this->query($query, $data);
   }
 

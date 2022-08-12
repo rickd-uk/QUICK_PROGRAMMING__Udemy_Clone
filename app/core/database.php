@@ -15,9 +15,11 @@ class Database
     $con = $this->connect();
 
     $stm = $con->prepare($query);
+
     if ($stm) {
-      $check = $stm->execute($data);
-      if ($check) {
+
+      try {
+        $stm->execute($data);
 
         if ($type == 'obj') {
           $type = PDO::FETCH_OBJ;
@@ -29,6 +31,9 @@ class Database
         if (is_array($result) && count($result) > 0) {
           return $result;
         }
+      } catch (PDOException $e) {
+        show_stop($e);
+        echo "Error: " . $e;
       }
     }
     return false;

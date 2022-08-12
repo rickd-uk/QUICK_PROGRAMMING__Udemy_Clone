@@ -331,3 +331,7 @@
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
+
+    <?php if (display_message()) : ?>
+      <div class="alert alert-success text-center"><?= display_message('', true) ?></div>
+    <?php endif; ?>

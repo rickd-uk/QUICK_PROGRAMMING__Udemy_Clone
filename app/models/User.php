@@ -75,7 +75,7 @@ class User extends Model
   }
 
 
-  public function edit_validate($data)
+  public function edit_validate($data, $id)
   {
     $this->errors = [];
 
@@ -97,16 +97,22 @@ class User extends Model
       $this->errors['email'] = "Email is incorrect";
     } else {
       // check email
-      if ($this->where(['email' => $data['email']])) {
-        $this->errors['email'] = "Email already exists";
+      if ($results = $this->where(['email' => $data['email']])) {
+
+        foreach ($results as $result) {
+          if ($id !=  $result->id) {
+            $this->errors['email'] = "Email already exists";
+          }
+        }
       }
     }
 
-    if (!preg_match("/^(09|\+[0-9]{3})[0-9]{6}$/", trim($data['phone']))) {
-      if (!filter_var($data['phone'], FILTER_VALIDATE_URL)) {
-        $this->errors['phone'] = "";
+    if (!empty($data['phone'])) {
+      if (!preg_match("/^(09|[0-9]{3})[0-9]{6}$/", trim($data['phone']))) {
+        $this->errors['phone'] = "Phone number not valid";
       }
     }
+
 
 
     if (!empty($data['facebook_link'])) {
@@ -131,7 +137,7 @@ class User extends Model
     }
 
 
-    // show_stop($this->errors);
+
 
     if (empty($this->errors)) {
       return true;

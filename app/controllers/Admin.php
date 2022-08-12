@@ -77,13 +77,15 @@ class Admin extends Controller
     if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
 
 
-      if ($user->edit_validate($_POST)) {
+      if ($user->edit_validate($_POST, $id)) {
         $this->save_image($row, $user);
         if ($this->updated_image) {
           $_POST['image'] = $this->destination;
         }
 
         $user->update($id, $_POST);
+        display_message("Profile saved successfully");
+
         redirect('admin/profile/' . $id);
       }
     }
