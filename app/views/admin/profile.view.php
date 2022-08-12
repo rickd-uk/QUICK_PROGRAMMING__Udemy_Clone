@@ -122,7 +122,7 @@
                       <div class="pt-2">
                         <label href="#" class="btn btn-primary btn-sm" title="Upload new profile image">
                           <i class="text-white bi bi-upload"></i>
-                          <input onchange="load_image(this.files[0])" type="file" name="image" style="display: none;" />
+                          <input class="js-profile-img-input" onchange="load_image(this.files[0])" type="file" name="image" style="display: none;" />
                         </label>
 
                       </div>
@@ -227,12 +227,17 @@
                     <?php show_error_msg($errors, 'linkedin_link'); ?>
                   </div>
 
+                  <div class="js-progress progress my-4 hide">
+                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving</div>
+                  </div>
+
+
                   <div class="text-center">
                     <a href="<?= ROOT ?>/admin">
                       <button type="button" class="btn btn-primary float-start">Back</button>
                     </a>
 
-                    <button type="submit" class="btn btn-danger float-end">Save Changes</button>
+                    <button type="button" onclick="save_profile()" class="btn btn-danger float-end">Save Changes</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -356,6 +361,48 @@
   window.onload = function() {
 
     show_tab(tab);
+  }
+
+  // upload functions
+  function save_profile() {
+
+    let image = document.querySelector('.js-profile-img-input');
+    send_data({
+      pic: image.files[0],
+    })
+  }
+
+  function send_data(obj) {
+
+    let progress = document.querySelector('.js-progress')
+    progress.classList.remove('hide');
+
+    let myForm = new FormData();
+    for (key in obj) {
+      myForm.append(key, obj[key]);
+    }
+    let ajax = new XMLHttpRequest();
+
+    ajax.addEventListener('readystatechange', () => {
+      if (ajax.readyState == 4) {
+        if (ajax.status == 200) {
+          alert('upload complete')
+        } else {
+          // error occurred
+          alert('error occurred')
+        }
+      }
+    })
+    ajax.upload.addEventListener('progress', (e) => {
+      let percent = Math.round((e.loaded / e.total) * 100);
+      progress.children[0].style.width = percent + "%";
+      progress.children[0].innerHTML = "Saving... " + percent + "%";
+    })
+    // '' - stay on the same page
+    // true - asynchronous (so page does not freeze)
+    ajax.open('POST', '', true);
+    ajax.send(myForm);
+
   }
 </script>
 

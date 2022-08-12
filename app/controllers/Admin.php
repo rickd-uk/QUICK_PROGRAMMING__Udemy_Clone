@@ -44,7 +44,6 @@ class Admin extends Controller
           resize_image($destination);
 
 
-
           if (file_exists($row->image)) {
             unlink($row->image);
           }
