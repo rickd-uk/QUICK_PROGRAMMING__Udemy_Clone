@@ -41,19 +41,19 @@
             <ul class="nav nav-tabs nav-tabs-bordered">
 
               <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview" id="profile-overview-tab">Overview</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" id="profile-edit-tab">Edit Profile</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+                <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings" id="profile-settings-tab">Settings</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" id="profile-change-password-tab">Change Password</button>
               </li>
 
             </ul>
@@ -331,14 +331,31 @@
 </main><!-- End #main -->
 
 <script>
-  var tab = tab || "default"
+  var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#profile-overview";
 
+  function show_tab(tab_name) {
+    const someTabTriggerEl = document.querySelector(tab_name + "-tab");
+    const tab = new bootstrap.Tab(someTabTriggerEl);
+
+    tab.show();
+
+  }
+
+  function set_tab(tab_name) {
+    tab = tab_name;
+    sessionStorage.setItem("tab", tab_name);
+  }
 
   function load_image(file) {
     document.querySelector(".js-filename").innerHTML = "Select Files:" + file.name;
 
     let myLink = window.URL.createObjectURL(file);
     document.querySelector(".js-image-preview").src = myLink;
+  }
+
+  window.onload = function() {
+
+    show_tab(tab);
   }
 </script>
 
