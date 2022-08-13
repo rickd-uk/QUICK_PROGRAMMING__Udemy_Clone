@@ -1,3 +1,7 @@
+const log = (text) => {
+	console.log(text)
+}
+
 var tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : '#profile-overview'
 
 function show_tab(tab_name) {
@@ -24,29 +28,47 @@ window.onload = function () {
 }
 
 // upload functions
-function save_profile() {
-	let image = document.querySelector('.js-profile-img-input')
-	let allowed = ['jpeg', 'jpg', 'png']
+function save_profile(e) {
+	const form = e.currentTarget.form
+	const inputs = form.querySelectorAll('input, textarea')
+	let obj = {}
+	let image_added = false
 
-	if (typeof image.files[0] == 'object') {
-		var ext = image.files[0].name.split('.').pop()
-	}
-	console.log('ext:   ', ext)
-	if (!allowed.includes(ext.toLowerCase())) {
-		alert('Only these file types are allowed: ' + allowed.toString(','))
-		return
-	}
-	console.log(image)
+	for (var i = 0; i < inputs.length; i++) {
+		var key = inputs[i].name
 
-	send_data({
-		pic: image.files[0],
-	})
+		if (key == 'image') {
+			if (typeof inputs[i].files[0] == 'object') {
+				obj[key] = inputs[i].files[0]
+				image_added = true
+			}
+		} else {
+			obj[key] = inputs[i].value
+		}
+	}
+
+	// validate image
+	if (image_added) {
+		var allowed = ['jpeg', 'jpg', 'png']
+		if (typeof obj.image == 'object') {
+			var ext = obj.image.name.split('.').pop()
+		}
+
+		if (!allowed.includes(ext.toLowerCase())) {
+			alert('Only these file types are allowed: ' + allowed.toString(','))
+			return
+		}
+	}
+
+	send_data(obj)
+
+	// hide progress bar after 2 sec
 	setTimeout(() => {
 		document.querySelector('.js-progress').style = 'display: none;'
 	}, 2000)
 }
 
-function send_data(obj, progbar = '.js-progress') {
+function send_data(obj, progbar = 'js-progress') {
 	let progress = document.querySelector('.' + progbar)
 
 	let myForm = new FormData()

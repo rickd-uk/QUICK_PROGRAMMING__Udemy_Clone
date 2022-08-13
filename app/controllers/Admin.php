@@ -74,10 +74,13 @@ class Admin extends Controller
 
 
     // if profile updated & data retrieved from db
-    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row && false) {
+
 
 
       if ($user->edit_validate($_POST, $id)) {
+
+
         $this->save_image($row, $user);
         if ($this->updated_image) {
           $_POST['image'] = $this->destination;

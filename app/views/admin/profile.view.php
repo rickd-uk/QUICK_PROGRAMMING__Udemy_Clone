@@ -132,7 +132,7 @@
                   <div class="row mb-3">
                     <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>">
+                      <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>" required>
                     </div>
                     <?php show_error_msg($errors, 'firstname'); ?>
                   </div>
@@ -140,7 +140,7 @@
                   <div class="row mb-3">
                     <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>">
+                      <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>" required>
                     </div>
                     <?php show_error_msg($errors, 'lastname'); ?>
                   </div>
@@ -191,7 +191,7 @@
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="email" value="<?= set_value('email', $row->email) ?>">
+                      <input name="email" type="email" class="form-control" id="email" value="<?= set_value('email', $row->email) ?>" required>
                     </div>
                   </div>
 
@@ -237,7 +237,7 @@
                       <button type="button" class="btn btn-primary float-start">Back</button>
                     </a>
 
-                    <button type="button" onclick="save_profile()" class="btn btn-danger float-end">Save Changes</button>
+                    <button type="button" onclick="save_profile(event)" class="btn btn-danger float-end">Save Changes</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -335,75 +335,5 @@
 
 </main><!-- End #main -->
 
-<script>
-  var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#profile-overview";
-
-  function show_tab(tab_name) {
-    const someTabTriggerEl = document.querySelector(tab_name + "-tab");
-    const tab = new bootstrap.Tab(someTabTriggerEl);
-
-    tab.show();
-
-  }
-
-  function set_tab(tab_name) {
-    tab = tab_name;
-    sessionStorage.setItem("tab", tab_name);
-  }
-
-  function load_image(file) {
-    document.querySelector(".js-filename").innerHTML = "Select Files:" + file.name;
-
-    let myLink = window.URL.createObjectURL(file);
-    document.querySelector(".js-image-preview").src = myLink;
-  }
-
-  window.onload = function() {
-
-    show_tab(tab);
-  }
-
-  // upload functions
-  function save_profile() {
-
-    let image = document.querySelector('.js-profile-img-input');
-    send_data({
-      pic: image.files[0],
-    })
-  }
-
-  function send_data(obj) {
-
-    let progress = document.querySelector('.js-progress')
-    progress.classList.remove('hide');
-
-    let myForm = new FormData();
-    for (key in obj) {
-      myForm.append(key, obj[key]);
-    }
-    let ajax = new XMLHttpRequest();
-
-    ajax.addEventListener('readystatechange', () => {
-      if (ajax.readyState == 4) {
-        if (ajax.status == 200) {
-          alert('upload complete')
-        } else {
-          // error occurred
-          alert('error occurred')
-        }
-      }
-    })
-    ajax.upload.addEventListener('progress', (e) => {
-      let percent = Math.round((e.loaded / e.total) * 100);
-      progress.children[0].style.width = percent + "%";
-      progress.children[0].innerHTML = "Saving... " + percent + "%";
-    })
-    // '' - stay on the same page
-    // true - asynchronous (so page does not freeze)
-    ajax.open('POST', '', true);
-    ajax.send(myForm);
-
-  }
-</script>
 
 <?php Controller::view_static('admin/footer') ?>

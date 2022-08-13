@@ -31,6 +31,8 @@
 
   <link href="<?= ROOT ?>/css/main.css" rel="stylesheet">
 
+  <script src="<?= ROOT ?>/js/main.js"></script>
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
