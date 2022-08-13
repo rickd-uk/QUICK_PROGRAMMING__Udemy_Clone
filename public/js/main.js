@@ -59,7 +59,6 @@ function save_profile(e) {
 			return
 		}
 	}
-
 	send_data(obj)
 
 	// hide progress bar after 2 sec
@@ -72,18 +71,26 @@ function handle_result(result) {
 	let obj = JSON.parse(result)
 	if (typeof obj == 'object') {
 		// object was created
-
 		if (typeof obj.errors == 'object') {
 			// errors
-			alert(obj.errors)
+			display_errors(obj.errors)
 		} else {
-			alert('data saved')
+			window.location.reload()
 		}
+	}
+}
+
+function display_errors(errors) {
+	log(errors)
+	for (key in errors) {
+		document.querySelector('.js-error-' + key).innerHTML = errors[key]
 	}
 }
 
 function send_data(obj, progbar = 'js-progress') {
 	let progress = document.querySelector('.' + progbar)
+
+	progress.style = 'display: block;'
 
 	let myForm = new FormData()
 	for (key in obj) {
@@ -94,7 +101,6 @@ function send_data(obj, progbar = 'js-progress') {
 	ajax.addEventListener('readystatechange', () => {
 		if (ajax.readyState == 4) {
 			if (ajax.status == 200) {
-				// window.location.reload()
 				handle_result(ajax.responseText)
 			} else {
 				// error occurred

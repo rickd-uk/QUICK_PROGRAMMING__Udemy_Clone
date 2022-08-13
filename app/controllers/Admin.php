@@ -10,8 +10,6 @@ class Admin extends Controller
 
   public function index()
   {
-
-
     if (!Auth::is_logged_in()) {
       display_message('Please login to view the admin section');
       redirect('login');

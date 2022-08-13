@@ -122,9 +122,10 @@
                       <div class="pt-2">
                         <label href="#" class="btn btn-primary btn-sm" title="Upload new profile image">
                           <i class="text-white bi bi-upload"></i>
-                          <input class="js-profile-img-input" onchange="load_image(this.files[0])" type="file" name="image" style="display: none;" />
+                          <input class="js-profile-img-input" onchange="load_image(this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/webp, image/jpeg" />
                         </label>
-
+                        <?php show_error_msg($errors, 'image'); ?>
+                        <small class="js-error-image text-danger"></small>
                       </div>
                     </div>
                   </div>
@@ -135,6 +136,7 @@
                       <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>" required>
                     </div>
                     <?php show_error_msg($errors, 'firstname'); ?>
+                    <small class="js-error-firstname text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -143,6 +145,7 @@
                       <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>" required>
                     </div>
                     <?php show_error_msg($errors, 'lastname'); ?>
+                    <small class="js-error-lastname text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -186,6 +189,7 @@
                       <input name="phone" type="text" class="form-control" id="phone" value="<?= set_value('phone', $row->phone) ?>">
                     </div>
                     <?php show_error_msg($errors, 'phone'); ?>
+                    <small class="js-error-phone text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -201,6 +205,7 @@
                       <input name="twitter_link" type="text" class="form-control" id="twitter" value="<?= set_value('twitter_link', $row->twitter_link) ?>">
                     </div>
                     <?php show_error_msg($errors, 'twitter_link'); ?>
+                    <small class="js-error-twitter_link text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -209,6 +214,7 @@
                       <input name="facebook_link" type="text" class="form-control" id="facebook" value="<?= set_value('facebook_link', $row->facebook_link) ?>">
                     </div>
                     <?php show_error_msg($errors, 'facebook_link'); ?>
+                    <small class="js-error-facebook_link text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -217,6 +223,7 @@
                       <input name="instagram_link" type="text" class="form-control" id="instagram" value="<?= set_value('instagram_link', $row->instagram_link) ?>">
                     </div>
                     <?php show_error_msg($errors, 'instagram_link'); ?>
+                    <small class="js-error-instagram_link text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -225,9 +232,10 @@
                       <input name="linkedin_link" type="text" class="form-control" id="linkedin" value="<?= set_value('linkedin_link', $row->linkedin_link) ?>">
                     </div>
                     <?php show_error_msg($errors, 'linkedin_link'); ?>
+                    <small class="js-error-instagram_link text-danger"></small>
                   </div>
 
-                  <div class="js-progress progress my-4 hide">
+                  <div class="js-progress progress my-4 hide" style="display: none;">
                     <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">Saving</div>
                   </div>
 
