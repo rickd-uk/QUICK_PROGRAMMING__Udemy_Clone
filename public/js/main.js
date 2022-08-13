@@ -68,6 +68,20 @@ function save_profile(e) {
 	}, 2000)
 }
 
+function handle_result(result) {
+	let obj = JSON.parse(result)
+	if (typeof obj == 'object') {
+		// object was created
+
+		if (typeof obj.errors == 'object') {
+			// errors
+			alert(obj.errors)
+		} else {
+			alert('data saved')
+		}
+	}
+}
+
 function send_data(obj, progbar = 'js-progress') {
 	let progress = document.querySelector('.' + progbar)
 
@@ -81,7 +95,7 @@ function send_data(obj, progbar = 'js-progress') {
 		if (ajax.readyState == 4) {
 			if (ajax.status == 200) {
 				// window.location.reload()
-				log(typeof JSON.parse(ajax.responseText))
+				handle_result(ajax.responseText)
 			} else {
 				// error occurred
 				alert('error occurred')
