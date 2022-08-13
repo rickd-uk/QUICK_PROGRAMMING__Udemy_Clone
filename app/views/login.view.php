@@ -1,4 +1,5 @@
-<?php include 'manage/functions.php' ?>
+<?php define(ROOT, $_SERVER['DOCUMENT_ROOT'] . '/'); ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -74,23 +74,33 @@ class Admin extends Controller
 
 
     // if profile updated & data retrieved from db
-    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row && false) {
-
-
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
 
       if ($user->edit_validate($_POST, $id)) {
 
-
-        $this->save_image($row, $user);
-        if ($this->updated_image) {
-          $_POST['image'] = $this->destination;
+        if (array_key_exists('image', $_FILES)) {
+          $this->save_image($row, $user);
+          if ($this->updated_image) {
+            $_POST['image'] = $this->destination;
+          }
         }
 
         $user->update($id, $_POST);
-        display_message("Profile saved successfully");
 
-        redirect('admin/profile/' . $id);
+
+        //display_message("Profile saved successfully");
+        //redirect('admin/profile/' . $id);
       }
+      if (empty($user->errors)) {
+        $arr['message'] = "Profile saved successfully";
+      } else {
+        $arr['message'] = "Please correct these errors";
+        $arr['errors'] = $user->errors;
+      }
+
+      echo json_encode($arr);
+
+      die;
     }
 
     $data['title'] = "Profile";

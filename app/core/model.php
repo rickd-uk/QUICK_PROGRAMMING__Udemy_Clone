@@ -18,8 +18,7 @@ class Model extends Database
   }
   public function insert($data)
   {
-    $this->remove_unwanted_cols($data);
-
+    $data = $this->remove_unwanted_cols($data);
 
     $keys = array_keys($data);
     // $values = array_values($data);

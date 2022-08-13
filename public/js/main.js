@@ -81,6 +81,7 @@ function send_data(obj, progbar = 'js-progress') {
 		if (ajax.readyState == 4) {
 			if (ajax.status == 200) {
 				// window.location.reload()
+				log(typeof JSON.parse(ajax.responseText))
 			} else {
 				// error occurred
 				alert('error occurred')

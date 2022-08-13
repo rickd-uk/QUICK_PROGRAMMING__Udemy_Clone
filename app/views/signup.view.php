@@ -1,5 +1,3 @@
-<?php include 'manage/functions.php' ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
