@@ -1,6 +1,6 @@
 <?php
 
-require 'db/create_tables.php';
+require 'create_tables.php';
 
 class Database
 {
