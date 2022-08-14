@@ -8,6 +8,14 @@ class Admin extends Controller
   private $destination = '';
   private $updated_image = false;
 
+  private function login_to_view()
+  {
+    if (!Auth::is_logged_in()) {
+      display_message('Please login to view the admin section');
+      redirect('login');
+    }
+  }
+
   public function index()
   {
     if (!Auth::is_logged_in()) {
@@ -59,10 +67,9 @@ class Admin extends Controller
 
   public function profile($id = null)
   {
-    if (!Auth::is_logged_in()) {
-      display_message('Please login to view the admin section');
-      redirect('login');
-    }
+
+    $this->login_to_view();
+
     // get id from url or logged in user
     $id = $id == null ? Auth::getId() : $id;
 
@@ -104,5 +111,14 @@ class Admin extends Controller
     $data['title'] = "Profile";
     $data['errors'] = $user->errors;
     $this->view('admin/profile', $data);
+  }
+
+  public function courses($id = null)
+  {
+    $this->login_to_view();
+
+    $data = [];
+
+    $this->view('admin/courses', $data);
   }
 }
