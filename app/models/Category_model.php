@@ -3,7 +3,7 @@
 /**
  * category class
  */
-class Category extends Model
+class Category_model extends Model
 {
   public $errors = [];
   protected $table = "categories";

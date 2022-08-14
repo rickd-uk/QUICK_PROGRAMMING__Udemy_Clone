@@ -115,15 +115,45 @@ class Admin extends Controller
 
   public function courses($action = null, $id = null)
   {
+
     $this->login_to_view();
 
     $data = [];
+    $data['errors'] = [];
     $data['action'] = $action;
     $data['id'] = $id;
 
+
     if ($action == 'add') {
-      $category = new Category();
-      $data['categories'] = $category->findAll();
+      $category = new Category_model();
+      $course = new Course_model();
+
+      $data['categories'] = $category->findAll('ASC');
+
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($course->validate($_POST)) {
+
+          // added ?? '' to stop vscode warning 'use of unassigned variable'
+          $user_id = Auth::getId() ?? '';
+
+          $_POST['date'] = get_date();
+          $_POST['user_id'] = $user_id;
+
+          $course->insert($_POST);
+
+          $row = $course->where(['user_id' => $user_id, 'published' => 0], 'DESC', 'one');
+
+          display_message("Your course was successfully created");
+
+          if ($row) {
+            redirect('admin/courses/edit/' . $row->id);
+          } else {
+            redirect('admin/courses');
+          }
+        }
+        $data['errors'] = $course->errors;
+      }
     }
 
     $this->view('admin/courses', $data);

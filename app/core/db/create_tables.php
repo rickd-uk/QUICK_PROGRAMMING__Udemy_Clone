@@ -38,7 +38,7 @@ class DB_Tasks extends Database
   public function create_courses_table()
   {
     $query = "
-    CREATE TABLE IF NOT EXISTS `courses` (
+    CREATE TABLE `courses` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `title` varchar(150) NOT NULL,
       `description` text,
@@ -56,6 +56,8 @@ class DB_Tasks extends Database
       `course_image` varchar(1024) DEFAULT NULL,
       `date` datetime DEFAULT NULL,
       `tags` varchar(2048) DEFAULT NULL,
+      `approved` tinyint(1) NOT NULL DEFAULT '0',
+      `published` tinyint(1) NOT NULL DEFAULT '0',
       PRIMARY KEY (`id`),
       KEY `title` (`title`),
       KEY `user_id` (`user_id`),
@@ -65,7 +67,9 @@ class DB_Tasks extends Database
       KEY `language_id` (`language_id`),
       KEY `price_id` (`price_id`),
       KEY `primary_subject` (`primary_subject`),
-      KEY `date` (`date`)
+      KEY `date` (`date`),
+      KEY `approved` (`approved`),
+      KEY `published` (`published`)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
   }
