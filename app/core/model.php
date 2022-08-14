@@ -62,11 +62,12 @@ class Model extends Database
     // if one record is required then limit it
     if ($get === 'one') {
       $query .= " ORDER BY id $order LIMIT 1";
+    } else {
+      $query .= " ORDER BY id $order ";
     }
     $res = $this->query($query, $data);
 
     if (is_array($res)) {
-
       // if one record is needed then return first in array
       return $get === 'one' ? $res[0] : $res;
     }

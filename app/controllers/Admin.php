@@ -75,7 +75,7 @@ class Admin extends Controller
 
     $user = new User();
     // get profile data for selected / logged in user
-    $data['row'] = $row = $user->where(['id' => $id], 'one');
+    $data['row'] = $row = $user->where(['id' => $id], 'ASC', 'one');
 
 
     // if profile updated & data retrieved from db
@@ -115,9 +115,10 @@ class Admin extends Controller
 
   public function courses($action = null, $id = null)
   {
-
     $this->login_to_view();
 
+    $user_id = Auth::getId() ?? null;
+    $course = new Course_model();
     $data = [];
     $data['errors'] = [];
     $data['action'] = $action;
@@ -126,10 +127,8 @@ class Admin extends Controller
 
     if ($action == 'add') {
       $category = new Category_model();
-      $course = new Course_model();
 
       $data['categories'] = $category->findAll('ASC');
-
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($course->validate($_POST)) {
@@ -154,8 +153,10 @@ class Admin extends Controller
         }
         $data['errors'] = $course->errors;
       }
+    } else {
+      // courses view
+      $data['rows'] = $course->where(['user_id' => $user_id]);
     }
-
     $this->view('admin/courses', $data);
   }
 }

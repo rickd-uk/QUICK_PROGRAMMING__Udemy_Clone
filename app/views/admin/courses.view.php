@@ -1,7 +1,8 @@
-<?php Controller::view_static('admin/header', $data) ?>
+<?php Controller::view_static('admin/header', $data); ?>
 
 
-<?php if ($action = 'add') : ?>
+<?php if ($action == 'add') : ?>
+
 	<div class="card col-md-5 mx-auto">
 		<div class="card-body">
 			<h5 class="card-title">New Course</h5>
@@ -53,9 +54,9 @@
 		<div class="card-body">
 			<h5 class="card-title">My Courses
 
-				<a href="<?= ROOT ?>/admin/courses/add"></a>
-				<button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i>
-					New Course</button>
+				<a href="<?= ROOT ?>/admin/courses/add">
+					<button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i>
+						New Course</button>
 				</a>
 			</h5>
 			<!-- Table with stripped rows -->
@@ -71,22 +72,32 @@
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Brandon Jacob</td>
-						<td>Designer</td>
-						<td>28</td>
-						<td>2016-05-25</td>
-						<td>2016-05-25</td>
-						<td>
-							<i class="bi bi-pencil-square"></i>
-							&nbsp;&nbsp;&nbsp;
-							<i class="bi bi-trash-fill"></i>
-						</td>
-					</tr>
 
-				</tbody>
+
+				<?php if (!empty($rows)) : ?>
+					<tbody>
+						<?php foreach ($rows as $row) : ?>
+							<tr>
+								<th scope="row"><?= esc($row->id) ?></th>
+								<td><?= esc($row->title) ?></td>
+								<td><?= esc($row->category_id) ?></td>
+								<td><?= esc($row->price_id) ?></td>
+								<td><?= esc($row->primary_subject) ?></td>
+								<td><?= format_date(esc($row->date)) ?></td>
+								<td>
+									<i class="bi bi-pencil-square"></i>
+									&nbsp;&nbsp;&nbsp;
+									<i class="bi bi-trash-fill"></i>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+
+					</tbody>
+				<?php else : ?>
+					<tr>
+						<td colspan="10">No records found!</td>
+					</tr>
+				<?php endif; ?>
 			</table>
 			<!-- End Table with stripped rows -->
 		</div>
