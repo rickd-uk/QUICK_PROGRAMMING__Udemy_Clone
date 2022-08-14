@@ -1,264 +1,94 @@
 <?php Controller::view_static('admin/header', $data) ?>
 
+<?php if ($action = 'add') : ?>
+	<div class="card col-md-5 mx-auto">
+		<div class="card-body">
+			<h5 class="card-title">New Course</h5>
 
-<div class="card">
-	<div class="card-body">
-		<h5 class="card-title">My Courses<button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i> New Course</button></h5>
+			<!-- No Labels Form -->
+			<form class="row g-3">
+				<div class="col-md-12">
+					<input type="text" class="form-control" placeholder="Course title">
+				</div>
 
 
-		<!-- Table with stripped rows -->
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Title</th>
-					<th scope="col">Category</th>
-					<th scope="col">Price</th>
-					<th scope="col">Primary Subject</th>
-					<th scope="col">Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Brandon Jacob</td>
-					<td>Designer</td>
-					<td>28</td>
-					<td>2016-05-25</td>
-					<td>2016-05-25</td>
-				</tr>
+				<div class="col-md-12">
+					<select id="inputState" class="form-select">
+						<option selected="">Choose Category</option>
+						<option value="" name="">Development</option>
+						<option value="" name="">Business</option>
+						<option value="" name="">Finance & Acounting</option>
+						<option value="" name="">IT & Software</option>
+						<option value="" name="">Office Productivity</option>
+						<option value="" name="">Personal Development</option>
+						<option value="" name="">Design</option>
+						<option value="" name="">Marketing</option>
+						<option value="" name="">Lifestyle</option>
+						<option value="" name="">Photography & Video</option>
+						<option value="" name="">Health & Fitness</option>
+						<option value="" name="">Music</option>
+						<option value="" name="">Teaching & Academics</option>
+						<option value="" name="">I don't know yet</option>
+					</select>
+				</div>
 
-			</tbody>
-		</table>
-		<!-- End Table with stripped rows -->
+				<div class="text-center">
+					<button type="submit" class="btn btn-primary">Save</button>
+					<a href="<?= ROOT ?>/admin/courses"></a>
+					<button type="button" class="btn btn-secondary">Cancel</button>
+				</div>
+			</form><!-- End No Labels Form -->
+
+		</div>
 	</div>
-</div>
 
-<div class="card">
-	<div class="card-body">
-		<h5 class="card-title">Table with hoverable rows</h5>
+<?php elseif ($action == 'edit') : ?>
 
-		<!-- Table with hoverable rows -->
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Position</th>
-					<th scope="col">Age</th>
-					<th scope="col">Start Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Brandon Jacob</td>
-					<td>Designer</td>
-					<td>28</td>
-					<td>2016-05-25</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Bridie Kessler</td>
-					<td>Developer</td>
-					<td>35</td>
-					<td>2014-12-05</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Ashleigh Langosh</td>
-					<td>Finance</td>
-					<td>45</td>
-					<td>2011-08-12</td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-					<td>Angus Grady</td>
-					<td>HR</td>
-					<td>34</td>
-					<td>2012-06-11</td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td>Raheem Lehner</td>
-					<td>Dynamic Division Officer</td>
-					<td>47</td>
-					<td>2011-04-19</td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- End Table with hoverable rows -->
+<?php else : ?>
+
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">My Courses
+
+				<a href="<?= ROOT ?>/admin/courses/add"></a>
+				<button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i>
+					New Course</button>
+				</a>
+			</h5>
+			<!-- Table with stripped rows -->
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Title</th>
+						<th scope="col">Category</th>
+						<th scope="col">Price</th>
+						<th scope="col">Primary Subject</th>
+						<th scope="col">Date</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">1</th>
+						<td>Brandon Jacob</td>
+						<td>Designer</td>
+						<td>28</td>
+						<td>2016-05-25</td>
+						<td>2016-05-25</td>
+						<td>
+							<i class="bi bi-pencil-square"></i>
+							&nbsp;&nbsp;&nbsp;
+							<i class="bi bi-trash-fill"></i>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<!-- End Table with stripped rows -->
+		</div>
 	</div>
-</div>
 
-<div class="card">
-	<div class="card-body">
-		<h5 class="card-title">Bordered Table</h5>
-		<p>Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>
-		<!-- Bordered Table -->
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Position</th>
-					<th scope="col">Age</th>
-					<th scope="col">Start Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Brandon Jacob</td>
-					<td>Designer</td>
-					<td>28</td>
-					<td>2016-05-25</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Bridie Kessler</td>
-					<td>Developer</td>
-					<td>35</td>
-					<td>2014-12-05</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Ashleigh Langosh</td>
-					<td>Finance</td>
-					<td>45</td>
-					<td>2011-08-12</td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-					<td>Angus Grady</td>
-					<td>HR</td>
-					<td>34</td>
-					<td>2012-06-11</td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td>Raheem Lehner</td>
-					<td>Dynamic Division Officer</td>
-					<td>47</td>
-					<td>2011-04-19</td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- End Bordered Table -->
-
-		<p>
-			<a href="https://getbootstrap.com/docs/5.0/utilities/borders/#border-color" target="_blank">Border color utilities</a> can be added
-			to change colors:
-		</p>
-
-		<!-- Primary Color Bordered Table -->
-		<table class="table table-bordered border-primary">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Position</th>
-					<th scope="col">Age</th>
-					<th scope="col">Start Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Brandon Jacob</td>
-					<td>Designer</td>
-					<td>28</td>
-					<td>2016-05-25</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Bridie Kessler</td>
-					<td>Developer</td>
-					<td>35</td>
-					<td>2014-12-05</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Ashleigh Langosh</td>
-					<td>Finance</td>
-					<td>45</td>
-					<td>2011-08-12</td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-					<td>Angus Grady</td>
-					<td>HR</td>
-					<td>34</td>
-					<td>2012-06-11</td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td>Raheem Lehner</td>
-					<td>Dynamic Division Officer</td>
-					<td>47</td>
-					<td>2011-04-19</td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- End Primary Color Bordered Table -->
-	</div>
-</div>
-
-<div class="card">
-	<div class="card-body">
-		<h5 class="card-title">Small tables</h5>
-		<p>Add <code>.table-sm</code> to make any <code>.table</code> more compact by cutting all cell padding in half.</p>
-		<!-- Small tables -->
-		<table class="table table-sm">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Position</th>
-					<th scope="col">Age</th>
-					<th scope="col">Start Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th scope="row">1</th>
-					<td>Brandon Jacob</td>
-					<td>Designer</td>
-					<td>28</td>
-					<td>2016-05-25</td>
-				</tr>
-				<tr>
-					<th scope="row">2</th>
-					<td>Bridie Kessler</td>
-					<td>Developer</td>
-					<td>35</td>
-					<td>2014-12-05</td>
-				</tr>
-				<tr>
-					<th scope="row">3</th>
-					<td>Ashleigh Langosh</td>
-					<td>Finance</td>
-					<td>45</td>
-					<td>2011-08-12</td>
-				</tr>
-				<tr>
-					<th scope="row">4</th>
-					<td>Angus Grady</td>
-					<td>HR</td>
-					<td>34</td>
-					<td>2012-06-11</td>
-				</tr>
-				<tr>
-					<th scope="row">5</th>
-					<td>Raheem Lehner</td>
-					<td>Dynamic Division Officer</td>
-					<td>47</td>
-					<td>2011-04-19</td>
-				</tr>
-			</tbody>
-		</table>
-		<!-- End small tables -->
-	</div>
-</div>
+<?php endif; ?>
 
 <?php Controller::view_static('admin/footer') ?>

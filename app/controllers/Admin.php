@@ -113,11 +113,13 @@ class Admin extends Controller
     $this->view('admin/profile', $data);
   }
 
-  public function courses($id = null)
+  public function courses($action = null, $id = null)
   {
     $this->login_to_view();
 
     $data = [];
+    $data['action'] = $action;
+    $data['id'] = $id;
 
     $this->view('admin/courses', $data);
   }
