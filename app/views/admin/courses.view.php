@@ -73,7 +73,6 @@
 					</tr>
 				</thead>
 
-
 				<?php if (!empty($rows)) : ?>
 					<tbody>
 						<?php foreach ($rows as $row) : ?>

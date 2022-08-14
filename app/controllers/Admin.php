@@ -156,6 +156,7 @@ class Admin extends Controller
     } else {
       // courses view
       $data['rows'] = $course->where(['user_id' => $user_id]);
+      show_stop($data['rows']);
     }
     $this->view('admin/courses', $data);
   }

@@ -54,6 +54,7 @@ class Model extends Database
     $keys = array_keys($data);
     $query = "SELECT * FROM " . $this->table . " where ";
 
+    // add the keys to build the wuery
     foreach ($keys as $key) {
       $query .= $key . "=:" . $key . " && ";
     }
@@ -65,9 +66,20 @@ class Model extends Database
     } else {
       $query .= " ORDER BY id $order ";
     }
+    // result of query
     $res = $this->query($query, $data);
 
+    // if it is an array process it
     if (is_array($res)) {
+
+      // Calls the protected functions in the course model
+      // run afterSelect functions
+      if (property_exists($this, 'afterSelect')) {
+        foreach ($this->afterSelect as $func) {
+          $res = $this->$func($res);
+        }
+      }
+
       // if one record is needed then return first in array
       return $get === 'one' ? $res[0] : $res;
     }
@@ -77,11 +89,18 @@ class Model extends Database
 
   public function findAll($order = 'ASC')
   {
-
     $query = "SELECT * FROM " . $this->table . " ORDER BY ID " . $order;
     $res = $this->query($query);
 
     if (is_array($res)) {
+
+      // Calls the protected functions in the course model
+      // run afterSelect functions
+      if (property_exists($this, 'afterSelect')) {
+        foreach ($this->afterSelect as $func) {
+          $res = $this->$func($res);
+        }
+      }
       return $res;
     }
     return false;
