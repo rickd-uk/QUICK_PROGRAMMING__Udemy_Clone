@@ -116,7 +116,7 @@
 
                       <div class="d-flex">
                         <img class="js-image-preview" src="<?= ROOT ?>/<?= display($row, 'image') ?>" alt="Profile" style="width:200px; max-width: 200px; height: 200px; object-fit: cover">
-                        <div class="js-filename m-2">Selected File: None</div>
+                        <!-- <div class="js-filename m-2">Selected File: None</div> -->
                       </div>
 
                       <div class="pt-2">
@@ -197,6 +197,8 @@
                     <div class="col-md-8 col-lg-9">
                       <input name="email" type="email" class="form-control" id="email" value="<?= set_value('email', $row->email) ?>" required>
                     </div>
+                    <?php show_error_msg($errors, 'email'); ?>
+                    <small class="js-error-email text-danger"></small>
                   </div>
 
                   <div class="row mb-3">
@@ -232,7 +234,7 @@
                       <input name="linkedin_link" type="text" class="form-control" id="linkedin" value="<?= set_value('linkedin_link', $row->linkedin_link) ?>">
                     </div>
                     <?php show_error_msg($errors, 'linkedin_link'); ?>
-                    <small class="js-error-instagram_link text-danger"></small>
+                    <small class="js-error-linkedin_link text-danger"></small>
                   </div>
 
                   <div class="js-progress progress my-4 hide" style="display: none;">

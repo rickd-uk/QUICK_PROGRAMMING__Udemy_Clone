@@ -17,7 +17,8 @@ function set_tab(tab_name) {
 }
 
 function load_image(file) {
-	document.querySelector('.js-filename').innerHTML = 'Select Files:' + file.name
+	// SHow file name - !! Not Necessary now, but keep for future
+	//document.querySelector('.js-filename').innerHTML = 'Select Files:' + file.name
 
 	let myLink = window.URL.createObjectURL(file)
 	document.querySelector('.js-image-preview').src = myLink
@@ -29,6 +30,8 @@ window.onload = function () {
 
 // upload functions
 function save_profile(e) {
+	// console.log('OUTPUT ', e)
+
 	const form = e.currentTarget.form
 	const inputs = form.querySelectorAll('input, textarea')
 	let obj = {}
@@ -61,10 +64,10 @@ function save_profile(e) {
 	}
 	send_data(obj)
 
-	// hide progress bar after 2 sec
+	// hide progress bar after 1.5s
 	setTimeout(() => {
 		document.querySelector('.js-progress').style = 'display: none;'
-	}, 2000)
+	}, 1500)
 }
 
 function handle_result(result) {
@@ -75,24 +78,26 @@ function handle_result(result) {
 			// errors
 			display_errors(obj.errors)
 		} else {
-			window.location.reload()
+			setTimeout(() => {
+				window.location.reload()
+			}, 2000)
 		}
 	}
 }
 
 function display_errors(errors) {
-	log(errors)
+	console.log('ERRORS:   ', errors)
 	for (key in errors) {
 		document.querySelector('.js-error-' + key).innerHTML = errors[key]
 	}
 }
 
 function send_data(obj, progbar = 'js-progress') {
-	let progress = document.querySelector('.' + progbar)
+	const progress = document.querySelector('.' + progbar)
 
 	progress.style = 'display: block;'
 
-	let myForm = new FormData()
+	const myForm = new FormData()
 	for (key in obj) {
 		myForm.append(key, obj[key])
 	}
@@ -101,6 +106,7 @@ function send_data(obj, progbar = 'js-progress') {
 	ajax.addEventListener('readystatechange', () => {
 		if (ajax.readyState == 4) {
 			if (ajax.status == 200) {
+				// network success, pass on ajax response
 				handle_result(ajax.responseText)
 			} else {
 				// error occurred
