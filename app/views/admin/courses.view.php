@@ -74,21 +74,26 @@
 						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="course-meetings-tab" data-bs-toggle="tab" data-bs-target="#course-meetings" type="button" role="tab" aria-controls="course-meetings" aria-selected="false" tabindex="-1">Course Messages</button>
 					</li>
 				</ul>
-				<div class="tab-content pt-2" id="myTabContent">
+				<div oninput="something_changed(event)" class="tab-content pt-2" id="myTabContent">
 					<div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="intended-learners-tab">
 						Intended learners
+						<input type="text" name="">
 					</div>
 					<div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
 						Curriculum
+						<input type="text" name="">
 					</div>
 					<div class="tab-pane fade" id="course-landing-page" role="tabpanel" aria-labelledby="course-landing-page-tab">
 						course-landing-page
+						<input type="text" name="">
 					</div>
 					<div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions-tab">
 						promotions
+						<input type="text" name="">
 					</div>
 					<div class="tab-pane fade" id="course-meetings" role="tabpanel" aria-labelledby="course-meetings-tab">
 						course-meetings
+						<input type="text" name="">
 					</div>
 				</div><!-- End Default Tabs -->
 				<div class="my-5">
@@ -168,6 +173,34 @@
 
 <script>
 	var tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : '#intended-learners'
+
+	let dirty = false;
+
+	function set_tab(tab_name) {
+		tab = tab_name;
+		sessionStorage.setItem('tab', tab_name);
+
+
+		// Warns user before switching tabs
+		if (dirty) {
+			// ask user to save when switching tabs
+			if (!confirm("Your changes were not changed. Continue?")) {
+				tab = dirty
+				sessionStorage.setItem('tab', dirty)
+
+				setTimeout(() => {
+					show_tab(dirty)
+				}, 10)
+			} else {
+				dirty = false
+			}
+		}
+	}
+
+	function something_changed(e) {
+
+		dirty = tab;
+	}
 </script>
 
 <?php Controller::view_static('admin/footer') ?>
