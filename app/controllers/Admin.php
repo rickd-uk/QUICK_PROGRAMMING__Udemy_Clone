@@ -159,6 +159,9 @@ class Admin extends Controller
         }
         $data['errors'] = $course->errors;
       }
+    } elseif ($action == 'edit') {
+      // cget course info
+      $data['row'] = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
     } else {
       // courses view
       $data['rows'] = $course->where(['user_id' => $user_id]);
