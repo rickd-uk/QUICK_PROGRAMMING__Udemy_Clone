@@ -33,6 +33,8 @@
 
   <script src="<?= ROOT ?>/js/main.js"></script>
 
+  <script type="module" src="<?= ROOT ?>/js/tabs.js"></script>
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1

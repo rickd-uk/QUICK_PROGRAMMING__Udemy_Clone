@@ -1,6 +1,5 @@
 <?php Controller::view_static('admin/header', $data); ?>
 
-
 <?php if ($action == 'add') : ?>
 
 	<div class="card col-md-5 mx-auto">
@@ -54,44 +53,49 @@
 <?php elseif ($action == 'edit') : ?>
 	<div class="card">
 		<div class="card-body">
-			<h5 class="card-title">Edit Course</h5>
-
+			<h3 class="card-title">Edit Course</h3>
 			<?php if (!empty($row)) : ?>
-
-
 				<h5 class="card-title"><?= esc($row->title) ?></h5>
-
-
 				<!-- Default Tabs -->
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
 					<li class="nav-item" role="presentation">
-						<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link active" id="intended-learners-tab" data-bs-toggle="tab" data-bs-target="#intended-learners" type="button" role="tab" aria-controls="intended-learners" aria-selected="true">Intended Learners</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" tabindex="-1">Profile</button>
+						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false" tabindex="-1">Curriculum</button>
 					</li>
 					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false" tabindex="-1">Contact</button>
+						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="course-landing-page-tab" data-bs-toggle="tab" data-bs-target="#course-landing-page" type="button" role="tab" aria-controls="course-landing-page" aria-selected="false" tabindex="-1">Course Landing Page</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false" tabindex="-1">Promotions</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="course-meetings-tab" data-bs-toggle="tab" data-bs-target="#course-meetings" type="button" role="tab" aria-controls="course-meetings" aria-selected="false" tabindex="-1">Course Messages</button>
 					</li>
 				</ul>
 				<div class="tab-content pt-2" id="myTabContent">
-					<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-						Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+					<div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="intended-learners-tab">
+						Intended learners
 					</div>
-					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+					<div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
+						Curriculum
 					</div>
-					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-						Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+					<div class="tab-pane fade" id="course-landing-page" role="tabpanel" aria-labelledby="course-landing-page-tab">
+						course-landing-page
+					</div>
+					<div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions-tab">
+						promotions
+					</div>
+					<div class="tab-pane fade" id="course-meetings" role="tabpanel" aria-labelledby="course-meetings-tab">
+						course-meetings
 					</div>
 				</div><!-- End Default Tabs -->
 				<div class="my-5">
 					<a href="<?= ROOT ?>/admin/courses">
 						<button class="btn btn-primary float-start">Back</button>
 					</a>
-
 					<button class="btn btn-success float-end">Save</button>
-
 				</div>
 			<?php else : ?>
 				<div>That course was not found</div>
@@ -158,6 +162,12 @@
 		</div>
 	</div>
 
+
+
 <?php endif; ?>
+
+<script>
+	var tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : '#intended-learners'
+</script>
 
 <?php Controller::view_static('admin/footer') ?>

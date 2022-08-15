@@ -13,7 +13,6 @@ class Database
   public function query($query, $data = [], $type = 'obj')
   {
     $con = $this->connect();
-
     $stm = $con->prepare($query);
 
     if ($stm) {

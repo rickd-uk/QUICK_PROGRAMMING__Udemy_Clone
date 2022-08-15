@@ -17,7 +17,7 @@ function set_tab(tab_name) {
 }
 
 function load_image(file) {
-	// SHow file name - !! Not Necessary now, but keep for future
+	// Show file name - !! Not Necessary now, but keep for future
 	//document.querySelector('.js-filename').innerHTML = 'Select Files:' + file.name
 
 	let myLink = window.URL.createObjectURL(file)
