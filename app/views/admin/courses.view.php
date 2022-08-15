@@ -37,7 +37,7 @@
 
 				<div class="text-center">
 
-					<button type="submit" class="btn btn-primary float-left">Save</button>
+					<button type="submit" class="btn btn-primary float-left ">Save</button>
 
 					<a href="<?= ROOT ?>/admin/courses">
 						<button type="button" class="btn btn-secondary">Cancel</button>
@@ -98,9 +98,9 @@
 				</div><!-- End Default Tabs -->
 				<div class="my-5">
 					<a href="<?= ROOT ?>/admin/courses">
-						<button class="btn btn-primary float-start">Back</button>
+						<button class=" btn btn-primary float-start">Back</button>
 					</a>
-					<button class="btn btn-success float-end">Save</button>
+					<button class="js-save-btn btn btn-success float-end disabled">Save</button>
 				</div>
 			<?php else : ?>
 				<div>That course was not found</div>
@@ -172,34 +172,46 @@
 <?php endif; ?>
 
 <script>
-	var tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : '#intended-learners'
-
+	//TODO: Not Efficient Revisit later
+	let tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem('tab_courses') : '#intended-learners'
 	let dirty = false;
 
 	function set_tab(tab_name) {
-		tab = tab_name;
+		tab_courses = tab_name;
 		sessionStorage.setItem('tab', tab_name);
-
-
 		// Warns user before switching tabs
 		if (dirty) {
 			// ask user to save when switching tabs
 			if (!confirm("Your changes were not changed. Continue?")) {
-				tab = dirty
+				tab_courses = dirty
 				sessionStorage.setItem('tab', dirty)
 
+				// hack to make it work correctly
 				setTimeout(() => {
 					show_tab(dirty)
+					disable_save_btn(false)
+					disable_save_btn(true)
 				}, 10)
 			} else {
 				dirty = false
+				disable_save_btn(false)
 			}
 		}
 	}
 
 	function something_changed(e) {
+		dirty = tab_courses;
+		disable_save_btn(true)
+	}
 
-		dirty = tab;
+	function disable_save_btn(status = false) {
+		save_btn = document.querySelector(".js-save-btn").classList
+
+		if (status) {
+			save_btn.remove("disabled")
+		} else {
+			save_btn.add("disabled")
+		}
 	}
 </script>
 
