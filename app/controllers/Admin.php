@@ -125,6 +125,7 @@ class Admin extends Controller
     $data['id'] = $id;
 
 
+    // Is the user adding a course
     if ($action == 'add') {
       $category = new Category_model();
 
@@ -136,8 +137,13 @@ class Admin extends Controller
           // added ?? '' to stop vscode warning 'use of unassigned variable'
           $user_id = Auth::getId() ?? '';
 
+          // DEFAULT data for Categories
+          // Set current date time as default
           $_POST['date'] = get_date();
           $_POST['user_id'] = $user_id;
+          // Set price at Free as default
+          $_POST['price_id'] = 1;
+
 
           $course->insert($_POST);
 

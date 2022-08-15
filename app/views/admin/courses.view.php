@@ -15,6 +15,11 @@
 					<?php show_error_msg($errors, 'title'); ?>
 				</div>
 
+				<div class="col-md-12">
+					<input name="primary_subject" type="text" value="<?= set_value('primary_subject'); ?>" class="form-control <?= !empty($errors['primary_subject']) ? 'border-danger' : ''; ?>" placeholder="Primary Subject e.g.  Photography, Blogging, etc.">
+					<?php show_error_msg($errors, 'primary_subject'); ?>
+				</div>
+
 
 				<div class="col-md-12">
 					<select name="category_id" id="inputState" class="form-select <?= !empty($errors['category_id']) ? 'border-danger' : ''; ?>">
@@ -82,7 +87,7 @@
 								<td><?= esc($row->title) ?></td>
 								<td><?= esc($row->user_row->name ?? 'Unknown') ?></td>
 								<td><?= esc($row->category_row->category ?? 'Unknown') ?></td>
-								<td><?= esc($row->price_id) ?></td>
+								<td><?= esc($row->price_row->name ?? 'Unknown') ?></td>
 								<td><?= esc($row->primary_subject) ?></td>
 								<td><?= format_date(esc($row->date)) ?></td>
 								<td>

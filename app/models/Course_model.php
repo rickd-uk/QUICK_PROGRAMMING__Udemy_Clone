@@ -35,6 +35,14 @@ class Course_model extends Model
     'published',
   ];
 
+  #1 TODO:
+  private function validate_field()
+  {
+    if (empty($data['title'])) {
+      $this->errors['title'] = "Enter course title";
+    }
+  }
+
   public function validate($data)
   {
     $this->errors = [];
@@ -42,8 +50,15 @@ class Course_model extends Model
     if (empty($data['title'])) {
       $this->errors['title'] = "Enter course title";
     } else
-    if (!preg_match("/^[a-zA-Z_]+$/", trim($data['title']))) {
-      $this->errors['title'] = "First name can only have letters, spaces and '_'";
+    if (!preg_match("/^[a-zA-Z_ ]+$/", trim($data['title']))) {
+      $this->errors['title'] = "Course titles can only have letters, spaces and '_'";
+    }
+
+    if (empty($data['primary_subject'])) {
+      $this->errors['primary_subject'] = "Enter a primary subject";
+    } else
+    if (!preg_match("/^[a-zA-Z_ ]+$/", trim($data['primary_subject']))) {
+      $this->errors['primary_subject'] = "Primary subjects can only have letters, spaces and '_'";
     }
 
     if (empty($data['category_id'])) {
@@ -127,7 +142,6 @@ class Course_model extends Model
     return false;
   }
 
-
   // Created a system to add function to a model. They are very specific
   // depending on the needs of the model
   protected function get_category($rows)
@@ -150,7 +164,6 @@ class Course_model extends Model
   }
   protected function get_user($rows)
   {
-
     $db = new Database();
     if (!empty($rows[0]->user_id)) {
 
@@ -168,6 +181,19 @@ class Course_model extends Model
   }
   protected function get_price($rows)
   {
+    $db = new Database();
+    if (!empty($rows[0]->price_id)) {
+
+      foreach ($rows as $key => $row) {
+        $query = "SELECT * FROM prices WHERE id = :id LIMIT 1";
+        $price = $db->query($query, ['id'  => $row->price_id]);
+        if (!empty($price)) {
+
+          $price[0]->name = $price[0]->name . ' ($' . $price[0]->price . ')';
+          $rows[$key]->price_row = $price[0];
+        }
+      }
+    }
     return $rows;
   }
   protected function get_level($rows)

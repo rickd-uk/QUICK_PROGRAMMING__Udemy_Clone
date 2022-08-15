@@ -5,6 +5,16 @@
  */
 class DB_Tasks extends Database
 {
+  public function create_db()
+  {
+    $query = "
+    CREATE DATABASE IF NOT EXISTS `udemy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    USE `udemy`;
+    ";
+
+    $this->query($query);
+  }
+
   public function create_user_table()
   {
     $query = "
@@ -38,7 +48,7 @@ class DB_Tasks extends Database
   public function create_courses_table()
   {
     $query = "
-    CREATE TABLE `courses` (
+    CREATE TABLE IF NOT EXISTS `courses` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `title` varchar(150) NOT NULL,
       `description` text,
@@ -72,5 +82,43 @@ class DB_Tasks extends Database
       KEY `published` (`published`)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
+    $this->query($query);
+  }
+
+  public function create_categories_table()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS `categories` (
+      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `title` varchar(50) NOT NULL,
+      `description` text NOT NULL,
+      PRIMARY KEY (`id`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8
+    ";
+    $this->query($query);
+  }
+
+  public function create_prices_table()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS `prices` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(30) NOT NULL,
+      `price` decimal(10,0) NOT NULL,
+      `disabled` tinyint(1) NOT NULL DEFAULT '0',
+      PRIMARY KEY (`id`),
+      KEY `price` (`price`),
+      KEY `disabled` (`disabled`),
+      KEY `name` (`name`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8";
+
+    $this->query($query);
+
+    $query = "
+     INSERT INTO `prices` (`id`, `name`, `price`, `disabled`) VALUES
+     (1, 'Free', '0', 0);
+     ";
+
+    $this->query($query);
   }
 }
