@@ -1,27 +1,54 @@
 //TODO: Not Efficient Revisit later
+
 let tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem('tab_courses') : '#intended-learners'
-let dirty = false
+var dirty = false
 
 function set_courses_tab(div) {
-	let children = div.parentNode.children
-	// remove previous active tab
-	for (let i = 0; i < children.length; i++) {
+	if (dirty) {
+		//ask user to save when switching tabs
+		if (!confirm('Your changes were not saved. continue?!')) {
+			return
+		}
+	}
+	tab = div.id
+	sessionStorage.setItem('tab', tab)
+
+	dirty = false
+	show_tab(tab)
+	// let children = div.parentNode.children
+	// // remove previous active tab
+	// for (let i = 0; i < children.length; i++) {
+	// 	children[i].classList.remove('active-tab')
+	// }
+	// // set new active tab
+	// div.classList.add('active-tab')
+	// // Show content
+	// let content = '<input />'
+	// document.querySelector('#tabs-content').innerHTML = div.id
+	// return
+}
+
+function show_tab(tab_name) {
+	var contentDiv = document.querySelector('#tabs-content')
+
+	//change active tab
+	var div = document.querySelector('#' + tab_name)
+	var children = div.parentNode.children
+	for (var i = 0; i < children.length; i++) {
 		children[i].classList.remove('active-tab')
 	}
-	// set new active tab
+
 	div.classList.add('active-tab')
 
-	children = document.querySelector('#' + div.id + '-div').parentNode.children
-	// remove previous active tab
-	for (let i = 0; i < children.length; i++) {
-		children[i].classList.add('hide')
-	}
-	document.querySelector('#' + div.id + '-div').classList.remove('hide')
+	var data = {}
+	data.tab_name = tab
+	data.data_type = 'read'
+	// send_data(data)
 
-	// set new active tab
-	// div.classList.add('active-tab')
+	let content = tab_name + '<input />'
+	document.querySelector('#tabs-content').innerHTML = content
 
-	return
+	disable_save_btn(false)
 }
 
 function something_changed(e) {

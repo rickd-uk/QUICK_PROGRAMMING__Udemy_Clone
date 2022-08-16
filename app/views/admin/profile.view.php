@@ -335,6 +335,9 @@
       </div>
     </div>
   </section>
+
+  <script src="<?= ROOT ?>/js/profile.js"></script>
+
 <?php else : ?>
 
   <div class="alert alert-danger alert-dimissible fade show" role="alert">

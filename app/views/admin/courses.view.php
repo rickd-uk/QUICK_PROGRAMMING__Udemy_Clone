@@ -1,7 +1,7 @@
 <?php Controller::view_static('admin/header', $data); ?>
-<style>
 
-</style>
+
+
 <?php if ($action == 'add') : ?>
 
 	<div class="card col-md-5 mx-auto">
@@ -53,6 +53,9 @@
 	</div>
 
 <?php elseif ($action == 'edit') : ?>
+
+
+
 	<div class="card">
 		<div class="card-body">
 			<h3 class="card-title">Edit Course</h3>
@@ -70,11 +73,9 @@
 				</div>
 				<!-- end tabs -->
 				<div oninput="something_changed(event)">
-					<div id="intended-learners-div" class="div-tab">1</div>
-					<div id="curriculum-div" class="div-tab hide">2</div>
-					<div id="course-landing-page-div" class="div-tab hide">3</div>
-					<div id="promotions-div" class="div-tab hide">4</div>
-					<div id="course-messages-div" class="div-tab hide">5</div>
+					<div id="tabs-content">
+
+					</div>
 				</div>
 
 				<div class="my-5">
@@ -88,6 +89,10 @@
 			<?php endif; ?>
 		</div>
 	</div>
+
+
+	<script src="<?= ROOT ?>/js/courses.js" />
+
 <?php else : ?>
 
 	<div class="card">
@@ -149,5 +154,7 @@
 	</div>
 
 <?php endif; ?>
+
+
 
 <?php Controller::view_static('admin/footer') ?>

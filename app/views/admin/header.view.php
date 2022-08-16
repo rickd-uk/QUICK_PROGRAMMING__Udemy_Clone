@@ -29,12 +29,11 @@
   <!-- Template Main CSS File -->
   <link href="<?= ROOT ?>/niceadmin/assets/css/style.css" rel="stylesheet">
 
-  <link href="<?= ROOT ?>/css/main.css?34" rel="stylesheet">
+  <link href="<?= ROOT ?>/css/main.css?3324" rel="stylesheet">
 
-  <script src="<?= ROOT ?>/js/main.js"></script>
-  <script src="<?= ROOT ?>/js/courses.js"></script>
+  <script defer src="<?= ROOT ?>/js/main.js"></script>
 
-  <script type="module" src="<?= ROOT ?>/js/tabs.js"></script>
+  <script type="module" src="<?= ROOT ?>/js/test.js"></script>
 
 
   <!-- =======================================================
