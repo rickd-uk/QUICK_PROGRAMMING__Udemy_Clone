@@ -1,5 +1,7 @@
 <?php Controller::view_static('admin/header', $data); ?>
+<style>
 
+</style>
 <?php if ($action == 'add') : ?>
 
 	<div class="card col-md-5 mx-auto">
@@ -56,46 +58,25 @@
 			<h3 class="card-title">Edit Course</h3>
 			<?php if (!empty($row)) : ?>
 				<h5 class="card-title"><?= esc($row->title) ?></h5>
-				<!-- Default Tabs -->
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item" role="presentation">
-						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link active" id="intended-learners-tab" data-bs-toggle="tab" data-bs-target="#intended-learners" type="button" role="tab" aria-controls="intended-learners" aria-selected="true">Intended Learners</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum" type="button" role="tab" aria-controls="curriculum" aria-selected="false" tabindex="-1">Curriculum</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="course-landing-page-tab" data-bs-toggle="tab" data-bs-target="#course-landing-page" type="button" role="tab" aria-controls="course-landing-page" aria-selected="false" tabindex="-1">Course Landing Page</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false" tabindex="-1">Promotions</button>
-					</li>
-					<li class="nav-item" role="presentation">
-						<button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link" id="course-meetings-tab" data-bs-toggle="tab" data-bs-target="#course-meetings" type="button" role="tab" aria-controls="course-meetings" aria-selected="false" tabindex="-1">Course Messages</button>
-					</li>
-				</ul>
-				<div oninput="something_changed(event)" class="tab-content pt-2" id="myTabContent">
-					<div class="tab-pane fade show active" id="intended-learners" role="tabpanel" aria-labelledby="intended-learners-tab">
-						Intended learners
-						<input type="text" name="">
-					</div>
-					<div class="tab-pane fade" id="curriculum" role="tabpanel" aria-labelledby="curriculum-tab">
-						Curriculum
-						<input type="text" name="">
-					</div>
-					<div class="tab-pane fade" id="course-landing-page" role="tabpanel" aria-labelledby="course-landing-page-tab">
-						course-landing-page
-						<input type="text" name="">
-					</div>
-					<div class="tab-pane fade" id="promotions" role="tabpanel" aria-labelledby="promotions-tab">
-						promotions
-						<input type="text" name="">
-					</div>
-					<div class="tab-pane fade" id="course-meetings" role="tabpanel" aria-labelledby="course-meetings-tab">
-						course-meetings
-						<input type="text" name="">
-					</div>
-				</div><!-- End Default Tabs -->
+
+
+				<!-- Tabs -->
+				<div class="tabs-holder ">
+					<div onclick="set_courses_tab(this)" id="intended-learners" class="my-tab active-tab">Intended Learners</div>
+					<div onclick="set_courses_tab(this)" id="curriculum" class="my-tab">Curriculum</div>
+					<div onclick="set_courses_tab(this)" id="course-landing-page" class="my-tab">Course Landing Page</div>
+					<div onclick="set_courses_tab(this)" id="promotions" class="my-tab">Promotions</div>
+					<div onclick="set_courses_tab(this)" id="course-messages" class="my-tab">Course Messages</div>
+				</div>
+				<!-- end tabs -->
+				<div oninput="something_changed(event)">
+					<div id="intended-learners-div" class="div-tab">1</div>
+					<div id="curriculum-div" class="div-tab hide">2</div>
+					<div id="course-landing-page-div" class="div-tab hide">3</div>
+					<div id="promotions-div" class="div-tab hide">4</div>
+					<div id="course-messages-div" class="div-tab hide">5</div>
+				</div>
+
 				<div class="my-5">
 					<a href="<?= ROOT ?>/admin/courses">
 						<button class=" btn btn-primary float-start">Back</button>
@@ -167,52 +148,6 @@
 		</div>
 	</div>
 
-
-
 <?php endif; ?>
-
-<script>
-	//TODO: Not Efficient Revisit later
-	let tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem('tab_courses') : '#intended-learners'
-	let dirty = false;
-
-	function set_tab(tab_name) {
-		tab_courses = tab_name;
-		sessionStorage.setItem('tab', tab_name);
-		// Warns user before switching tabs
-		if (dirty) {
-			// ask user to save when switching tabs
-			if (!confirm("Your changes were not changed. Continue?")) {
-				tab_courses = dirty
-				sessionStorage.setItem('tab', dirty)
-
-				// hack to make it work correctly
-				setTimeout(() => {
-					show_tab(dirty)
-					disable_save_btn(false)
-					disable_save_btn(true)
-				}, 10)
-			} else {
-				dirty = false
-				disable_save_btn(false)
-			}
-		}
-	}
-
-	function something_changed(e) {
-		dirty = tab_courses;
-		disable_save_btn(true)
-	}
-
-	function disable_save_btn(status = false) {
-		save_btn = document.querySelector(".js-save-btn").classList
-
-		if (status) {
-			save_btn.remove("disabled")
-		} else {
-			save_btn.add("disabled")
-		}
-	}
-</script>
 
 <?php Controller::view_static('admin/footer') ?>

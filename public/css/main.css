@@ -13,5 +13,49 @@
 	object-fit: cover;
 }
 
-.js-progress {
+:root {
+	--link-selected-color: #4154f1;
+	--tab-border-color: #bbb;
+}
+
+.tabs-holder {
+	display: flex;
+	margin: 10px 0;
+	justify-content: center;
+	text-align: center;
+}
+
+/* TABS */
+
+:root {
+	--link-selected-color: #4154f1;
+	--tab-border-color: #bbb;
+}
+
+.tabs-holder {
+	display: flex;
+	margin: 10px 0;
+	justify-content: center;
+	text-align: center;
+}
+
+.my-tab {
+	flex: 1;
+	border-bottom: solid 1px var(--tab-border-color);
+	padding-bottom: 2px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.my-tab:hover {
+	color: var(--link-selected-color);
+}
+
+.active-tab {
+	color: var(--link-selected-color);
+	border-bottom: solid 2px var(--link-selected-color);
+}
+
+.hide {
+	display: none;
 }
