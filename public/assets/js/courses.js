@@ -4,6 +4,8 @@ var tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem
 
 var dirty = false
 
+console.log('<?= $action ?>')
+
 function set_courses_tab(div) {
 	if (dirty) {
 		//ask user to save when switching tabs
@@ -34,10 +36,12 @@ function show_tab(tab_name) {
 
 	// get data from server
 	// send_data misnomer
-	var data = {}
-	data.tab_name = tab_courses
-	data.data_type = 'read'
-	get_course_data(data)
+
+	get_course_data({
+		tab_name: tab_courses,
+		data_type: 'read',
+		course_id: '<?= $action ?>',
+	})
 
 	disable_save_btn(false)
 }
@@ -87,18 +91,18 @@ function get_course_data(obj) {
 	ajax.send(myform)
 }
 
-console.log(window.performance)
+// console.log(window.performance)
 
-//check for Navigation Timing API support
-if (window.performance) {
-	console.info('window.performance works fine on this browser')
-}
+// //check for Navigation Timing API support
+// if (window.performance) {
+// 	console.info('window.performance works fine on this browser')
+// }
 
-if (performance.type == performance.TYPE_RELOAD) {
-	console.info('This page is reloaded')
-} else {
-	console.info('This page is not reloaded')
-}
+// if (performance.type == performance.TYPE_RELOAD) {
+// 	console.info('This page is reloaded')
+// } else {
+// 	console.info('This page is not reloaded')
+// }
 
 function show_loader(item) {
 	item.innerHTML = '<img class="loader" src="<?=ROOT?>/assets/images/loader.gif">'

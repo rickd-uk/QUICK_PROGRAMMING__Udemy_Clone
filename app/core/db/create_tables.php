@@ -51,6 +51,7 @@ class DB_Tasks extends Database
     CREATE TABLE IF NOT EXISTS `courses` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `title` varchar(150) NOT NULL,
+      `subtitle` varchar(100) DEFAULT NULL,
       `description` text,
       `user_id` int(11) NOT NULL,
       `category_id` int(11) NOT NULL,
@@ -58,6 +59,7 @@ class DB_Tasks extends Database
       `level_id` int(11) DEFAULT NULL,
       `language_id` int(11) DEFAULT NULL,
       `price_id` int(11) DEFAULT NULL,
+      `currency_id` int(11) DEFAULT NULL,
       `promo_link` varchar(1024) DEFAULT NULL,
       `welcome_message` varchar(2048) DEFAULT NULL,
       `congratulations_message` varchar(2048) DEFAULT NULL,
@@ -80,7 +82,7 @@ class DB_Tasks extends Database
       KEY `date` (`date`),
       KEY `approved` (`approved`),
       KEY `published` (`published`)
-     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+     ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8
     ";
     $this->query($query);
   }

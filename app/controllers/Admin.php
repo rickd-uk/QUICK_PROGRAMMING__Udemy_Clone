@@ -160,16 +160,14 @@ class Admin extends Controller
         $data['errors'] = $course->errors;
       }
     } elseif ($action == 'edit') {
-      // cget course info
+      // get course info
       $data['row'] = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
-
-
-
 
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
           if ($_POST['tab_name'] == "course-landing-page") {
+            show_stop($_POST);
             include views_path("course-edit-tabs/course-landing-page");
           }
         }

@@ -60,7 +60,6 @@
 			<?php if (!empty($row)) : ?>
 				<h5 class="card-title"><?= esc($row->title) ?></h5>
 
-
 				<!-- Tabs -->
 				<div class="tabs-holder">
 					<div onclick="set_courses_tab(this)" id="intended-learners" class="my-tab active-tab">Intended Learners</div>
@@ -88,7 +87,14 @@
 		</div>
 	</div>
 
-	<script src="<?= ROOT ?>/assets/js/courses.js" />
+
+	<script>
+		console.log('<?= $action ?>')
+	</script>
+
+
+
+
 
 <?php else : ?>
 
@@ -153,5 +159,5 @@
 <?php endif; ?>
 
 
-
+<script src="<?= ROOT ?>/assets/js/courses.js" />
 <?php Controller::view_static('admin/footer') ?>
