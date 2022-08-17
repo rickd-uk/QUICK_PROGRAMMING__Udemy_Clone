@@ -67,7 +67,6 @@ class Admin extends Controller
 
   public function profile($id = null)
   {
-
     $this->login_to_view();
 
     // get id from url or logged in user
@@ -76,7 +75,6 @@ class Admin extends Controller
     $user = new User();
     // get profile data for selected / logged in user
     $data['row'] = $row = $user->where(['id' => $id], 'ASC', 'one');
-
 
     // if profile updated & data retrieved from db
     if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
@@ -137,6 +135,8 @@ class Admin extends Controller
           // added ?? '' to stop vscode warning 'use of unassigned variable'
           $user_id = Auth::getId() ?? '';
 
+
+
           // DEFAULT data for Categories
           // Set current date time as default
           $_POST['date'] = get_date();
@@ -162,6 +162,20 @@ class Admin extends Controller
     } elseif ($action == 'edit') {
       // cget course info
       $data['row'] = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
+
+
+
+
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
+          if ($_POST['tab_name'] == "course-landing-page") {
+            include views_path("course-edit-tabs/course-landing-page");
+          }
+        }
+
+        die;
+      }
     } else {
       // courses view
       $data['rows'] = $course->where(['user_id' => $user_id]);

@@ -29,11 +29,11 @@
   <!-- Template Main CSS File -->
   <link href="<?= ROOT ?>/niceadmin/assets/css/style.css" rel="stylesheet">
 
-  <link href="<?= ROOT ?>/css/main.css?3324" rel="stylesheet">
+  <link href="<?= ROOT ?>/assets/css/main.css?3324" rel="stylesheet">
 
-  <script defer src="<?= ROOT ?>/js/main.js"></script>
+  <script defer src="<?= ROOT ?>/assets/js/main.js"></script>
 
-  <script type="module" src="<?= ROOT ?>/js/test.js"></script>
+  <script type="module" src="<?= ROOT ?>/assets/js/test.js"></script>
 
 
   <!-- =======================================================

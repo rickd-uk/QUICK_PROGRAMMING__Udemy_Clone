@@ -1,7 +1,5 @@
 <?php Controller::view_static('admin/header', $data); ?>
 
-
-
 <?php if ($action == 'add') : ?>
 
 	<div class="card col-md-5 mx-auto">
@@ -54,7 +52,7 @@
 
 <?php elseif ($action == 'edit') : ?>
 
-
+	<link href="<?= ROOT ?>/assets/css/courses.css?<?= get_date() ?>" rel="stylesheet">
 
 	<div class="card">
 		<div class="card-body">
@@ -64,7 +62,7 @@
 
 
 				<!-- Tabs -->
-				<div class="tabs-holder ">
+				<div class="tabs-holder">
 					<div onclick="set_courses_tab(this)" id="intended-learners" class="my-tab active-tab">Intended Learners</div>
 					<div onclick="set_courses_tab(this)" id="curriculum" class="my-tab">Curriculum</div>
 					<div onclick="set_courses_tab(this)" id="course-landing-page" class="my-tab">Course Landing Page</div>
@@ -74,7 +72,7 @@
 				<!-- end tabs -->
 				<div oninput="something_changed(event)">
 					<div id="tabs-content">
-
+						<img class="loader" src="<?= ROOT ?>/assets/images/spinner.gif">
 					</div>
 				</div>
 
@@ -90,8 +88,7 @@
 		</div>
 	</div>
 
-
-	<script src="<?= ROOT ?>/js/courses.js" />
+	<script src="<?= ROOT ?>/assets/js/courses.js" />
 
 <?php else : ?>
 

@@ -1,5 +1,7 @@
 <?php Controller::view_static('admin/header', $data) ?>
 
+
+
 <?php if (!empty($row)) : ?>
   <div class="pagetitle">
     <h1>Profile</h1>
@@ -336,7 +338,8 @@
     </div>
   </section>
 
-  <script src="<?= ROOT ?>/js/profile.js"></script>
+  <script src="<?= ROOT ?>/assets/js/profile.js"></script>
+  <script src="<?= ROOT ?>/assets/js/ajax.js" />
 
 <?php else : ?>
 

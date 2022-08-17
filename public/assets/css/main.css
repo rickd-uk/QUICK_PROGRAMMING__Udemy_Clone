@@ -1,0 +1,19 @@
+.navbar ul::-webkit-scrollbar {
+	display: none;
+}
+
+.navbar ul {
+	max-width: 250px;
+}
+
+.profile-image {
+	width: 100px;
+	max-width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
+
+:root {
+	--link-selected-color: #4154f1;
+	--tab-border-color: #bbb;
+}

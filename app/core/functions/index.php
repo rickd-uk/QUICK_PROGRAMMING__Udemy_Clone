@@ -7,3 +7,4 @@ require 'url.php';
 require 'string.php';
 require 'date_time.php';
 require 'options.php';
+require 'views.php';
