@@ -79,7 +79,7 @@
 					<a href="<?= ROOT ?>/admin/courses">
 						<button class=" btn btn-primary float-start">Back</button>
 					</a>
-					<button class="js-save-btn btn btn-success float-end disabled">Save</button>
+					<button onclick="save_content()" class="js-save-btn btn btn-success float-end disabled">Save</button>
 				</div>
 			<?php else : ?>
 				<div>That course was not found</div>

@@ -173,19 +173,30 @@ class Admin extends Controller
       $prices = $price->findAll('ASC');
       $currencies = $currency->findAll('ASC');
 
-
-
       // get course info
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
-
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
           if ($_POST['tab_name'] == "course-landing-page") {
-            include views_path("course-edit-tabs/course-landing-page");
+
+            $info['data'] = file_get_contents(views_path("course-edit-tabs/course-landing-page"));
+            $info['data_type'] = 'read';
+
+            echo json_encode($info);
+            // include views_path("course-edit-tabs/course-landing-page");
+          }
+        } else 
+        if (!empty($_POST['data_type']) && $_POST['data_type'] == "save") {
+          if ($_POST['tab_name'] == "course-landing-page") {
+
+            $info['data'] = '';
+            $info['data_type'] = 'save';
+
+            echo json_encode($info);
+            // include views_path("course-edit-tabs/course-landing-page");
           }
         }
-
         die;
       }
     } else {

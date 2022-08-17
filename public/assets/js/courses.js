@@ -44,8 +44,16 @@ function show_tab(tab_name) {
 }
 
 function handle_result(result) {
-	const contentDiv = document.querySelector('#tabs-content')
-	contentDiv.innerHTML = result
+	let obj = JSON.parse(result)
+
+	if (typeof obj == 'object') {
+		if (obj.data_type == 'read') {
+			const contentDiv = document.querySelector('#tabs-content')
+			contentDiv.innerHTML = obj.data
+		} else if (obj.data_type == 'save') {
+			alert('data saved')
+		}
+	}
 }
 
 function something_changed(e) {
@@ -106,3 +114,18 @@ function show_loader(item) {
 }
 
 show_tab(tab_courses)
+
+function save_content() {
+	const content = document.querySelector('#tabs-content')
+	const inputs = content.querySelectorAll('input, textarea,select')
+
+	let obj = {}
+	obj.data_type = 'save'
+	obj.tab_name = tab_courses
+
+	for (let i = 0; i < inputs.length; i++) {
+		let key = inputs[i].name
+		obj[key] = inputs[i].value
+	}
+	get_course_data(obj)
+}
