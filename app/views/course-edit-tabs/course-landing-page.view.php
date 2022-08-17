@@ -1,20 +1,19 @@
 <form>
-  <?= $_POST['course_id'] ?>
   <div class="col-md-6 mx-auto" style="padding-top: 40px">
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Course Title</span>
-      <input name="title" type="text" class="form-control">
+      <input name="title" type="text" value="<?= $row->title ?>" class="form-control">
     </div>
 
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Course Subtitle</span>
-      <input name="subtitle" type="text" class="form-control">
+      <input name="subtitle" type="text" value="<?= $row->subtitle ?>" class="form-control">
     </div>
 
     <div class="row mb-3">
       <label for="inputPassword" class="col-sm-2 col-form-label" style="min-width:200px">Description</label>
       <div class="col-sm-12">
-        <textarea name="description" class="form-control" style="height: 100px"></textarea>
+        <textarea name="description" class="form-control" style="height: 100px"><?= $row->description ?></textarea>
       </div>
     </div>
 
@@ -32,6 +31,11 @@
       <div class="col-md-6 my-2">
         <select name="category_id" class=" form-select">
           <option value="">Select Category</option>
+          <?php if (!empty($categories)) : ?>
+            <?php foreach ($categories as $cat) : ?>
+              <option value="<?= $cat->id ?>" <?= set_selected('category_id', $cat->id, $row->category_id); ?>><?= esc($cat->category) ?></option>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </select>
       </div>
       <div class="col-md-6 my-2">
@@ -64,7 +68,7 @@
 
     <div class="input-group my-3">
       <span class="input-group-text" id="basic-addon1">Primary Sub</span>
-      <input name="primary_subject" type="text" class="form-control">
+      <input name="primary_subject" type="text" value="<?= $row->primary_subject ?>" class="form-control">
     </div>
 
     <div class="my-4 row">

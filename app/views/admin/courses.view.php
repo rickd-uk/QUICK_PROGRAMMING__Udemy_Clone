@@ -88,9 +88,6 @@
 	</div>
 
 
-	<script>
-		console.log('<?= $action ?>')
-	</script>
 
 
 

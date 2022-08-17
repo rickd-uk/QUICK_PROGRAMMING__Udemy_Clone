@@ -4,8 +4,6 @@ var tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem
 
 var dirty = false
 
-console.log('<?= $action ?>')
-
 function set_courses_tab(div) {
 	if (dirty) {
 		//ask user to save when switching tabs
@@ -40,7 +38,6 @@ function show_tab(tab_name) {
 	get_course_data({
 		tab_name: tab_courses,
 		data_type: 'read',
-		course_id: '<?= $action ?>',
 	})
 
 	disable_save_btn(false)
