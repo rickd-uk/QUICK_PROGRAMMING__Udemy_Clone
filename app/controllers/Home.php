@@ -7,9 +7,11 @@ class Home extends Controller
 {
   public function index()
   {
-    $db = new DB_Tasks();
-    // $db->create_tables();
-    $db->create_user_table();
+
+    $add_data = new Add_Data();
+    $add_data->languages();
+    // $db = new Create_Tables();
+    // $db->user_table();
 
     $data['title'] = "Home";
 

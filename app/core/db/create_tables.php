@@ -3,9 +3,9 @@
 /**
  * db_tasks class
  */
-class DB_Tasks extends Database
+class Create_Tables extends Database
 {
-  public function create_db()
+  public function db()
   {
     $query = "
     CREATE DATABASE IF NOT EXISTS `udemy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -15,7 +15,7 @@ class DB_Tasks extends Database
     $this->query($query);
   }
 
-  public function create_user_table()
+  public function user_table()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `users` (
@@ -45,7 +45,7 @@ class DB_Tasks extends Database
     $this->query($query);
   }
 
-  public function create_courses_table()
+  public function courses_table()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `courses` (
@@ -87,7 +87,7 @@ class DB_Tasks extends Database
     $this->query($query);
   }
 
-  public function create_categories_table()
+  public function categories_table()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `categories` (
@@ -100,7 +100,7 @@ class DB_Tasks extends Database
     $this->query($query);
   }
 
-  public function create_prices_table()
+  public function prices_table()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `prices` (
@@ -121,6 +121,49 @@ class DB_Tasks extends Database
      (1, 'Free', '0', 0);
      ";
 
+    $this->query($query);
+  }
+
+  public function currencies_table()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS `currencies` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `currency` varchar(20) NOT NULL,
+      `symbol` varchar(4) NOT NULL,
+      `disabled` tinyint(1) NOT NULL DEFAULT '0',
+      PRIMARY KEY (`id`),
+      KEY `disabled` (`disabled`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+    ";
+    $this->query($query);
+  }
+
+  public function course_levels_table()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS `course_levels` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `level` varchar(30) NOT NULL,
+      `disabled` tinyint(1) NOT NULL DEFAULT '0',
+      PRIMARY KEY (`id`),
+      KEY `disabled` (`disabled`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ";
+    $this->query($query);
+  }
+  public function languages_table()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS`languages` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `symbol` varchar(10) NOT NULL,
+      `language` varchar(30) NOT NULL,
+      `disabled` tinyint(4) NOT NULL DEFAULT '0',
+      PRIMARY KEY (`id`),
+      KEY `disabled` (`disabled`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8
+    ";
     $this->query($query);
   }
 }
