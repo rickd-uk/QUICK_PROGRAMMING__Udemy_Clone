@@ -21,11 +21,21 @@
       <div class="col-md-6 my-2">
         <select name="language_id" class=" form-select">
           <option value="">Select Language</option>
+          <?php if (!empty($languages)) : ?>
+            <?php foreach ($languages as $lang) : ?>
+              <option value="<?= $lang->id ?>" <?= set_selected('language_id', $lang->id, $row->language_id); ?>><?= esc($lang->language) ?></option>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </select>
       </div>
       <div class="col-md-6 my-2">
         <select name="level_id" class="form-select">
           <option value="">Select Level</option>
+          <?php if (!empty($levels)) : ?>
+            <?php foreach ($levels as $lev) : ?>
+              <option value="<?= $lev->id ?>" <?= set_selected('level_id', $lev->id, $row->level_id); ?>><?= esc($lev->level) ?></option>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </select>
       </div>
       <div class="col-md-6 my-2">
@@ -52,12 +62,22 @@
 
           <select name="currency_id" class=" form-select">
             <option value="">Select Currency</option>
+            <?php if (!empty($currencies)) : ?>
+              <?php foreach ($currencies as $curr) : ?>
+                <option value="<?= $curr->id ?>" <?= set_selected('currency_id', $curr->id, $row->currency_id); ?>><?= esc($curr->currency . "($curr->symbol)") ?></option>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </select>
         </div>
         <div class="col-md-6 my-3">
 
           <select name="price_id" class=" form-select">
             <option value="">Select Price</option>
+            <?php if (!empty($prices)) : ?>
+              <?php foreach ($prices as $pri) : ?>
+                <option value="<?= $pri->id ?>" <?= set_selected('price_id', $pri->id, $row->price_id); ?>><?= esc($pri->name . " ($pri->price)") ?></option>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </select>
         </div>
       </div>

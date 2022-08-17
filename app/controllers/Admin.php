@@ -117,6 +117,12 @@ class Admin extends Controller
 
     $user_id = Auth::getId() ?? null;
     $course = new Course_model();
+    $category = new Category_model();
+    $language = new Language_model();
+    $level = new Level_model();
+    $price = new Price_model();
+    $currency = new Currency_model();
+
     $data = [];
     $data['errors'] = [];
     $data['action'] = $action;
@@ -160,8 +166,13 @@ class Admin extends Controller
         $data['errors'] = $course->errors;
       }
     } elseif ($action == 'edit') {
-      $category = new Category_model();
+
       $categories = $category->findAll('ASC');
+      $languages = $language->findAll('ASC');
+      $levels = $level->findAll('ASC');
+      $prices = $price->findAll('ASC');
+      $currencies = $currency->findAll('ASC');
+
 
 
       // get course info
