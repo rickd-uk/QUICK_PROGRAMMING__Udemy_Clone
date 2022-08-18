@@ -4,6 +4,26 @@ class Model extends Database
 {
   protected $table = "";
 
+  protected function validate_empty($data, $field, $err_message = null)
+  {
+    if (empty($data[$field])) {
+      // Use first part of field name in string  e.g. currency_id required => currency required
+      if (empty($err_message)) {
+        $err_message = explode("_", $field)[0] . ' required';
+      }
+      $this->errors[$field] = $err_message;
+      return true;
+    }
+    return false;
+  }
+
+  protected function validate_text($data, $field, $regex, $err_msg)
+  {
+    if (!preg_match($regex, trim($data[$field]))) {
+      $this->errors[$field] = $err_msg;
+    }
+  }
+
   private function remove_unwanted_cols($data)
   {
     // Remove unwanted cols

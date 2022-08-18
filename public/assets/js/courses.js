@@ -49,7 +49,7 @@ function handle_result(result) {
 		let obj = JSON.parse(result)
 		if (typeof obj == 'object') {
 			if (obj.data_type == 'save') {
-				alert(obj.data)
+				// alert(obj.data)
 
 				// Clear all errors
 				const error_containers = document.querySelectorAll('.error')

@@ -34,8 +34,10 @@
         <select name="language_id" class=" form-select">
           <option value="">Select Language</option>
           <?php if (!empty($languages)) : ?>
+
+            <!-- language_id is SET to 21 (English) by default -->
             <?php foreach ($languages as $lang) : ?>
-              <option value="<?= $lang->id ?>" <?= set_selected('language_id', $lang->id, $row->language_id); ?>><?= esc($lang->language) ?></option>
+              <option value="<?= $lang->id ?>" <?= set_selected('language_id', $lang->id, $row->language_id ?? 21); ?>><?= esc($lang->language) ?></option>
             <?php endforeach; ?>
           <?php endif; ?>
         </select>
@@ -78,11 +80,12 @@
       <div class="input-group d-flex justify-content-between">
         <div class="col-md-5 my-2">
 
+          <!-- currency_id is SET to 1 ($) by default -->
           <select name="currency_id" class=" form-select">
             <option value="">Select Currency</option>
             <?php if (!empty($currencies)) : ?>
               <?php foreach ($currencies as $curr) : ?>
-                <option value="<?= $curr->id ?>" <?= set_selected('currency_id', $curr->id, $row->currency_id); ?>><?= esc($curr->currency . "($curr->symbol)") ?></option>
+                <option value="<?= $curr->id ?>" <?= set_selected('currency_id', $curr->id, $row->currency_id ?? 1); ?>><?= esc($curr->currency . "($curr->symbol)") ?></option>
               <?php endforeach; ?>
             <?php endif; ?>
           </select>

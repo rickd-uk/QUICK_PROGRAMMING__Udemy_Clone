@@ -6,6 +6,7 @@
 class Course_model extends Model
 {
   public $errors = [];
+
   protected $table = "courses";
 
   protected $afterSelect = [
@@ -37,35 +38,17 @@ class Course_model extends Model
     'published',
   ];
 
-  #1 TODO:
-  private function validate_field()
-  {
-    if (empty($data['title'])) {
-      $this->errors['title'] = "Enter course title";
-    }
-  }
+
 
   public function validate($data)
   {
     $this->errors = [];
 
-    if (empty($data['title'])) {
-      $this->errors['title'] = "Enter course title";
-    } else
-    if (!preg_match("/^[a-zA-Z_ ]+$/", trim($data['title']))) {
-      $this->errors['title'] = "Course titles can only have letters, spaces and '_'";
-    }
+    $this->validate_empty($data, 'title', 'Enter course title')
+      || $this->validate_text($data, 'title', "/^[a-zA-Z_ ]+$/", "Course titles can only have letters, spaces and '_'");
 
-    if (empty($data['primary_subject'])) {
-      $this->errors['primary_subject'] = "Enter a primary subject";
-    } else
-    if (!preg_match("/^[a-zA-Z_ ]+$/", trim($data['primary_subject']))) {
-      $this->errors['primary_subject'] = "Primary subjects can only have letters, spaces and '_'";
-    }
-
-    if (empty($data['category_id'])) {
-      $this->errors['category_id'] = "Category is required";
-    }
+    $this->validate_empty($data, 'primary_subject', "Enter a primary subject")
+      || $this->validate_text($data, 'title', "/^[a-zA-Z_ ]+$/", "Primary subjects can only have letters, spaces and '_'");
 
     if (empty($this->errors)) {
       return true;
@@ -78,7 +61,11 @@ class Course_model extends Model
     $this->errors = [];
 
     $this->validate($data);
-
+    $this->validate_empty($data, 'category_id');
+    $this->validate_empty($data, 'level_id');
+    $this->validate_empty($data, 'currency_id');
+    $this->validate_empty($data, 'language_id');
+    $this->validate_empty($data, 'price_id');
 
 
     if (empty($this->errors)) {
