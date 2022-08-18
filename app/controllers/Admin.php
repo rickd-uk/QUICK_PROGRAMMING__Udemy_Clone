@@ -8,6 +8,17 @@ class Admin extends Controller
   private $destination = '';
   private $updated_image = false;
 
+
+  // Check whether a particular data type exists
+  private function is_data_type($post, $data_type)
+  {
+
+    if (!empty($post['data_type']) && $post['data_type'] == $data_type) {
+      return true;
+    }
+    return false;
+  }
+
   private function login_to_view()
   {
     if (!Auth::is_logged_in()) {
@@ -134,14 +145,13 @@ class Admin extends Controller
 
       $data['categories'] = $category->findAll('ASC');
 
+
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tab_name = $_POST['tab_name'];
         if ($course->validate($_POST)) {
 
           // added ?? '' to stop vscode warning 'use of unassigned variable'
           $user_id = Auth::getId() ?? '';
-
-
 
           // DEFAULT data for Categories
           // Set current date time as default
@@ -178,20 +188,18 @@ class Admin extends Controller
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         $tab_name = $_POST['tab_name'];
-        if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
+
+        if ($this->is_data_type($_POST, 'read')) {
           if ($tab_name == "course-landing-page") {
             // Return course landing page data
             include views_path("course-edit-tabs/course-landing-page");
           } else if ($tab_name == "course-messages") {
-
             // Return course landing page data
             include views_path("course-edit-tabs/course-messages");
           }
         } else
-
           // Save course landing page data
-          if (!empty($_POST['data_type']) && $_POST['data_type'] == "save") {
-
+          if ($this->is_data_type($_POST, 'save')) {
             if ($course->edit_validate($_POST, $id, $tab_name)) {
               $course->update($id, $_POST);
 
@@ -202,6 +210,23 @@ class Admin extends Controller
             }
             $info['data_type'] = "save";
             echo json_encode($info);
+          }
+
+          // Upload Course Image
+          else
+        if ($this->is_data_type($_POST, 'upload_course_image')) {
+
+            $dir = 'uploads/courses/';
+
+            if (!file_exists($dir)) {
+              // true refers to creating nested dir, equivalent to:   mkdir -p $dir
+              mkdir($dir, 0777, true);
+            }
+            $errors = [];
+            if (!empty($_FILES['image']['name'])) {
+              $destination = $dir . time() . $_FILES['image']['name'];
+              move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+            }
           }
         die;
       }

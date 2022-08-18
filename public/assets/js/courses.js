@@ -148,11 +148,26 @@ function upload_course_image(file) {
 		alert('Please wait while another image uploads')
 		return
 	}
+
+	let allowed_types = ['jpg', 'jpeg', 'png']
+	// Remove the last item from split filename i.e. the extension
+	let ext = file.name.split('.').pop()
+	ext = ext.toLowerCase()
+
+	if (!allowed_types.includes(ext)) {
+		alert('Only files of this type allowed: ' + allowed_types.toString(','))
+		img_ul_input.classList.remove('hide')
+		img_ul_input.value = null
+		return
+	}
+
+	// Start image file upload
 	course_img_uploading = true
 
 	// Hide image upload input & Show cancel button
 	img_ul_info.innerHTML = file.name
 	img_ul_info.classList.remove('hide')
+
 	img_ul_input.classList.add('hide')
 	img_ul_cancel_btn.classList.remove('hide')
 
@@ -175,6 +190,8 @@ function upload_course_image(file) {
 				break
 			case 4:
 				if (ajax_course_image.status == 200) {
+					// alert(ajax_course_image.responseText)
+
 					course_img_uploading = false
 					console.log('%c COMPLETED! ', 'background: #222; color: #bada55')
 					img_ul_input.classList.remove('hide')
@@ -189,8 +206,10 @@ function upload_course_image(file) {
 
 					img_ul_info.innerHTML = ''
 					img_ul_info.classList.add('hide')
+
 					img_ul_input.classList.remove('hide')
 					img_ul_input.value = null
+
 					img_ul_cancel_btn.classList.add('hide')
 
 					course_img_uploading = false
@@ -207,6 +226,8 @@ function upload_course_image(file) {
 		img_progress_bar.style.width = percent_progress + '%'
 		img_progress_bar.innerHTML = percent_progress + '%'
 	})
+
+	// Append data to send as a form post
 	myform.append('data_type', 'upload_course_image')
 	myform.append('tab_name', tab_courses)
 	myform.append('image', file)
@@ -218,16 +239,3 @@ function upload_course_image(file) {
 function ajax_course_img_ul_cancel() {
 	ajax_course_image.abort()
 }
-
-// console.log(window.performance)
-
-// //check for Navigation Timing API support
-// if (window.performance) {
-// 	console.info('window.performance works fine on this browser')
-// }
-
-// if (performance.type == performance.TYPE_RELOAD) {
-// 	console.info('This page is reloaded')
-// } else {
-// 	console.info('This page is not reloaded')
-// }
