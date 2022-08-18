@@ -128,6 +128,7 @@ class Admin extends Controller
     $data['action'] = $action;
     $data['id'] = $id;
 
+    $tab_name = $_POST['tab_name'];
 
     // Is the user adding a course
     if ($action == 'add') {
@@ -178,10 +179,10 @@ class Admin extends Controller
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
-          if ($_POST['tab_name'] == "course-landing-page") {
+          if ($tab_name == "course-landing-page") {
             // Return course landing page data
             include views_path("course-edit-tabs/course-landing-page");
-          } else if ($_POST['tab_name'] == "course-messages") {
+          } else if ($tab_name == "course-messages") {
 
             // Return course landing page data
             include views_path("course-edit-tabs/course-messages");
@@ -190,31 +191,17 @@ class Admin extends Controller
 
           // Save course landing page data
           if (!empty($_POST['data_type']) && $_POST['data_type'] == "save") {
-            if ($_POST['tab_name'] == "course-landing-page") {
 
-              if ($course->edit_validate($_POST, $id)) {
-                $course->update($id, $_POST);
+            if ($course->edit_validate($_POST, $id, $tab_name)) {
+              $course->update($id, $_POST);
 
-                $info['data'] = "Course saved successfully";
-              } else {
-                $info['errors'] = $course->errors;
-                $info['data'] = "There are some problems";
-              }
-              $info['data_type'] = "save";
-              echo json_encode($info);
-            } else if ($_POST['tab_name'] == "course-messages") {
-
-              if ($course->edit_validate($_POST, $id)) {
-                $course->update($id, $_POST);
-
-                $info['data'] = "Course saved successfully";
-              } else {
-                $info['errors'] = $course->errors;
-                $info['data'] = "There are some problems";
-              }
-              $info['data_type'] = "save";
-              echo json_encode($info);
+              $info['data'] = "Course saved successfully";
+            } else {
+              $info['errors'] = $course->errors;
+              $info['data'] = "There are some problems";
             }
+            $info['data_type'] = "save";
+            echo json_encode($info);
           }
         die;
       }

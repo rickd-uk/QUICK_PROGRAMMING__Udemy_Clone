@@ -56,22 +56,24 @@ class Course_model extends Model
     return false;
   }
 
-  public function edit_validate($data, $id = null)
+  public function edit_validate($data, $id = null, $tab_name = null)
   {
     $this->errors = [];
 
-    $this->validate($data);
-    $this->validate_empty($data, 'category_id');
-    $this->validate_empty($data, 'level_id');
-    $this->validate_empty($data, 'currency_id');
-    $this->validate_empty($data, 'language_id');
-    $this->validate_empty($data, 'price_id');
 
-
-    if (empty($this->errors)) {
-      return true;
+    if ($tab_name == "course_landing_page") {
+      $this->validate($data);
+      $this->validate_empty($data, 'category_id');
+      $this->validate_empty($data, 'level_id');
+      $this->validate_empty($data, 'currency_id');
+      $this->validate_empty($data, 'language_id');
+      $this->validate_empty($data, 'price_id');
+      $this->validate_empty($data, 'subtitle');
+      $this->validate_empty($data, 'description');
+    } else if ($tab_name == "course_messages") {
     }
 
+    if (empty($this->errors)) return true;
     return false;
   }
 

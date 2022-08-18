@@ -64,6 +64,7 @@ function handle_result(result) {
 					}
 				} else {
 					disable_save_btn(true)
+					dirty = false
 				}
 			}
 		}
