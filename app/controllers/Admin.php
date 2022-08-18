@@ -128,8 +128,6 @@ class Admin extends Controller
     $data['action'] = $action;
     $data['id'] = $id;
 
-    $tab_name = $_POST['tab_name'];
-
     // Is the user adding a course
     if ($action == 'add') {
       $category = new Category_model();
@@ -137,6 +135,7 @@ class Admin extends Controller
       $data['categories'] = $category->findAll('ASC');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $tab_name = $_POST['tab_name'];
         if ($course->validate($_POST)) {
 
           // added ?? '' to stop vscode warning 'use of unassigned variable'
@@ -178,6 +177,7 @@ class Admin extends Controller
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
+        $tab_name = $_POST['tab_name'];
         if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
           if ($tab_name == "course-landing-page") {
             // Return course landing page data

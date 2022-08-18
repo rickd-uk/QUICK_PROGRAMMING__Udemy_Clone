@@ -114,19 +114,6 @@ function get_course_data(obj) {
 	ajax.send(myform)
 }
 
-// console.log(window.performance)
-
-// //check for Navigation Timing API support
-// if (window.performance) {
-// 	console.info('window.performance works fine on this browser')
-// }
-
-// if (performance.type == performance.TYPE_RELOAD) {
-// 	console.info('This page is reloaded')
-// } else {
-// 	console.info('This page is not reloaded')
-// }
-
 function show_loader(item) {
 	item.innerHTML = '<img class="loader" src="<?=ROOT?>/assets/images/loader.gif">'
 }
@@ -147,3 +134,68 @@ function save_content() {
 	}
 	get_course_data(obj)
 }
+
+let course_img_uploading = false
+
+function upload_course_image(file) {
+	if (course_img_uploading) {
+		alert('Please wait while another image uploads')
+		return
+	}
+	course_img_uploading = true
+
+	let myform = new FormData()
+	let ajax = new XMLHttpRequest()
+
+	ajax.addEventListener('readystatechange', () => {
+		switch (ajax.readyState) {
+			case 0:
+				console.info('request not initialized')
+				break
+			case 1:
+				console.info('server connection established')
+				break
+			case 2:
+				console.info('request received')
+				break
+			case 3:
+				console.info('processing request')
+				break
+			case 4:
+				if (ajax.status == 200) {
+					course_img_uploading = false
+				} else {
+					console.error('Image upload failed')
+				}
+				break
+			default:
+				console.log(`Unrecognized ajax.readyState!!`)
+		}
+	})
+
+	ajax.upload.addEventListener('progress', (e) => {
+		let percent_progress = (e.loaded / e.total) * 100
+
+		document.querySelector('#progress-bar-image').style.width = percent_progress + '%'
+		document.querySelector('#progress-bar-image').innerHTML = percent_progress + '%'
+	})
+	myform.append('data_type', 'upload_course_image')
+	myform.append('tab_name', tab_courses)
+	myform.append('image', file)
+
+	ajax.open('POST', '', true)
+	ajax.send(myform)
+}
+
+// console.log(window.performance)
+
+// //check for Navigation Timing API support
+// if (window.performance) {
+// 	console.info('window.performance works fine on this browser')
+// }
+
+// if (performance.type == performance.TYPE_RELOAD) {
+// 	console.info('This page is reloaded')
+// } else {
+// 	console.info('This page is not reloaded')
+// }

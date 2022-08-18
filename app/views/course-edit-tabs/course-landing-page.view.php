@@ -117,9 +117,9 @@
         Upload your course image here. It must meet our course image quality standards to be accepted.
 
         <br><br>
-        <input id="js-img-ul-input" type="file">
+        <input onchange="upload_course_image(this.files[0])" id="js-img-ul-input" type="file">
         <div class="progress my-4">
-          <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div id="progress-bar-image" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <button id="js-img-ul-cancel" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
       </div>
@@ -136,7 +136,7 @@
         <br><br>
         <input id="js-video-ul-input" type="file">
         <div class="progress my-4">
-          <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div id="progress-bar-video" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <button id="js-video-ul-cancel" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
       </div>
