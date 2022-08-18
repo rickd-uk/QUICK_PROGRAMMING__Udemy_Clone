@@ -136,6 +136,7 @@ function save_content() {
 }
 
 let course_img_uploading = false
+let ajax_course_image = null
 
 function upload_course_image(file) {
 	if (course_img_uploading) {
@@ -144,11 +145,17 @@ function upload_course_image(file) {
 	}
 	course_img_uploading = true
 
-	let myform = new FormData()
-	let ajax = new XMLHttpRequest()
+	// Hide image upload input & Show cancel button
+	document.querySelector('#js-img-ul-info').innerHTML = file.name
+	document.querySelector('#js-img-ul-info').classList.remove('hide')
+	document.querySelector('#js-img-ul-input').classList.add('hide')
+	document.querySelector('#js-img-ul-cancel-btn').classList.remove('hide')
 
-	ajax.addEventListener('readystatechange', () => {
-		switch (ajax.readyState) {
+	let myform = new FormData()
+	ajax_course_image = new XMLHttpRequest()
+
+	ajax_course_image.addEventListener('readystatechange', () => {
+		switch (ajax_course_image.readyState) {
 			case 0:
 				console.info('request not initialized')
 				break
@@ -162,19 +169,23 @@ function upload_course_image(file) {
 				console.info('processing request')
 				break
 			case 4:
-				if (ajax.status == 200) {
+				if (ajax_course_image.status == 200) {
 					course_img_uploading = false
+					console.log('%c COMPLETED! ', 'background: #222; color: #bada55')
+					document.querySelector('#js-img-ul-input').classList.remove('hide')
+					document.querySelector('#js-img-ul-cancel-btn').classList.add('hide')
+					document.querySelector('#js-img-ul-info').classList.add('hide')
 				} else {
 					console.error('Image upload failed')
 				}
 				break
 			default:
-				console.log(`Unrecognized ajax.readyState!!`)
+				console.warning(`Unrecognized ajax readyState!!`)
 		}
 	})
 
-	ajax.upload.addEventListener('progress', (e) => {
-		let percent_progress = (e.loaded / e.total) * 100
+	ajax_course_image.upload.addEventListener('progress', (e) => {
+		let percent_progress = Math.round((e.loaded / e.total) * 100, 0)
 
 		document.querySelector('#progress-bar-image').style.width = percent_progress + '%'
 		document.querySelector('#progress-bar-image').innerHTML = percent_progress + '%'
@@ -183,8 +194,12 @@ function upload_course_image(file) {
 	myform.append('tab_name', tab_courses)
 	myform.append('image', file)
 
-	ajax.open('POST', '', true)
-	ajax.send(myform)
+	ajax_course_image.open('POST', '', true)
+	ajax_course_image.send(myform)
+}
+
+function ajax_course_img_ul_cancel() {
+	ajax_course_image.abort()
 }
 
 // console.log(window.performance)
