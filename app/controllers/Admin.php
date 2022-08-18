@@ -180,18 +180,27 @@ class Admin extends Controller
         if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
           if ($_POST['tab_name'] == "course-landing-page") {
 
+            // Return course landing page data
             include views_path("course-edit-tabs/course-landing-page");
           }
-        } else 
-        if (!empty($_POST['data_type']) && $_POST['data_type'] == "save") {
-          if ($_POST['tab_name'] == "course-landing-page") {
+        } else
 
-            $info['data'] = "";
-            $info['data_type'] = "save";
+          // Save course landing page data
+          if (!empty($_POST['data_type']) && $_POST['data_type'] == "save") {
+            if ($_POST['tab_name'] == "course-landing-page") {
 
-            echo json_encode($info);
+              if ($course->edit_validate($_POST, $id)) {
+                $course->update($id, $_POST);
+
+                $info['data'] = "Course saved successfully";
+              } else {
+                $info['errors'] = $course->errors;
+                $info['data'] = "There are some problems";
+              }
+              $info['data_type'] = "save";
+              echo json_encode($info);
+            }
           }
-        }
         die;
       }
     } else {

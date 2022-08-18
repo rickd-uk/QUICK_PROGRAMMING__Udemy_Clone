@@ -1,24 +1,36 @@
 <form>
+
   <div class="col-md-6 mx-auto" style="padding-top: 40px">
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Course Title</span>
       <input name="title" type="text" value="<?= $row->title ?>" class="form-control">
+      <small class="error error-title w-100 text-danger"></small>
     </div>
 
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Course Subtitle</span>
       <input name="subtitle" type="text" value="<?= $row->subtitle ?>" class="form-control">
+      <small class="error error-subtitle w-100 text-danger"></small>
     </div>
 
-    <div class="row mb-3">
-      <label for="inputPassword" class="col-sm-2 col-form-label" style="min-width:200px">Description</label>
-      <div class="col-sm-12">
-        <textarea name="description" class="form-control" style="height: 100px"><?= $row->description ?></textarea>
-      </div>
+    <div class="input-group my-3">
+      <span class="input-group-text" id="basic-addon1">Primary Sub</span>
+      <input name="primary_subject" type="text" value="<?= $row->primary_subject ?>" class="form-control">
+      <small class="error error-primary_subject w-100 text-danger"></small>
     </div>
+
+    <div class="row mb-1">
+      <label for="inputPassword" class="col-sm-2 col-form-label" style="min-width:200px"><b>Description</b></label>
+      <div class="col-sm-12">
+        <textarea name="description" class="form-control" style="height: 200px; resize:none"><?= $row->description ?></textarea>
+      </div>
+      <small class="error error-description w-100 text-danger"></small>
+    </div>
+
 
     <div class="row">
-      <div class="col-md-6 my-2">
+      <div class="col-md-6 my-1">
+        <label class="mt-2 mb-1"><b>Language</b></label>
         <select name="language_id" class=" form-select">
           <option value="">Select Language</option>
           <?php if (!empty($languages)) : ?>
@@ -27,8 +39,11 @@
             <?php endforeach; ?>
           <?php endif; ?>
         </select>
+        <small class="error error-language_id w-100 text-danger"></small>
       </div>
-      <div class="col-md-6 my-2">
+
+      <div class="col-md-6 my-1">
+        <label class="mt-2 mb-1"><b>Level</b></label>
         <select name="level_id" class="form-select">
           <option value="">Select Level</option>
           <?php if (!empty($levels)) : ?>
@@ -37,8 +52,10 @@
             <?php endforeach; ?>
           <?php endif; ?>
         </select>
+        <small class="error error-level_id w-100 text-danger"></small>
       </div>
-      <div class="col-md-6 my-2">
+      <div class="col-md-6 my-1">
+        <label class="mt-2 mb-1"><b>Category</b></label>
         <select name="category_id" class=" form-select">
           <option value="">Select Category</option>
           <?php if (!empty($categories)) : ?>
@@ -47,16 +64,19 @@
             <?php endforeach; ?>
           <?php endif; ?>
         </select>
+        <small class="error error-category_id w-100 text-danger"></small>
       </div>
-      <div class="col-md-6 my-2">
+      <div class="col-md-6 my-1">
+        <label class="mt-2 mb-1"><b>Sub-Category</b></label>
         <select name="_id" class=" form-select">
           <option value="">Select Sub-Category</option>
         </select>
+        <small class="error error-sub_category_id w-100 text-danger"></small>
       </div>
 
       <label class="mt-2"><b>Pricing:</b></label>
       <div class="input-group d-flex justify-content-between">
-        <div class="col-md-5 my-3">
+        <div class="col-md-5 my-2">
 
           <select name="currency_id" class=" form-select">
             <option value="">Select Currency</option>
@@ -66,8 +86,9 @@
               <?php endforeach; ?>
             <?php endif; ?>
           </select>
+          <small class="error error-currency_id w-100 text-danger"></small>
         </div>
-        <div class="col-md-6 my-3">
+        <div class="col-md-6 my-2">
 
           <select name="price_id" class=" form-select">
             <option value="">Select Price</option>
@@ -77,17 +98,12 @@
               <?php endforeach; ?>
             <?php endif; ?>
           </select>
+          <small class="error error-price_id w-100 text-danger"></small>
         </div>
       </div>
-
     </div>
 
 
-
-    <div class="input-group my-3">
-      <span class="input-group-text" id="basic-addon1">Primary Sub</span>
-      <input name="primary_subject" type="text" value="<?= $row->primary_subject ?>" class="form-control">
-    </div>
 
     <div class="my-4 row">
       <div class="col-md-4">

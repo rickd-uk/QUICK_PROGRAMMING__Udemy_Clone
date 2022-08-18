@@ -31,6 +31,7 @@ class Model extends Database
 
   public function update($id, $data)
   {
+    // show_stop($id, $data);
     $data = $this->remove_unwanted_cols($data);
 
     $keys = array_keys($data);

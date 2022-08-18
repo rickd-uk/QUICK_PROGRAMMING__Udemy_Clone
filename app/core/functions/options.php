@@ -3,18 +3,17 @@
 
 function set_selected($key, $value, $default = '')
 {
-
   if (!empty($_POST[$key])) {
     if ($value == $_POST[$key]) {
       return ' selected ';
     }
   } else
 	if (!empty($default)) {
+
     if ($value == $default) {
       return ' selected ';
     }
   }
-
   return '';
 }
 

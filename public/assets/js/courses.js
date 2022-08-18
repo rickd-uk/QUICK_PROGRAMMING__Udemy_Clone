@@ -47,10 +47,25 @@ function handle_result(result) {
 	result = result.trim()
 	if (result.substr(0, 2) == '{"') {
 		let obj = JSON.parse(result)
+		if (typeof obj == 'object') {
+			if (obj.data_type == 'save') {
+				alert(obj.data)
 
-		if (obj.data_type == 'save') {
-			alert('data saved')
-			disable_save_btn(true)
+				// Clear all errors
+				const error_containers = document.querySelectorAll('.error')
+				for (let i = 0; i < error_containers.length; i++) {
+					error_containers[i].innerHTML = ''
+				}
+
+				// Show any validation errors
+				if (typeof obj.errors == 'object') {
+					for (key in obj.errors) {
+						document.querySelector('.error-' + key).innerHTML = obj.errors[key]
+					}
+				} else {
+					disable_save_btn(true)
+				}
+			}
 		}
 	} else {
 		const contentDiv = document.querySelector('#tabs-content')

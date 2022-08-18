@@ -1,7 +1,7 @@
 <?php
 
 /**
- * category class
+ * categories class
  */
 class Category_model extends Model
 {
@@ -19,8 +19,8 @@ class Category_model extends Model
     if (empty($data['category'])) {
       $this->errors['category'] = "Enter category";
     } else
-    if (!preg_match("/^[a-zA-Z ]+$/", trim($data['firstname']))) {
-      $this->errors['firstname'] = "Category can only have letters and spaces";
+    if (!preg_match("/^[a-zA-Z ]+$/", trim($data['category']))) {
+      $this->errors['category'] = "Category can only have letters and spaces";
     }
     if (empty($this->errors)) {
       return true;
