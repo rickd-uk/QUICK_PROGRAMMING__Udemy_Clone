@@ -139,6 +139,11 @@ let course_img_uploading = false
 let ajax_course_image = null
 
 function upload_course_image(file) {
+	let img_ul_info = document.querySelector('#js-img-ul-info')
+	let img_ul_input = document.querySelector('#js-img-ul-input')
+	let img_ul_cancel_btn = document.querySelector('#js-img-ul-cancel-btn')
+	let img_progress_bar = document.querySelector('#progress-bar-image')
+
 	if (course_img_uploading) {
 		alert('Please wait while another image uploads')
 		return
@@ -146,10 +151,10 @@ function upload_course_image(file) {
 	course_img_uploading = true
 
 	// Hide image upload input & Show cancel button
-	document.querySelector('#js-img-ul-info').innerHTML = file.name
-	document.querySelector('#js-img-ul-info').classList.remove('hide')
-	document.querySelector('#js-img-ul-input').classList.add('hide')
-	document.querySelector('#js-img-ul-cancel-btn').classList.remove('hide')
+	img_ul_info.innerHTML = file.name
+	img_ul_info.classList.remove('hide')
+	img_ul_input.classList.add('hide')
+	img_ul_cancel_btn.classList.remove('hide')
 
 	let myform = new FormData()
 	ajax_course_image = new XMLHttpRequest()
@@ -172,11 +177,23 @@ function upload_course_image(file) {
 				if (ajax_course_image.status == 200) {
 					course_img_uploading = false
 					console.log('%c COMPLETED! ', 'background: #222; color: #bada55')
-					document.querySelector('#js-img-ul-input').classList.remove('hide')
-					document.querySelector('#js-img-ul-cancel-btn').classList.add('hide')
-					document.querySelector('#js-img-ul-info').classList.add('hide')
+					img_ul_input.classList.remove('hide')
+					img_ul_cancel_btn.classList.add('hide')
+					img_ul_info.classList.add('hide')
 				} else {
 					console.error('Image upload failed')
+					img_progress_bar.style.width = '0%'
+					img_progress_bar.innerHTML = '0%'
+
+					// Hide image upload input & Show cancel button
+
+					img_ul_info.innerHTML = ''
+					img_ul_info.classList.add('hide')
+					img_ul_input.classList.remove('hide')
+					img_ul_input.value = null
+					img_ul_cancel_btn.classList.add('hide')
+
+					course_img_uploading = false
 				}
 				break
 			default:
@@ -187,8 +204,8 @@ function upload_course_image(file) {
 	ajax_course_image.upload.addEventListener('progress', (e) => {
 		let percent_progress = Math.round((e.loaded / e.total) * 100, 0)
 
-		document.querySelector('#progress-bar-image').style.width = percent_progress + '%'
-		document.querySelector('#progress-bar-image').innerHTML = percent_progress + '%'
+		img_progress_bar.style.width = percent_progress + '%'
+		img_progress_bar.innerHTML = percent_progress + '%'
 	})
 	myform.append('data_type', 'upload_course_image')
 	myform.append('tab_name', tab_courses)

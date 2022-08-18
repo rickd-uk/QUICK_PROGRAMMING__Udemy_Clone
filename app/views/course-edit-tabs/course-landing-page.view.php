@@ -122,7 +122,7 @@
           <div id="progress-bar-image" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div id="js-img-ul-info" class="hide"></div>
-        <button onclick="ajax_course_img_ul_cancel()" id="js-img-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
+        <button type="button" onclick="ajax_course_img_ul_cancel()" id="js-img-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
       </div>
 
     </div>
@@ -140,7 +140,7 @@
           <div id="progress-bar-video" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <div id="js-video-ul-info" class="hide"></div>
-        <button id="js-video-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
+        <button type="button" id="js-video-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
       </div>
     </div>
   </div>
