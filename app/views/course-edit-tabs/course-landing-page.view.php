@@ -54,8 +54,6 @@
         </select>
       </div>
 
-
-
       <label class="mt-2"><b>Pricing:</b></label>
       <div class="input-group d-flex justify-content-between">
         <div class="col-md-5 my-3">

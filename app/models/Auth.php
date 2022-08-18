@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ROOT')) die('direct script access denied');
+
 /**
  * 
  * authentication class

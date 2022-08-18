@@ -180,7 +180,8 @@ class Admin extends Controller
         if (!empty($_POST['data_type']) && $_POST['data_type'] == "read") {
           if ($_POST['tab_name'] == "course-landing-page") {
 
-            $info['data'] = file_get_contents(views_path("course-edit-tabs/course-landing-page"));
+            // $info['data'] = file_get_contents(ROOT . '/' . views_path("course-edit-tabs/course-landing-page"));
+            $info['data'] = file_get_contents(ROOT . "/ajax/course_edit/" . $user_id . "/" . $id);
             $info['data_type'] = 'read';
 
             echo json_encode($info);
