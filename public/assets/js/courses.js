@@ -40,34 +40,36 @@ function show_tab(tab_name) {
 		data_type: 'read',
 	})
 
-	disable_save_btn(false)
+	disable_save_btn(true)
 }
 
 function handle_result(result) {
-	let obj = JSON.parse(result)
+	result = result.trim()
+	if (result.substr(0, 2) == '{"') {
+		let obj = JSON.parse(result)
 
-	if (typeof obj == 'object') {
-		if (obj.data_type == 'read') {
-			const contentDiv = document.querySelector('#tabs-content')
-			contentDiv.innerHTML = obj.data
-		} else if (obj.data_type == 'save') {
+		if (obj.data_type == 'save') {
 			alert('data saved')
+			disable_save_btn(true)
 		}
+	} else {
+		const contentDiv = document.querySelector('#tabs-content')
+		contentDiv.innerHTML = result
 	}
 }
 
 function something_changed(e) {
 	dirty = tab_courses
-	disable_save_btn(true)
+	disable_save_btn(false)
 }
 
-function disable_save_btn(status = false) {
+function disable_save_btn(status = true) {
 	save_btn = document.querySelector('.js-save-btn').classList
 
 	if (status) {
-		save_btn.remove('disabled')
-	} else {
 		save_btn.add('disabled')
+	} else {
+		save_btn.remove('disabled')
 	}
 }
 
