@@ -110,17 +110,18 @@
 
     <div class="my-4 row">
       <div class="col-md-4">
-        <img src="<?= ROOT ?>/assets/images/image_placeholder.jpg" style="width: 100%;" alt="">
+        <img id="js-img-ul-preview" src="<?= get_image($row->course_image) ?>" style="width: 100%; height: 150px; object-fit: cover;" alt="">
       </div>
       <div class="col-sm-8">
         <div class="h5"><b>Course Image</b></div>
         Upload your course image here. It must meet our course image quality standards to be accepted.
 
         <br><br>
-        <input onchange="upload_course_image(this.files[0])" id="js-img-ul-input" type="file">
+        <input onchange="upload_course_image(this.files[0])" id="js-img-ul-input" type="file" accept="image/png, image/jpg, image/jpeg">
         <div class="progress my-4">
           <div id="progress-bar-image" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
+        <course_image_tmpjs-image></course_image_tmpjs-image>
         <div id="js-img-ul-info" class="hide"></div>
         <button type="button" onclick="ajax_course_img_ul_cancel()" id="js-img-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
       </div>

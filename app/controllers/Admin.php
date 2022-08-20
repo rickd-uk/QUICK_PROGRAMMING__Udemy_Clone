@@ -201,6 +201,20 @@ class Admin extends Controller
           // Save course landing page data
           if ($this->is_data_type($_POST, 'save')) {
             if ($course->edit_validate($_POST, $id, $tab_name)) {
+
+              // check if a temp image exists
+              $tmp_img = $row->course_image_tmp;
+              if ($tmp_img != '' && file_exists($tmp_img)) {
+                // delete current course image
+                if (file_exists($row->course_image)) {
+                  unlink($row->course_image);
+                }
+
+                // if it exists remove variable for image temp
+                $_POST['course_image'] = $tmp_img;
+                $_POST['course_image_tmp'] = '';
+              }
+
               $course->update($id, $_POST);
 
               $info['data'] = "Course saved successfully";
@@ -226,6 +240,13 @@ class Admin extends Controller
             if (!empty($_FILES['image']['name'])) {
               $destination = $dir . time() . $_FILES['image']['name'];
               move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+
+              // Delete old temp file
+              if (file_exists($row->course_image_tmp)) {
+                unlink($row->course_image_tmp);
+              }
+
+              $course->update($id, ['course_image_tmp' => $destination]);
             }
           }
         die;

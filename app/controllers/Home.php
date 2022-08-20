@@ -11,8 +11,9 @@ class Home extends Controller
 
     // $add_data = new Add_Data();
     // $add_data->languages();
-    // $db = new Create_Tables();
-    // $db->user_table();
+
+    // $ct = new Create_Table();
+    // $db->user();
 
     $data['title'] = "Home";
 

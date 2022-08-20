@@ -161,6 +161,12 @@ function upload_course_image(file) {
 		return
 	}
 
+	// display an image preview
+	let img_preview = document.querySelector('#js-img-ul-preview')
+	// Create url link on local machine
+	let link = URL.createObjectURL(file)
+	img_preview.src = link
+
 	// Start image file upload
 	course_img_uploading = true
 

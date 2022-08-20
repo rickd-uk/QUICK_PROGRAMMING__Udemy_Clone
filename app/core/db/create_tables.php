@@ -3,7 +3,7 @@
 /**
  * db_tasks class
  */
-class Create_Tables extends Database
+class Create_Table extends Database
 {
   public function db()
   {
@@ -15,7 +15,7 @@ class Create_Tables extends Database
     $this->query($query);
   }
 
-  public function user_table()
+  public function user()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `users` (
@@ -45,7 +45,7 @@ class Create_Tables extends Database
     $this->query($query);
   }
 
-  public function courses_table()
+  public function courses()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `courses` (
@@ -66,6 +66,7 @@ class Create_Tables extends Database
       `primary_subject` varchar(100) DEFAULT NULL,
       `course_promo_video` varchar(1024) DEFAULT NULL,
       `course_image` varchar(1024) DEFAULT NULL,
+      `course_image_tmp` varchar(1024) NOT NULL,
       `date` datetime DEFAULT NULL,
       `tags` varchar(2048) DEFAULT NULL,
       `approved` tinyint(1) NOT NULL DEFAULT '0',
@@ -87,7 +88,7 @@ class Create_Tables extends Database
     $this->query($query);
   }
 
-  public function categories_table()
+  public function categories()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `categories` (
@@ -100,7 +101,7 @@ class Create_Tables extends Database
     $this->query($query);
   }
 
-  public function prices_table()
+  public function prices()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `prices` (
@@ -124,7 +125,7 @@ class Create_Tables extends Database
     $this->query($query);
   }
 
-  public function currencies_table()
+  public function currencies()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `currencies` (
@@ -139,7 +140,7 @@ class Create_Tables extends Database
     $this->query($query);
   }
 
-  public function course_levels_table()
+  public function course_levels()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS `course_levels` (
@@ -152,7 +153,7 @@ class Create_Tables extends Database
     ";
     $this->query($query);
   }
-  public function languages_table()
+  public function languages()
   {
     $query = "
     CREATE TABLE IF NOT EXISTS`languages` (

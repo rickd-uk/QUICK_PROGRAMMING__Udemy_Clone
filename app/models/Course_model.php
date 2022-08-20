@@ -32,6 +32,7 @@ class Course_model extends Model
     'primary_subject',
     'course_promo_video',
     'course_image',
+    'course_image_tmp',
     'date',
     'tags',
     'approved',
