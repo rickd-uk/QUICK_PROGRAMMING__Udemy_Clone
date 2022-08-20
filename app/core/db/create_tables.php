@@ -71,6 +71,7 @@ class Create_Table extends Database
       `tags` varchar(2048) DEFAULT NULL,
       `approved` tinyint(1) NOT NULL DEFAULT '0',
       `published` tinyint(1) NOT NULL DEFAULT '0',
+      `csrf_code` varchar(32) NOT NULL,
       PRIMARY KEY (`id`),
       KEY `title` (`title`),
       KEY `user_id` (`user_id`),

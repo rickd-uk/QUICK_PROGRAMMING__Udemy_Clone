@@ -1,5 +1,6 @@
 <?php
 
+require 'security.php';
 require 'show.php';
 require 'set_values.php';
 require 'files.php';

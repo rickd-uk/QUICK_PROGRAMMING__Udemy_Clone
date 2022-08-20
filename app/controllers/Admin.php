@@ -181,7 +181,6 @@ class Admin extends Controller
         $data['errors'] = $course->errors;
       }
     } elseif ($action == 'edit') {
-
       $categories = $category->findAll('ASC');
       $languages = $language->findAll('ASC');
       $levels = $level->findAll('ASC');
@@ -192,6 +191,10 @@ class Admin extends Controller
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
+
+
+
+
         $tab_name = $_POST['tab_name'];
 
         if ($this->is_data_type($_POST, 'read')) {
@@ -205,35 +208,47 @@ class Admin extends Controller
         } else
           // Save course landing page data
           if ($this->is_data_type($_POST, 'save')) {
-            if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
 
-              // check if a temp image exists
-              $tmp_img = $row->course_image_tmp;
-              if ($tmp_img != '' && file_exists($tmp_img)) {
-                // delete current course image
-                if (file_exists($row->course_image)) {
-                  unlink($row->course_image);
+
+            show($_POST['csrf_code']);
+            show($_SESSION['csrf_code']);
+            // Check if form is valid
+            if ($_SESSION['csrf_code'] == $_POST['csrf_code']) {
+
+              if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
+
+                // check if a temp image exists
+                $tmp_img = $row->course_image_tmp;
+                if ($tmp_img != '' && file_exists($tmp_img)) {
+                  // delete current course image
+                  if (file_exists($row->course_image)) {
+                    unlink($row->course_image);
+                  }
+
+                  // if it exists remove variable for image temp
+                  $_POST['course_image'] = $tmp_img;
+                  $_POST['course_image_tmp'] = '';
                 }
 
-                // if it exists remove variable for image temp
-                $_POST['course_image'] = $tmp_img;
-                $_POST['course_image_tmp'] = '';
+                $course->update($id, $_POST);
+
+                $info['data'] = "Course saved successfully";
+              } else {
+                $info['errors'] = $course->errors;
+                $info['data'] = "There are some problems";
               }
-
-              $course->update($id, $_POST);
-
-              $info['data'] = "Course saved successfully";
             } else {
-              $info['errors'] = $course->errors;
-              $info['data'] = "There are some problems";
-            }
+              $info['errors'] = ['key' => 'value'];
+              $info['data'] = 'This form is not valid';
+              $info['data_type'] = $_POST['data_type'];
+            } // csrf_codes DO NOT MATCH!
+
             $info['data_type'] = "save";
             echo json_encode($info);
           }
-
           // Upload Course Image
           else
-        if ($this->is_data_type($_POST, 'upload_course_image')) {
+          if ($this->is_data_type($_POST, 'upload_course_image')) {
 
             $dir = 'uploads/courses/';
 
@@ -254,6 +269,8 @@ class Admin extends Controller
               $course->update($id, ['course_image_tmp' => $destination]);
             }
           }
+
+
         die;
       }
     } else {

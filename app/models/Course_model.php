@@ -37,6 +37,7 @@ class Course_model extends Model
     'tags',
     'approved',
     'published',
+    'csrf_code'
   ];
 
 

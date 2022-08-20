@@ -1,6 +1,6 @@
 <form>
-
   <div class="col-md-6 mx-auto" style="padding-top: 40px">
+    <?php csrf() ?>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Course Title</span>
       <input name="title" type="text" value="<?= $row->title ?>" class="form-control">
