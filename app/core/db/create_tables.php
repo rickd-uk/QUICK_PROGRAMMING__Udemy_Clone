@@ -66,7 +66,7 @@ class Create_Table extends Database
       `primary_subject` varchar(100) DEFAULT NULL,
       `course_promo_video` varchar(1024) DEFAULT NULL,
       `course_image` varchar(1024) DEFAULT NULL,
-      `course_image_tmp` varchar(1024) NOT NULL,
+      `course_image_tmp` varchar(1024) DEFAULT NULL,
       `date` datetime DEFAULT NULL,
       `tags` varchar(2048) DEFAULT NULL,
       `approved` tinyint(1) NOT NULL DEFAULT '0',

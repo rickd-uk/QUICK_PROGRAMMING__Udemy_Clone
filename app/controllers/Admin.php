@@ -6,6 +6,9 @@
 class Admin extends Controller
 {
   private $destination = '';
+
+  private $img_filename = '';
+
   private $updated_image = false;
 
 
@@ -41,9 +44,10 @@ class Admin extends Controller
 
   private function save_image($row, $user)
   {
-    $dir = "uploads/images/";
+    $dir = "uploads/users/";
     if (!file_exists($dir)) {
       mkdir($dir, 0777, true);
+      // add index.php for security in root & uploads dir
       file_put_contents($dir . "index.php", "");
       file_put_contents("uploads/index.php", "");
     }
@@ -54,12 +58,13 @@ class Admin extends Controller
       if ($image['error'] == 0) {
         if (in_array($image['type'], $allowed_images)) {
           // passed validation
-          $destination = $dir . time() . "_" . $image['name'];
+
+          $this->img_filename = time() . "_" . $image['name'];
+
+          $destination = $dir . $this->img_filename;
           move_uploaded_file($image['tmp_name'], $destination);
           $this->destination = $destination;
-
           resize_image($destination);
-
 
           if (file_exists($row->image)) {
             unlink($row->image);
@@ -95,7 +100,7 @@ class Admin extends Controller
         if (array_key_exists('image', $_FILES)) {
           $this->save_image($row, $user);
           if ($this->updated_image) {
-            $_POST['image'] = $this->destination;
+            $_POST['image'] = $this->img_filename;
           }
         }
 
