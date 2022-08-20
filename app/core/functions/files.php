@@ -69,3 +69,12 @@ function get_image($file_path)
   }
   return ROOT . "/assets/images/image_placeholder.jpg";
 }
+
+function get_video($file_path)
+{
+  $file_path;
+  if (file_exists($file_path)) {
+    return ROOT . '/' . $file_path;
+  }
+  return ROOT . "/assets/images/image_placeholder.jpg";
+}

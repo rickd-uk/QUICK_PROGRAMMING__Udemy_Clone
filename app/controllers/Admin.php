@@ -191,10 +191,6 @@ class Admin extends Controller
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
-
-
-
-
         $tab_name = $_POST['tab_name'];
 
         if ($this->is_data_type($_POST, 'read')) {
@@ -208,18 +204,14 @@ class Admin extends Controller
         } else
           // Save course landing page data
           if ($this->is_data_type($_POST, 'save')) {
-
-
-            show($_POST['csrf_code']);
-            show($_SESSION['csrf_code']);
             // Check if form is valid
             if ($_SESSION['csrf_code'] == $_POST['csrf_code']) {
 
               if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
 
-                // check if a temp image exists
+                // check if a temp image exists and csrf of form & post match
                 $tmp_img = $row->course_image_tmp;
-                if ($tmp_img != '' && file_exists($tmp_img)) {
+                if ($tmp_img != '' && file_exists($tmp_img) && $row->csrf_code == $_POST['csrf_code']) {
                   // delete current course image
                   if (file_exists($row->course_image)) {
                     unlink($row->course_image);
@@ -266,7 +258,7 @@ class Admin extends Controller
                 unlink($row->course_image_tmp);
               }
 
-              $course->update($id, ['course_image_tmp' => $destination]);
+              $course->update($id, ['course_image_tmp' => $destination, 'csrf_code' => $_POST['csrf_code']]);
             }
           }
 

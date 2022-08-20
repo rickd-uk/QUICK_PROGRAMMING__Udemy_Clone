@@ -68,6 +68,8 @@ function save_profile(e) {
 }
 
 function handle_result(result) {
+	console.log(result)
+
 	let obj = JSON.parse(result)
 	if (typeof obj == 'object') {
 		// object was created

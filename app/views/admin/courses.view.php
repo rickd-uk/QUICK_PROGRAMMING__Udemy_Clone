@@ -156,5 +156,6 @@
 <?php endif; ?>
 
 
-<script src="<?= ROOT ?>/assets/js/courses.js" />
+<script src="<?= ROOT ?>/assets/js/courses.js?<?= time() ?>" />
+<script src="<?= ROOT ?>/assets/js/video_ul.js" />
 <?php Controller::view_static('admin/footer') ?>

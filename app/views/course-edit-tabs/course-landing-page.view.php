@@ -129,19 +129,22 @@
     </div>
     <div class="my-4 row">
       <div class="col-md-4">
-        <img src="<?= ROOT ?>/assets/images/image_placeholder.jpg" style="width: 100%;" alt="">
+        <video id="js-vid-ul-preview" controls style="width: 100%;">
+          <source src="<?= get_video($row->course_promo_video) ?>" type="video/mp4">
+        </video>
+
       </div>
       <div class="col-sm-8">
         <div class="h5"><b>Course Video</b></div>
         Upload your course video here. It must meet our course image quality standards to be accepted.
 
         <br><br>
-        <input id="js-video-ul-input" type="file">
+        <input onchange="upload_course_video(this.files[0])" id="js-vid-ul-input" type="file">
         <div class="progress my-4">
-          <div id="progress-bar-video" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div id="progress-bar-vid" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-        <div id="js-video-ul-info" class="hide"></div>
-        <button type="button" id="js-video-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
+        <div id="js-vid-ul-info" class="hide"></div>
+        <button type="button" onclick="ajax_course_vid_ul_cancel()" id="js-vid-ul-cancel-btn" class="btn btn-warning btn-sm text-white hide">Cancel Upload</button>
       </div>
     </div>
   </div>

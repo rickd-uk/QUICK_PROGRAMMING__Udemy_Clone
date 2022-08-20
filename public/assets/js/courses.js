@@ -45,6 +45,7 @@ function show_tab(tab_name) {
 
 function handle_result(result) {
 	result = result.trim()
+	console.log(result)
 	if (result.substr(0, 2) == '{"') {
 		let obj = JSON.parse(result)
 		if (typeof obj == 'object') {
@@ -237,6 +238,10 @@ function upload_course_image(file) {
 	myform.append('data_type', 'upload_course_image')
 	myform.append('tab_name', tab_courses)
 	myform.append('image', file)
+
+	// append csrf code
+	$csrf_code = document.querySelector('#js-csrf_code').value
+	myform.append('csrf_code', $csrf_code)
 
 	ajax_course_image.open('POST', '', true)
 	ajax_course_image.send(myform)

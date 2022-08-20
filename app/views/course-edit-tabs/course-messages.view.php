@@ -1,4 +1,5 @@
 <form>
+  <?php csrf() ?>
   <div class="col-md-10 mx-auto" style="padding-top: 20px">
     <div class="row mb-3">
       <label for="inputPassword" class="col-sm-3 col-form-label"><b>Welcome Message</b></label>
