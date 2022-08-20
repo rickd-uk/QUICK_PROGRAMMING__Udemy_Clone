@@ -59,13 +59,14 @@ class Course_model extends Model
 
   public function edit_validate($data, $id = null, $tab_name = null)
   {
-    $this->errors = [];
+    $tab_name = $data['tab_name'];
 
-
-    if ($tab_name == "course_landing_page") {
+    if ($tab_name == 'course-landing-page') {
       $this->validate($data);
+
       $this->validate_empty($data, 'category_id');
       $this->validate_empty($data, 'level_id');
+
       $this->validate_empty($data, 'currency_id');
       $this->validate_empty($data, 'language_id');
       $this->validate_empty($data, 'price_id');
@@ -74,6 +75,12 @@ class Course_model extends Model
     } else if ($tab_name == "course_messages") {
     }
 
+    // if (empty($data['level_id'])) {
+    //   $this->errors['level_id'] = "A category is required";
+    // }
+
+    // show_stop($data['level_id']);
+    // show_stop($this->errors);
     if (empty($this->errors)) return true;
     return false;
   }

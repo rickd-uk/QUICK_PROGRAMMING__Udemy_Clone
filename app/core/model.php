@@ -4,14 +4,18 @@ class Model extends Database
 {
   protected $table = "";
 
+  protected $errors = [];
+
   protected function validate_empty($data, $field, $err_message = null)
   {
+
     if (empty($data[$field])) {
       // Use first part of field name in string  e.g. currency_id required => currency required
       if (empty($err_message)) {
         $err_message = explode("_", $field)[0] . ' required';
       }
       $this->errors[$field] = $err_message;
+
       return true;
     }
     return false;

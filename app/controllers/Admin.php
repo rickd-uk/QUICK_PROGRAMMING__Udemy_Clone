@@ -205,7 +205,7 @@ class Admin extends Controller
         } else
           // Save course landing page data
           if ($this->is_data_type($_POST, 'save')) {
-            if ($course->edit_validate($_POST, $id, $tab_name)) {
+            if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
 
               // check if a temp image exists
               $tmp_img = $row->course_image_tmp;
