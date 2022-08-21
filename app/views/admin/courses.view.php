@@ -9,6 +9,7 @@
 			<?php isset($_POST['category_id']) &&  show($_POST['category_id']) ?>
 			<!-- No Labels Form -->
 			<form method="POST" class="row g-3">
+				<?php csrf() ?>
 				<div class="col-md-12">
 					<input name="title" type="text" value="<?= set_value('title'); ?>" class="form-control <?= !empty($errors['title']) ? 'border-danger' : ''; ?>" placeholder="Course title">
 					<?php show_error_msg($errors, 'title'); ?>
@@ -87,11 +88,11 @@
 		</div>
 	</div>
 
+	<script src="<?= ROOT ?>/assets/js/tabs.js? <?= time() ?>" />
 
-
-
-
-
+	//
+	<script src="<?= ROOT ?>/assets/js/save.js?32423" />
+	<script src="<?= ROOT ?>/assets/js/video_ul.js?324" />
 
 <?php else : ?>
 
@@ -156,6 +157,6 @@
 <?php endif; ?>
 
 
-<script src="<?= ROOT ?>/assets/js/courses.js?<?= time() ?>" />
-<script src="<?= ROOT ?>/assets/js/video_ul.js" />
+
+
 <?php Controller::view_static('admin/footer') ?>

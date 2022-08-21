@@ -152,7 +152,7 @@ class Admin extends Controller
 
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $tab_name = $_POST['tab_name'];
+        $tab_name = $_POST['tab_name'] ?? '';
         if ($course->validate($_POST)) {
 
           // added ?? '' to stop vscode warning 'use of unassigned variable'

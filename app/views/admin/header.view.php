@@ -32,7 +32,7 @@
   <link href="<?= ROOT ?>/assets/css/main.css?3324" rel="stylesheet">
 
   <script defer src="<?= ROOT ?>/assets/js/main.js"></script>
-  <script defer src="<?= ROOT ?>/assets/js/video_ul.js"></script>
+  <!-- <script defer src="<?= ROOT ?>/assets/js/video_ul.js"></script> -->
 
 
 
