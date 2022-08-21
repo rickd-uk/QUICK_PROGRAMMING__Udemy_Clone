@@ -36,13 +36,14 @@
 					<?php show_error_msg($errors, 'category_id'); ?>
 				</div>
 
-				<div class="text-center">
+				<div class="text-center d-flex justify-content-between pt-2">
 
-					<button type="submit" class="btn btn-primary float-left ">Save</button>
+
 
 					<a href="<?= ROOT ?>/admin/courses">
 						<button type="button" class="btn btn-secondary">Cancel</button>
 					</a>
+					<button type="submit" class="btn btn-primary ">Save</button>
 
 
 				</div>
