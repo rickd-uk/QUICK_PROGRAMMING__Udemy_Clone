@@ -18,8 +18,12 @@ class Home extends Controller
     $data['title'] = "Home";
 
     $course = new Course_model();
-    // read all courses
+    // Read all courses
     $data['rows'] = $course->where(['approved' => 0], 'DESC', '', 7);
+
+    // Read all courses, order by trending value
+    $query = "SELECT * FROM courses WHERE approved = 0 ORDER BY trending DESC LIMIT  5";
+    $data['trending'] = $course->query($query);
 
     if ($data['rows']) {
       $data['first_row'] = $data['rows'][0];

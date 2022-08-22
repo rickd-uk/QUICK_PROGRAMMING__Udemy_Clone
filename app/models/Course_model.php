@@ -37,7 +37,9 @@ class Course_model extends Model
     'tags',
     'approved',
     'published',
-    'csrf_code'
+    'csrf_code',
+    'views',
+    'trending',
   ];
 
   public function validate($data)

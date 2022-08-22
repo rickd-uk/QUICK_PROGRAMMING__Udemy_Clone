@@ -48,7 +48,7 @@ class Create_Table extends Database
   public function courses()
   {
     $query = "
-    CREATE TABLE IF NOT EXISTS `courses` (
+    CREATE TABLE `courses` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `title` varchar(150) NOT NULL,
       `subtitle` varchar(100) DEFAULT NULL,
@@ -71,7 +71,9 @@ class Create_Table extends Database
       `tags` varchar(2048) DEFAULT NULL,
       `approved` tinyint(1) NOT NULL DEFAULT '0',
       `published` tinyint(1) NOT NULL DEFAULT '0',
-      `csrf_code` varchar(32) NOT NULL,
+      `csrf_code` varchar(32) DEFAULT NULL,
+      `views` int(11) NOT NULL DEFAULT '0',
+      `trending` int(11) NOT NULL DEFAULT '0',
       PRIMARY KEY (`id`),
       KEY `title` (`title`),
       KEY `user_id` (`user_id`),
@@ -83,8 +85,10 @@ class Create_Table extends Database
       KEY `primary_subject` (`primary_subject`),
       KEY `date` (`date`),
       KEY `approved` (`approved`),
-      KEY `published` (`published`)
-     ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8
+      KEY `published` (`published`),
+      KEY `views` (`views`),
+      KEY `trending` (`trending`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
     ";
     $this->query($query);
   }
