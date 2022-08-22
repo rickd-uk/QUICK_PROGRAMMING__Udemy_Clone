@@ -3,7 +3,7 @@
 /**
  * controller class
  */
-class Controller
+class Controller extends Utility
 {
   public function view($view, $data = [])
   {

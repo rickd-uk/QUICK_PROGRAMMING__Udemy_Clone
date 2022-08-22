@@ -118,6 +118,8 @@ function upload_course_image(file) {
 	myform.append('tab_name', tab_courses)
 	myform.append('image', file)
 
+	console.log(myform)
+
 	// append csrf code
 	$csrf_code = document.querySelector('#js-csrf_code').value
 	myform.append('csrf_code', $csrf_code)

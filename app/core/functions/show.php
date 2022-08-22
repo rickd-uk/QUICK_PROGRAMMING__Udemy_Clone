@@ -7,7 +7,7 @@ function show($stuff)
   echo "</pre>";
 }
 
-function show_stop($stuff)
+function ss($stuff)
 {
   show($stuff);
   die();

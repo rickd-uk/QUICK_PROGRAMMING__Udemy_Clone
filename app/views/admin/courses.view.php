@@ -1,9 +1,6 @@
 <?php Controller::view_static('admin/header', $data); ?>
 
-
-
 <?php if ($action == 'add') : ?>
-
 	<div class="card col-md-5 mx-auto">
 		<div class="card-body">
 			<h5 class="card-title">New Course</h5>

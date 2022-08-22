@@ -130,6 +130,8 @@ class Admin extends Controller
   public function courses($action = null, $id = null)
   {
     $this->login_to_view();
+    // Get name of current function
+    $cur_function = __FUNCTION__;
 
     $user_id = Auth::getId() ?? null;
     $course = new Course_model();
@@ -139,6 +141,8 @@ class Admin extends Controller
     $price = new Price_model();
     $currency = new Currency_model();
 
+    $img_dir = UL_DIR . $cur_function . '/';
+
     $data = [];
     $data['errors'] = [];
     $data['action'] = $action;
@@ -147,9 +151,7 @@ class Admin extends Controller
     // Is the user adding a course
     if ($action == 'add') {
       $category = new Category_model();
-
       $data['categories'] = $category->findAll('ASC');
-
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $tab_name = $_POST['tab_name'] ?? '';
@@ -164,7 +166,6 @@ class Admin extends Controller
           $_POST['user_id'] = $user_id;
           // Set price at Free as default
           $_POST['price_id'] = 1;
-
 
           $course->insert($_POST);
 
@@ -181,6 +182,7 @@ class Admin extends Controller
         $data['errors'] = $course->errors;
       }
     } elseif ($action == 'edit') {
+
       $categories = $category->findAll('ASC');
       $languages = $language->findAll('ASC');
       $levels = $level->findAll('ASC');
@@ -189,6 +191,8 @@ class Admin extends Controller
 
       // get course info
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
+
+
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         $tab_name = $_POST['tab_name'];
@@ -204,30 +208,35 @@ class Admin extends Controller
         } else
           // Save course landing page data
           if ($this->is_data_type($_POST, 'save')) {
+
             // Check if form is valid
             if ($_SESSION['csrf_code'] == $_POST['csrf_code']) {
-
               if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
 
                 // check if a temp image exists and csrf of form & post match
                 $tmp_img = $row->course_image_tmp;
-                if ($tmp_img != '' && file_exists($tmp_img) && $row->csrf_code == $_POST['csrf_code']) {
-                  // delete current course image
-                  if (file_exists($row->course_image)) {
-                    unlink($row->course_image);
+                $tmp_img_path = $img_dir . $tmp_img;
+                $course_img_path = $img_dir . $row->course_image;
+
+
+                // Check there is temp image, that the path exists and CSRF codes match (i.e. legitimate request)
+                if ($tmp_img != '' && file_exists($tmp_img_path) && $row->csrf_code == $_POST['csrf_code']) {
+                  // Remove course image if it exists
+                  if ($row->course_image && file_exists($course_img_path)) {
+                    unlink($course_img_path);
                   }
 
-                  // if it exists remove variable for image temp
+                  // Set course image and remove ref to temp image, effectively tmp_img -> course_img transfer
                   $_POST['course_image'] = $tmp_img;
                   $_POST['course_image_tmp'] = '';
                 }
 
+                // Update the course info
+
                 $course->update($id, $_POST);
                 $info['data'] = "Course saved successfully";
-
-                // Saved successfully
                 #TODO: Redirect To add page    
-                // redirect('admin/courses/add');
+                //redirect('admin/courses');
               } else {
                 $info['errors'] = $course->errors;
                 $info['data'] = "There are some problems";
@@ -237,32 +246,14 @@ class Admin extends Controller
               $info['data'] = 'This form is not valid';
               $info['data_type'] = $_POST['data_type'];
             } // csrf_codes DO NOT MATCH!
-
             $info['data_type'] = "save";
             echo json_encode($info);
           }
           // Upload Course Image
           else
           if ($this->is_data_type($_POST, 'upload_course_image')) {
-
-            $dir = 'uploads/courses/';
-
-            if (!file_exists($dir)) {
-              // true refers to creating nested dir, equivalent to:   mkdir -p $dir
-              mkdir($dir, 0777, true);
-            }
-            $errors = [];
-            if (!empty($_FILES['image']['name'])) {
-              $destination = $dir . time() . $_FILES['image']['name'];
-              move_uploaded_file($_FILES['image']['tmp_name'], $destination);
-
-              // Delete old temp file
-              if (file_exists($row->course_image_tmp)) {
-                unlink($row->course_image_tmp);
-              }
-
-              $course->update($id, ['course_image_tmp' => $destination, 'csrf_code' => $_POST['csrf_code']]);
-            }
+            $this->upload_course_image($id, $row, $course, $img_dir);
+            $course;
           }
         die;
       }
@@ -271,5 +262,30 @@ class Admin extends Controller
       $data['rows'] = $course->where(['user_id' => $user_id]);
     }
     $this->view('admin/courses', $data);
+  }
+
+
+
+
+
+
+  function upload_course_image($id, $row, $course, $img_dir)
+  {
+    Admin::mkdir($img_dir);
+
+    if (!empty($_FILES['image']['name'])) {
+
+      $file_name = time() . $_FILES['image']['name'];
+      $file_path = $img_dir . $file_name;
+
+      move_uploaded_file($_FILES['image']['tmp_name'], $file_path);
+
+      //delete old temp file
+      if (file_exists($row->course_image_tmp)) {
+        unlink($row->course_image_tmp);
+      }
+
+      $course->update($id, ['course_image_tmp' => $file_name, 'csrf_code' => $_POST['csrf_code']]);
+    }
   }
 }

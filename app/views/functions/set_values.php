@@ -3,8 +3,8 @@
 
 function set_value($key, $default = '')
 {
-  show_stop('set_value');
-  show_stop($_POST[$key]);
+  ss('set_value');
+  ss($_POST[$key]);
   if (!empty($_POST[$key])) {
 
     return $_POST[$key];

@@ -55,7 +55,7 @@ class Model extends Database
 
   public function update($id, $data)
   {
-    // show_stop($id, $data);
+    // ss($id, $data);
     $data = $this->remove_unwanted_cols($data);
 
     $keys = array_keys($data);
@@ -74,7 +74,7 @@ class Model extends Database
 
   // $get '' by default which returns multiple records
   // if $get is 'one' then one record is retrieved
-  public function where($data, $order = 'DESC', $get = '')
+  public function where($data, $order = 'DESC', $get = '', $limit = 10, $offset = 0)
   {
     $keys = array_keys($data);
     $query = "SELECT * FROM " . $this->table . " where ";
@@ -89,7 +89,7 @@ class Model extends Database
     if ($get === 'one') {
       $query .= " ORDER BY id $order LIMIT 1";
     } else {
-      $query .= " ORDER BY id $order ";
+      $query .= " ORDER BY id $order LIMIT $limit";
     }
     // result of query
     $res = $this->query($query, $data);

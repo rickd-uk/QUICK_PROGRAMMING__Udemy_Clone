@@ -33,7 +33,7 @@ class Database
           return $result;
         }
       } catch (PDOException $e) {
-        show_stop($e);
+        ss($e);
         echo "Error: " . $e;
       }
     }

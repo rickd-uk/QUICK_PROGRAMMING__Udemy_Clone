@@ -40,8 +40,6 @@ class Course_model extends Model
     'csrf_code'
   ];
 
-
-
   public function validate($data)
   {
     $this->errors = [];
@@ -51,6 +49,8 @@ class Course_model extends Model
 
     $this->validate_empty($data, 'primary_subject', "Enter a primary subject")
       || $this->validate_text($data, 'title', "/^[a-zA-Z_ ]+$/", "Primary subjects can only have letters, spaces and '_'");
+
+    $this->validate_empty($data, 'category_id');
 
     if (empty($this->errors)) {
       return true;
@@ -80,8 +80,8 @@ class Course_model extends Model
     //   $this->errors['level_id'] = "A category is required";
     // }
 
-    // show_stop($data['level_id']);
-    // show_stop($this->errors);
+    // ss($data['level_id']);
+    // ss($this->errors);
     if (empty($this->errors)) return true;
     return false;
   }
