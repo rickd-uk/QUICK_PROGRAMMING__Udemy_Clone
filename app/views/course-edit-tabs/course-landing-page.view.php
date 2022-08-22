@@ -1,5 +1,5 @@
 <form>
-  <div class="col-md-6 mx-auto" style="padding-top: 40px">
+  <div class="col-md-8 mx-auto" style="padding-top: 40px">
     <?php csrf() ?>
     <div class="input-group mb-3">
       <span class="input-group-text" id="basic-addon1">Course Title</span>
@@ -110,7 +110,7 @@
 
     <div class="my-4 row">
       <div class="col-md-4">
-        <img id="js-img-ul-preview" src="<?= get_image($row->course_image) ?>" style="width: 100%; height: 150px; object-fit: cover;" alt="">
+        <img id="js-img-ul-preview" src="<?= get_image($row->course_image, 'courses') ?>" style="max-width: 100%; height: 200px; object-fit: contain;" alt="">
       </div>
       <div class="col-sm-8">
         <div class="h5"><b>Course Image</b></div>

@@ -17,6 +17,10 @@ class Home extends Controller
 
     $data['title'] = "Home";
 
+    $course = new Course_model();
+    // read all courses
+    $data['rows'] = $course->where(['approved' => 0]);
+
     $this->view('home', $data);
   }
 }

@@ -1,5 +1,3 @@
-console.log('URL:   ', window.location.href)
-
 var tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem('tab_courses') : 'intended-learners'
 
 var dirty = false
@@ -39,7 +37,6 @@ function show_tab(tab_name) {
 		tab_name: tab_courses,
 		data_type: 'read',
 	})
-
 	disable_save_btn(true)
 }
 

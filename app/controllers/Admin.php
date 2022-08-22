@@ -223,8 +223,11 @@ class Admin extends Controller
                 }
 
                 $course->update($id, $_POST);
-
                 $info['data'] = "Course saved successfully";
+
+                // Saved successfully
+                #TODO: Redirect To add page    
+                // redirect('admin/courses/add');
               } else {
                 $info['errors'] = $course->errors;
                 $info['data'] = "There are some problems";
@@ -261,8 +264,6 @@ class Admin extends Controller
               $course->update($id, ['course_image_tmp' => $destination, 'csrf_code' => $_POST['csrf_code']]);
             }
           }
-
-
         die;
       }
     } else {

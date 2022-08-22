@@ -112,7 +112,7 @@ class Course_model extends Model
     if (!empty($rows[0]->user_id)) {
 
       foreach ($rows as $key => $row) {
-        $query = "SELECT firstname, lastname, role FROM users WHERE id = :id LIMIT 1";
+        $query = "SELECT firstname, lastname, role, image FROM users WHERE id = :id LIMIT 1";
         $user = $db->query($query, ['id'  => $row->user_id]);
         if (!empty($user)) {
 

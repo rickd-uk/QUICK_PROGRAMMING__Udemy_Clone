@@ -1,5 +1,7 @@
 <?php Controller::view_static('admin/header', $data); ?>
 
+
+
 <?php if ($action == 'add') : ?>
 
 	<div class="card col-md-5 mx-auto">
@@ -10,6 +12,8 @@
 			<!-- No Labels Form -->
 			<form method="POST" class="row g-3">
 				<?php csrf() ?>
+				<?php $_POST['tab_name'] = 'course-landing-page' ?>
+
 				<div class="col-md-12">
 					<input name="title" type="text" value="<?= set_value('title'); ?>" class="form-control <?= !empty($errors['title']) ? 'border-danger' : ''; ?>" placeholder="Course title">
 					<?php show_error_msg($errors, 'title'); ?>
@@ -73,7 +77,7 @@
 				<!-- end tabs -->
 				<div oninput="something_changed(event)">
 					<div id="tabs-content">
-						<img class="loader" src="<?= ROOT ?>/assets/images/spinner.gif">
+						<img class="loader" src="<?= ROOT ?>/assets/images/loader.gif">
 					</div>
 				</div>
 
@@ -158,6 +162,8 @@
 <?php endif; ?>
 
 
-
+<script>
+	set_tab()
+</script>
 
 <?php Controller::view_static('admin/footer') ?>

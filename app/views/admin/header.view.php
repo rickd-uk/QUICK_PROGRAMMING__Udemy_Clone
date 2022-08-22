@@ -31,11 +31,8 @@
 
   <link href="<?= ROOT ?>/assets/css/main.css?3324" rel="stylesheet">
 
-  <script defer src="<?= ROOT ?>/assets/js/main.js"></script>
+  <script src="<?= ROOT ?>/assets/js/main.js"></script>
   <!-- <script defer src="<?= ROOT ?>/assets/js/video_ul.js"></script> -->
-
-
-
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
@@ -51,7 +48,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="<?= ROOT ?>" class="logo d-flex align-items-center">
         <img src="<?= ROOT ?>/niceadmin/assets/img/logo.png" alt="">
         <span class="d-none d-lg-block"><?= APP_NAME ?></span>
       </a>

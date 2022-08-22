@@ -61,9 +61,11 @@ function resize_image($filename, $max_size = 700)
   }
 }
 
-function get_image($file_path)
+function get_image($file_path, $db = 'users')
 {
-  $file_path;
+  $db == 'users' ? $file_path = USERS_UL_DIR . $file_path : null;
+  $db == 'courses' ? $file_path = COURSES_UL_DIR . $file_path : null;
+
   if (file_exists($file_path)) {
     return ROOT . '/' . $file_path;
   }
