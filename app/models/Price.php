@@ -1,9 +1,11 @@
 <?php
 
+namespace Model;
+
 /**
  * price class
  */
-class Price_model extends Model
+class Price extends Model
 {
   public $errors = [];
   protected $table = "prices";

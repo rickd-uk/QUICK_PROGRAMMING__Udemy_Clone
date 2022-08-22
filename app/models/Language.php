@@ -1,9 +1,11 @@
 <?php
 
+namespace Model;
+
 /**
  * language class
  */
-class Language_model extends Model
+class Language extends Model
 {
   public $errors = [];
   protected $table = "languages";

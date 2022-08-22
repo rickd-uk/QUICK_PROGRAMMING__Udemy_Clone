@@ -2,13 +2,12 @@
 
 namespace Controller;
 
-if (!defined("ROOT")) die("direct script access denied");
-
+if (!defined('ROOT')) die('direct script access denied');
 /**
- * home class
+ * single course class
  */
 
-class Home extends Controller
+class Course extends Controller
 {
   public function index()
   {

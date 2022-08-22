@@ -1,15 +1,21 @@
 <?php
 
+namespace Controller;
+
 /**
  * login class
  */
+
+use \Model\Auth;
+use \Model\User;
+
 class Login extends Controller
 {
   public function index()
   {
     $data['title'] = "Login";
     $data['errors'] = [];
-    $user = new User();
+    $user = new \Model\User();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       // validate

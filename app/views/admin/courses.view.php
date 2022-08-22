@@ -1,4 +1,4 @@
-<?php Controller::view_static('admin/header', $data); ?>
+<?php \Controller\Controller::view_static('admin/header', $data); ?>
 
 <?php if ($action == 'add') : ?>
 	<div class="card col-md-5 mx-auto">
@@ -165,4 +165,4 @@
 	set_tab()
 </script>
 
-<?php Controller::view_static('admin/footer') ?>
+<?php \Controller\Controller::view_static('admin/footer') ?>

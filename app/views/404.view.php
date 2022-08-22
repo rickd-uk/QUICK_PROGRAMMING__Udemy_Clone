@@ -1,7 +1,7 @@
 <?php
 
 /**
-@var Home $this
+@var \Controller\Home $this
  */
 $this->view('includes/header', $data);
 $this->view('includes/nav', $data);

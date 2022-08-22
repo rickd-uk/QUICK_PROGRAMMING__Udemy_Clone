@@ -1,9 +1,12 @@
 <?php
 
+namespace Controller;
+
 /**
  * controller class
  */
-class Controller extends Utility
+
+class Controller extends \Core\Utility
 {
   public function view($view, $data = [])
   {

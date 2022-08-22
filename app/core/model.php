@@ -1,5 +1,9 @@
 <?php
 
+namespace Model;
+
+use \Database;
+
 class Model extends Database
 {
   protected $table = "";

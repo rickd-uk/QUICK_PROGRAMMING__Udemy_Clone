@@ -1,5 +1,11 @@
 <?php
 
+namespace Controller;
+
+if (!defined('ROOT')) die('direct script access denied');
+
+use \Model\Auth;
+
 /**
  * admin class
  */
@@ -88,7 +94,7 @@ class Admin extends Controller
     // get id from url or logged in user
     $id = $id == null ? Auth::getId() : $id;
 
-    $user = new User();
+    $user = new \Model\User();
     // get profile data for selected / logged in user
     $data['row'] = $row = $user->where(['id' => $id], 'ASC', 'one');
 
@@ -134,12 +140,12 @@ class Admin extends Controller
     $cur_function = __FUNCTION__;
 
     $user_id = Auth::getId() ?? null;
-    $course = new Course_model();
-    $category = new Category_model();
-    $language = new Language_model();
-    $level = new Level_model();
-    $price = new Price_model();
-    $currency = new Currency_model();
+    $course = new \Model\Course();
+    $category = new \Model\Category();
+    $language = new \Model\Language();
+    $level = new \Model\Level();
+    $price = new \Model\Price();
+    $currency = new \Model\Currency();
 
     $img_dir = UL_DIR . $cur_function . '/';
 
@@ -150,7 +156,7 @@ class Admin extends Controller
 
     // Is the user adding a course
     if ($action == 'add') {
-      $category = new Category_model();
+      $category = new \Model\Category();
       $data['categories'] = $category->findAll('ASC');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {

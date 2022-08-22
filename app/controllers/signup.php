@@ -1,5 +1,7 @@
 <?php
 
+namespace Controller;
+
 /**
  * signup class
  */
@@ -9,7 +11,7 @@ class Signup extends Controller
   {
     $data['errors'] = [];
 
-    $user = new User();
+    $user = new \Model\User();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       if ($user->validate($_POST)) {

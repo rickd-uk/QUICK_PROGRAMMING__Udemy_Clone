@@ -1,7 +1,4 @@
 <?php
-
-
-
 // App Info
 define('APP_NAME', 'Udemy+');
 define('APP_DESC', 'Free and paid tuts.');
@@ -22,10 +19,8 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
   define('UL_DIR', 'uploads/');
   define('IMG_ASSETS', '/assets/images/');
   define('IMG_PLACEHOLDER', 'image_placeholder.jpg');
-  // define('USERS_UL_DIR', 'uploads/users/');
-  // define('COURSES_UL_DIR', 'uploads/courses/');
-
-
+  define('USERS_UL_DIR', 'uploads/users/');
+  define('COURSES_UL_DIR', 'uploads/courses/');
 } else {
 
   // db config for web host

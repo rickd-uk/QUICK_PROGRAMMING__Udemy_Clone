@@ -2,4 +2,4 @@
 session_start();
 require '../app/core/init.php';
 
-$app = new App('main');
+$app = new \App('main');

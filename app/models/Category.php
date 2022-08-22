@@ -1,9 +1,11 @@
 <?php
 
+namespace Model;
+
 /**
  * categories class
  */
-class Category_model extends Model
+class Category extends Model
 {
   public $errors = [];
   protected $table = "categories";

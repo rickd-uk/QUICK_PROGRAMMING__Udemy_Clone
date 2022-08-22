@@ -1,9 +1,11 @@
 <?php
 
+namespace Model;
+
 /**
  * currency class
  */
-class Currency_model extends Model
+class Currency extends Model
 {
   public $errors = [];
   protected $table = "currencies";

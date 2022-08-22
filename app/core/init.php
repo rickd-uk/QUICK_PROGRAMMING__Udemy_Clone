@@ -1,7 +1,10 @@
 <?php
 
 spl_autoload_register(function ($class_name) {
-  require "../app/models/" . $class_name . ".php";
+  $parts = explode("\\", $class_name);
+  // array_pop and end equivalent
+  $class_name = end($parts);
+  require_once "../app/models/" . $class_name . ".php";
 });
 
 require 'config.php';

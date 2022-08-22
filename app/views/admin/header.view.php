@@ -1,3 +1,7 @@
+<?php
+
+use \Model\Auth;  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -319,6 +323,7 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Nav -->
+
 
 
       <li class="nav-heading">Go to</li>

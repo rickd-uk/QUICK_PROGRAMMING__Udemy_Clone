@@ -1,5 +1,6 @@
 <?php
 
+
 class App
 {
   protected $controller = '_404';
@@ -24,7 +25,8 @@ class App
       require "../app/controllers/" . $this->controller . ".php";
     }
 
-    $mycontroller = new $this->controller();
+    // Changed
+    $mycontroller = new ("Controller\\" . $this->controller)();
     // print_r($arr);
     // die();
     $mymethod = $arr[1] ?? $arr[0];

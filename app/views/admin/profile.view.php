@@ -1,4 +1,4 @@
-<?php Controller::view_static('admin/header', $data) ?>
+<?php \Controller\Controller::view_static('admin/header', $data) ?>
 
 <?php if (!empty($row)) : ?>
   <div class="pagetitle">
@@ -350,4 +350,4 @@
 </main><!-- End #main -->
 
 
-<?php Controller::view_static('admin/footer') ?>
+<?php \Controller\Controller::view_static('admin/footer') ?>

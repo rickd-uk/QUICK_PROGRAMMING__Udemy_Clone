@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Utility
 {
   protected static function mkdir($dir)

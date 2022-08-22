@@ -1,9 +1,11 @@
 <?php
 
+namespace Model;
+
 /**
  * level class
  */
-class Level_model extends Model
+class Level extends Model
 {
   public $errors = [];
   protected $table = "course_levels";
