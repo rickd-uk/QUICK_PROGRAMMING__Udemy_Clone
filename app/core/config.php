@@ -19,8 +19,13 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
   define('ROOT', 'http://localhost:8895/udemy/public');
 
   // image dirs
-  define('USERS_UL_DIR', 'uploads/users/');
-  define('COURSES_UL_DIR', 'uploads/courses/');
+  define('UL_DIR', 'uploads/');
+  define('IMG_ASSETS', '/assets/images/');
+  define('IMG_PLACEHOLDER', 'image_placeholder.jpg');
+  // define('USERS_UL_DIR', 'uploads/users/');
+  // define('COURSES_UL_DIR', 'uploads/courses/');
+
+
 } else {
 
   // db config for web host

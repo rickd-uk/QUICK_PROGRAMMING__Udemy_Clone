@@ -61,15 +61,14 @@ function resize_image($filename, $max_size = 700)
   }
 }
 
-function get_image($file_path, $db = 'users')
+function get_image($file, $db = 'users')
 {
-  $db == 'users' ? $file_path = USERS_UL_DIR . $file_path : null;
-  $db == 'courses' ? $file_path = COURSES_UL_DIR . $file_path : null;
+  $file_path = UL_DIR . $db . '/' . $file;
 
   if (file_exists($file_path)) {
     return ROOT . '/' . $file_path;
   }
-  return ROOT . "/assets/images/image_placeholder.jpg";
+  return ROOT . IMG_ASSETS . IMG_PLACEHOLDER;
 }
 
 function get_video($file_path)
@@ -78,5 +77,5 @@ function get_video($file_path)
   if (file_exists($file_path)) {
     return ROOT . '/' . $file_path;
   }
-  return ROOT . "/assets/images/image_placeholder.jpg";
+  return ROOT . IMG_ASSETS . IMG_PLACEHOLDER;
 }
