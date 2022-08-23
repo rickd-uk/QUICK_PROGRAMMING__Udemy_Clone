@@ -31,7 +31,6 @@ class Admin extends Controller
     $this->view('admin/dashboard', $data);
   }
 
-
   public function profile($id = null)
   {
     Auth::login_to_view();
@@ -94,6 +93,7 @@ class Admin extends Controller
     $price = new \Model\Price();
     $currency = new \Model\Currency();
 
+    // Get ul dir using the current function name
     $img_dir = UL_DIR . $cur_function . '/';
 
     $data = [];
@@ -165,19 +165,20 @@ class Admin extends Controller
             // Check if form is valid
             if ($_SESSION['csrf_code'] == $_POST['csrf_code']) {
               if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
-
-                // check if a temp image exists and csrf of form & post match
                 $tmp_img = $row->course_image_tmp;
                 $tmp_img_path = $img_dir . $tmp_img;
                 $course_img_path = $img_dir . $row->course_image;
 
-
                 // Check there is temp image, that the path exists and CSRF codes match (i.e. legitimate request)
                 if ($tmp_img != '' && file_exists($tmp_img_path) && $row->csrf_code == $_POST['csrf_code']) {
+
+
+
                   // Remove course image if it exists
                   if ($row->course_image && file_exists($course_img_path)) {
                     unlink($course_img_path);
                   }
+
 
                   // Set course image and remove ref to temp image, effectively tmp_img -> course_img transfer
                   $_POST['course_image'] = $tmp_img;
@@ -185,7 +186,6 @@ class Admin extends Controller
                 }
 
                 // Update the course info
-
                 $course->update($id, $_POST);
                 $info['data'] = "Course saved successfully";
                 #TODO: Redirect To add page    
@@ -205,7 +205,7 @@ class Admin extends Controller
           // Upload Course Image
           else
           if ($this->is_data_type($_POST, 'upload_course_image')) {
-            $this->upload_course_image($id, $row, $course, $img_dir);
+            Admin::upload_course_image($id, $row, $course, $img_dir);
             $course;
           }
         die;
@@ -215,30 +215,5 @@ class Admin extends Controller
       $data['rows'] = $course->where(['user_id' => $user_id]);
     }
     $this->view('admin/courses', $data);
-  }
-
-
-
-
-
-
-  function upload_course_image($id, $row, $course, $img_dir)
-  {
-    Admin::mkdir($img_dir);
-
-    if (!empty($_FILES['image']['name'])) {
-
-      $file_name = time() . $_FILES['image']['name'];
-      $file_path = $img_dir . $file_name;
-
-      move_uploaded_file($_FILES['image']['tmp_name'], $file_path);
-
-      //delete old temp file
-      if (file_exists($row->course_image_tmp)) {
-        unlink($row->course_image_tmp);
-      }
-
-      $course->update($id, ['course_image_tmp' => $file_name, 'csrf_code' => $_POST['csrf_code']]);
-    }
   }
 }
