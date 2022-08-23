@@ -325,6 +325,12 @@ use \Model\Auth;  ?>
       </li><!-- End Profile Nav -->
 
 
+      <li class="nav-item">
+        <a class="nav-link " href="<?= ROOT ?>/admin/slider-images">
+          <i class="bi bi-images"></i>
+          <span>Slider Images</span>
+        </a>
+      </li><!-- End Profile Nav -->
 
       <li class="nav-heading">Go to</li>
 

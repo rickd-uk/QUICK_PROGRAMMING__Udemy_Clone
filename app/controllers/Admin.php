@@ -18,23 +18,6 @@ class Admin extends Controller
   private $updated_image = false;
 
 
-  // Check whether a particular data type exists
-  private function is_data_type($post, $data_type)
-  {
-
-    if (!empty($post['data_type']) && $post['data_type'] == $data_type) {
-      return true;
-    }
-    return false;
-  }
-
-  private function login_to_view()
-  {
-    if (!Auth::is_logged_in()) {
-      display_message('Please login to view the admin section');
-      redirect('login');
-    }
-  }
 
   public function index()
   {
@@ -48,48 +31,10 @@ class Admin extends Controller
     $this->view('admin/dashboard', $data);
   }
 
-  private function save_image($row, $user)
-  {
-    $dir = "uploads/users/";
-    if (!file_exists($dir)) {
-      mkdir($dir, 0777, true);
-      // add index.php for security in root & uploads dir
-      file_put_contents($dir . "index.php", "");
-      file_put_contents("uploads/index.php", "");
-    }
-    $allowed_images = ['image/jpeg', 'image/png'];
-    $image = $_FILES['image'];
-
-    if (!empty($image['name'])) {
-      if ($image['error'] == 0) {
-        if (in_array($image['type'], $allowed_images)) {
-          // passed validation
-
-          $this->img_filename = time() . "_" . $image['name'];
-
-          $destination = $dir . $this->img_filename;
-          move_uploaded_file($image['tmp_name'], $destination);
-          $this->destination = $destination;
-          resize_image($destination);
-
-          if (file_exists($row->image)) {
-            unlink($row->image);
-          }
-          $this->updated_image = true;
-        } else {
-          $user->errors['image'] = "This file type is not allowed";
-        }
-      } else {
-        $user->errors['image'] = "Could not upload image";
-      }
-    } else {
-      $this->updated_image = false;
-    }
-  }
 
   public function profile($id = null)
   {
-    $this->login_to_view();
+    Auth::login_to_view();
 
     // get id from url or logged in user
     $id = $id == null ? Auth::getId() : $id;
@@ -104,6 +49,8 @@ class Admin extends Controller
       if ($user->edit_validate($_POST, $id)) {
 
         if (array_key_exists('image', $_FILES)) {
+
+          // Saves course image
           $this->save_image($row, $user);
           if ($this->updated_image) {
             $_POST['image'] = $this->img_filename;
@@ -135,7 +82,7 @@ class Admin extends Controller
 
   public function courses($action = null, $id = null)
   {
-    $this->login_to_view();
+    Auth::login_to_view();
     // Get name of current function
     $cur_function = __FUNCTION__;
 
@@ -203,7 +150,7 @@ class Admin extends Controller
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         $tab_name = $_POST['tab_name'];
 
-        if ($this->is_data_type($_POST, 'read')) {
+        if (Admin::is_data_type($_POST, 'read')) {
           if ($tab_name == "course-landing-page") {
             // Return course landing page data
             include views_path("course-edit-tabs/course-landing-page");

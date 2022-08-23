@@ -16,6 +16,16 @@ class Auth
       $_SESSION['USER_DATA'] = $row;
     }
   }
+
+  public static function login_to_view()
+  {
+    if (!Auth::is_logged_in()) {
+      display_message('Please login to view the admin section');
+      redirect('login');
+    }
+  }
+
+
   public static function logout()
   {
     if (!empty($_SESSION['USER_DATA'])) {
