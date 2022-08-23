@@ -1,10 +1,20 @@
 <?php
 
+
 /**
  * db_tasks class
  */
+
 class Create_Table extends Database
 {
+  public function for($table)
+  {
+    if (method_exists($this, $table)) {
+      $query = $this->$table();
+      $this->query($query);
+    }
+  }
+
   public function db()
   {
     $query = "
@@ -13,6 +23,20 @@ class Create_Table extends Database
     ";
 
     $this->query($query);
+  }
+
+  public function test()
+  {
+    return "
+    CREATE TABLE IF NOT EXISTS `test` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `symbol` varchar(10) NOT NULL,
+      `language` varchar(30) NOT NULL,
+      `disabled` tinyint(4) NOT NULL DEFAULT '0',
+      PRIMARY KEY (`id`),
+      KEY `disabled` (`disabled`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8
+    ";
   }
 
   public function user()
@@ -48,7 +72,7 @@ class Create_Table extends Database
   public function courses()
   {
     $query = "
-    CREATE TABLE `courses` (
+    CREATE TABLE IF NOT EXISTS `courses` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `title` varchar(150) NOT NULL,
       `subtitle` varchar(100) DEFAULT NULL,
@@ -121,13 +145,6 @@ class Create_Table extends Database
      ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8";
 
     $this->query($query);
-
-    $query = "
-     INSERT INTO `prices` (`id`, `name`, `price`, `disabled`) VALUES
-     (1, 'Free', '0', 0);
-     ";
-
-    $this->query($query);
   }
 
   public function currencies()
@@ -161,7 +178,7 @@ class Create_Table extends Database
   public function languages()
   {
     $query = "
-    CREATE TABLE IF NOT EXISTS`languages` (
+    CREATE TABLE IF NOT EXISTS `languages` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `symbol` varchar(10) NOT NULL,
       `language` varchar(30) NOT NULL,
@@ -169,6 +186,20 @@ class Create_Table extends Database
       PRIMARY KEY (`id`),
       KEY `disabled` (`disabled`)
      ) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8
+    ";
+    $this->query($query);
+  }
+
+  public function slider_images()
+  {
+    $query = "
+    CREATE TABLE IF NOT EXISTS `slider_images` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `image` varchar(2048) NOT NULL,
+      `title` varchar(100) NOT NULL,
+      `description` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`)
+     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
     $this->query($query);
   }

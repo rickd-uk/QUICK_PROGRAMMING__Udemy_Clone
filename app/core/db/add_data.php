@@ -1,24 +1,57 @@
 <?php
 
+namespace Core;
+
+use \Database;
+
+
 /**
- * db_tasks class
+ * add data class
  */
 class Add_Data extends Database
 {
+  public function to($table)
+  {
+    if (method_exists($this, $table)) {
+      $query = $this->$table();
+      $this->query($query);
+    }
+  }
+
+  public function test()
+  {
+    return <<<EOT
+    INSERT INTO test (symbol, language) VALUES('af_ZA',"Afrikaans");
+    INSERT INTO test (symbol, language) VALUES('sq_AL',"Shqip");
+    INSERT INTO test (symbol, language) VALUES('ar_AR',"العربية");
+    INSERT INTO test (symbol, language) VALUES('hy_AM',"Հայերեն");
+    INSERT INTO test (symbol, language) VALUES('ay_BO',"Aymar aru");
+    INSERT INTO test (symbol, language) VALUES('az_AZ',"Azərbaycan dili");
+    INSERT INTO test (symbol, language) VALUES('eu_ES',"Euskara");
+    INSERT INTO test (symbol, language) VALUES('bn_IN',"Bangla");
+    INSERT INTO test (symbol, language) VALUES('bs_BA',"Bosanski");
+    INSERT INTO test (symbol, language) VALUES('bg_BG',"Български");
+    INSERT INTO test (symbol, language) VALUES('my_MM',"မြန်မာဘာသာ");
+    INSERT INTO test (symbol, language) VALUES('ca_ES',"Català");
+    INSERT INTO test (symbol, language) VALUES('ck_US',"Cherokee");
+    INSERT INTO test (symbol, language) VALUES('hr_HR',"Hrvatski");
+    INSERT INTO test (symbol, language) VALUES('cs_CZ',"Čeština");
+    INSERT INTO test (symbol, language) VALUES('da_DK',"Dansk");
+    EOT;
+  }
+
   public function users()
   {
-
-    $query = <<<EOT
+    return <<<EOT
     INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `date`, `about`, `company`, `job`, `country`, `address`, `phone`, `slug`, `image`, `facebook_link`, `instagram_link`, `twitter_link`, `linkedin_link`) VALUES
-    (2, 'Mary', 'Smith', 'dhard@gmail.com', '$2y$10$h4AkOL7q2hVWB88Z15cSLOAATDp8EnMmltD6Z.ADRxeDRToSBl93O', 'user', '2022-08-10', 'About', 'ABC', '', 'America', 'sadsagerge', '', 'david-hard', 'uploads/images/1660644117_TaylorSwift.jpg', 'https://facebook.com', '', 'https://twitter.com', ''),
+    (2, 'Mary', 'Smith', 'dhard@gmail.com', "$2y$10$h4AkOL7q2hVWB88Z15cSLOAATDp8EnMmltD6Z.ADRxeDRToSBl93O", 'user', '2022-08-10', 'About', 'ABC', '', 'America', 'sadsagerge', '', 'david-hard', 'uploads/images/1660644117_TaylorSwift.jpg', 'https://facebook.com', '', 'https://twitter.com', ''),
     (3, 'harry', 'hill', 'hh@gmail.com', '$2y$10$CC8mKIr8ipjNKfadsZXl8uXleGTJnpStEa6VBQEq6p5uYp24HzwJS', 'user', '2022-08-13', '', '', '', '', '', '', NULL, 'uploads/images/1660469785_TaylorSwift.jpg', '', '', '', ''),
     (4, 'sdfdf', 'dfsdf', 'sdfsdfs@dfs.com', '$2y$10$Hh8YkkcVBqyv0/IfgbjqxOzIcoWn5Tvq44YfVHNFEClAgU7r.3MT6', 'user', '2022-08-14  ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     EOT;
-    $this->query($query);
   }
   public function categories()
   {
-    $query = <<<EOT
+    return <<<EOT
     INSERT INTO `categories` (`id`, `category`, `disabled`) VALUES
     (1, 'Development', 0),
     (2, 'Business', 0),
@@ -35,14 +68,12 @@ class Add_Data extends Database
     (13, 'Teaching & Academics', 0),
     (14, 'I don\'t know yet', 0);
     EOT;
-
-    $this->query($query);
   }
 
   public function languages()
   {
 
-    $query = <<<EOT
+    return <<<EOT
      INSERT INTO languages (symbol, language) VALUES('af_ZA',"Afrikaans");
      INSERT INTO languages (symbol, language) VALUES('sq_AL',"Shqip");
      INSERT INTO languages (symbol, language) VALUES('ar_AR',"العربية");
@@ -148,31 +179,33 @@ class Add_Data extends Database
      INSERT INTO languages (symbol, language) VALUES('yi_DE',"ייִדיש");
      INSERT INTO languages (symbol, language) VALUES('zu_ZA',"isiZulu");
      EOT;
-
-    $this->query($query);
   }
 
 
   public function course_levels()
   {
-    $query = <<<EOT
+    return  <<<EOT
     INSERT INTO `course_levels` (`id`, `level`, `disabled`) 
     VALUES(1, 'Beginner Level', 0), 
     (2, 'Intermediate Level', 0), 
     (3, 'Expert Level', 0),
     (4, 'All Levels', 0);
     EOT;
-
-    $this->query($query);
   }
 
   public function currencies()
   {
-    $query = <<<EOT
+    return  <<<EOT
     INSERT INTO `currencies` (`id`, `currency`, `symbol`, `disabled`) VALUES
     (1, 'US Dollar', '$', 0);
     EOT;
+  }
 
-    $this->query($query);
+  public function prices()
+  {
+    return  <<<EOT
+    INSERT INTO `prices` (`id`, `name`, `price`, `disabled`) VALUES
+    (1, 'Free', '0', 0);
+    EOT;
   }
 }

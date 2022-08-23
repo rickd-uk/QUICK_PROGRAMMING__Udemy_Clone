@@ -2,6 +2,9 @@
 
 namespace Controller;
 
+use Core\Add_Data;
+use Create_Table;
+
 if (!defined("ROOT")) die("direct script access denied");
 
 /**
@@ -12,6 +15,11 @@ class Home extends Controller
 {
   public function index()
   {
+    // $ct = new Create_Table();
+    // $ct->for('test');
+
+    $ad = new Add_Data();
+    $ad->to('test');
 
     // $add_data = new Add_Data();
     // $add_data->languages();
