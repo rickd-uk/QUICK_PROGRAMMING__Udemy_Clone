@@ -15,8 +15,8 @@ class Home extends Controller
 {
   public function index()
   {
-    // $ct = new Create_Table();
-    // $ct->for('test');
+    $ct = new Create_Table();
+    $ct->for('test');
 
     $ad = new Add_Data();
     $ad->to('test');

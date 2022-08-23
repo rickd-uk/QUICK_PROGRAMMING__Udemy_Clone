@@ -15,17 +15,15 @@ class Create_Table extends Database
     }
   }
 
-  public function db()
+  private function db()
   {
-    $query = "
+    return "
     CREATE DATABASE IF NOT EXISTS `udemy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
     USE `udemy`;
     ";
-
-    $this->query($query);
   }
 
-  public function test()
+  private function test()
   {
     return "
     CREATE TABLE IF NOT EXISTS `test` (
@@ -39,9 +37,9 @@ class Create_Table extends Database
     ";
   }
 
-  public function user()
+  private function user()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `users` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `firstname` varchar(30) NOT NULL,
@@ -65,13 +63,11 @@ class Create_Table extends Database
       KEY `slug` (`slug`)
      ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
     ";
-
-    $this->query($query);
   }
 
-  public function courses()
+  private function courses()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `courses` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `title` varchar(150) NOT NULL,
@@ -114,12 +110,11 @@ class Create_Table extends Database
       KEY `trending` (`trending`)
      ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
     ";
-    $this->query($query);
   }
 
-  public function categories()
+  private function categories()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `categories` (
       `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `title` varchar(50) NOT NULL,
@@ -127,12 +122,11 @@ class Create_Table extends Database
       PRIMARY KEY (`id`)
      ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8
     ";
-    $this->query($query);
   }
 
-  public function prices()
+  private function prices()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `prices` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `name` varchar(30) NOT NULL,
@@ -143,13 +137,11 @@ class Create_Table extends Database
       KEY `disabled` (`disabled`),
       KEY `name` (`name`)
      ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8";
-
-    $this->query($query);
   }
 
-  public function currencies()
+  private function currencies()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `currencies` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `currency` varchar(20) NOT NULL,
@@ -159,12 +151,11 @@ class Create_Table extends Database
       KEY `disabled` (`disabled`)
      ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
     ";
-    $this->query($query);
   }
 
-  public function course_levels()
+  private function course_levels()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `course_levels` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `level` varchar(30) NOT NULL,
@@ -173,11 +164,10 @@ class Create_Table extends Database
       KEY `disabled` (`disabled`)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
-    $this->query($query);
   }
-  public function languages()
+  private function languages()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `languages` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `symbol` varchar(10) NOT NULL,
@@ -187,12 +177,11 @@ class Create_Table extends Database
       KEY `disabled` (`disabled`)
      ) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8
     ";
-    $this->query($query);
   }
 
-  public function slider_images()
+  private function slider_images()
   {
-    $query = "
+    return "
     CREATE TABLE IF NOT EXISTS `slider_images` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `image` varchar(2048) NOT NULL,
@@ -201,6 +190,5 @@ class Create_Table extends Database
       PRIMARY KEY (`id`)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
-    $this->query($query);
   }
 }

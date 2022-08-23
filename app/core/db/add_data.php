@@ -18,7 +18,7 @@ class Add_Data extends Database
     }
   }
 
-  public function test()
+  private function test()
   {
     return <<<EOT
     INSERT INTO test (symbol, language) VALUES('af_ZA',"Afrikaans");
@@ -40,7 +40,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  public function users()
+  private function users()
   {
     return <<<EOT
     INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `date`, `about`, `company`, `job`, `country`, `address`, `phone`, `slug`, `image`, `facebook_link`, `instagram_link`, `twitter_link`, `linkedin_link`) VALUES
@@ -49,7 +49,7 @@ class Add_Data extends Database
     (4, 'sdfdf', 'dfsdf', 'sdfsdfs@dfs.com', '$2y$10$Hh8YkkcVBqyv0/IfgbjqxOzIcoWn5Tvq44YfVHNFEClAgU7r.3MT6', 'user', '2022-08-14  ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     EOT;
   }
-  public function categories()
+  private function categories()
   {
     return <<<EOT
     INSERT INTO `categories` (`id`, `category`, `disabled`) VALUES
@@ -70,7 +70,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  public function languages()
+  private function languages()
   {
 
     return <<<EOT
@@ -182,7 +182,7 @@ class Add_Data extends Database
   }
 
 
-  public function course_levels()
+  private function course_levels()
   {
     return  <<<EOT
     INSERT INTO `course_levels` (`id`, `level`, `disabled`) 
@@ -193,7 +193,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  public function currencies()
+  private function currencies()
   {
     return  <<<EOT
     INSERT INTO `currencies` (`id`, `currency`, `symbol`, `disabled`) VALUES
@@ -201,7 +201,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  public function prices()
+  private function prices()
   {
     return  <<<EOT
     INSERT INTO `prices` (`id`, `name`, `price`, `disabled`) VALUES
