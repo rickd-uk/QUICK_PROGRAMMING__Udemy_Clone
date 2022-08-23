@@ -1,19 +1,13 @@
 /**
 * @var Admin $this
 */
-<?php \Controller\Controller::view_static('admin/header', $data) ?>
+<?php
 
+use \Controller\Controller;
 
-
-<div class="pagetitle">
-  <h1>Dashboard</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
+Controller::view_static('admin/header', $data);
+Controller::view_breadcrumbs('admin/breadcrumbs', 'Dashboard');
+?>
 
 <section class="section dashboard">
   <div class="row">

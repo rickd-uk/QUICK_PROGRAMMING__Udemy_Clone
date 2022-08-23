@@ -3,7 +3,8 @@
 use \Controller\Controller;
 
 Controller::view_static('admin/header', $data);
-Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
+Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
+
 
 <?php if (!empty($row)) : ?>
   <section class="section profile">
@@ -12,7 +13,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
 
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
             <img src="<?= ROOT ?>/<?= USERS_UL_DIR . display($row, 'image') ?>" style="" alt="Profile" class="profile-image rounded-circle">
             <h2><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></h2>
             <h3><?= display($row, 'role') ?></h3>

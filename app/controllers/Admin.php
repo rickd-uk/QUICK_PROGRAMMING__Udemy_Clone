@@ -216,4 +216,59 @@ class Admin extends Controller
     }
     $this->view('admin/courses', $data);
   }
+
+
+
+
+
+
+
+
+  public function slider_images($id = null)
+  {
+    Auth::login_to_view();
+
+    // get id from url or logged in user
+    $id = $id == null ? Auth::getId() : $id;
+
+    $user = new \Model\User();
+    // get profile data for selected / logged in user
+    $data['row'] = $row = $user->where(['id' => $id], 'ASC', 'one');
+
+    // if profile updated & data retrieved from db
+    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
+
+      if ($user->edit_validate($_POST, $id)) {
+
+        if (array_key_exists('image', $_FILES)) {
+
+          // Saves course image
+          $this->save_image($row, $user);
+          if ($this->updated_image) {
+            $_POST['image'] = $this->img_filename;
+          }
+        }
+
+        $user->update($id, $_POST);
+
+
+        //display_message("Profile saved successfully");
+        //redirect('admin/profile/' . $id);
+      }
+      if (empty($user->errors)) {
+        $arr['message'] = "Profile saved successfully";
+      } else {
+        $arr['message'] = "Please correct these errors";
+        $arr['errors'] = $user->errors;
+      }
+
+      echo json_encode($arr);
+
+      die;
+    }
+
+    $data['title'] = "Profile";
+    $data['errors'] = $user->errors;
+    $this->view('admin/slider-images', $data);
+  }
 }

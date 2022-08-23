@@ -1,4 +1,11 @@
-<?php \Controller\Controller::view_static('admin/header', $data); ?>
+<?php
+
+use \Controller\Controller;
+
+Controller::view_static('admin/header', $data);
+Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
+?>
+
 
 <?php if ($action == 'add') : ?>
 	<div class="card col-md-5 mx-auto">

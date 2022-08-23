@@ -1,6 +1,4 @@
 <?php
-
-
 class App
 {
   protected $controller = '_404';
@@ -27,9 +25,8 @@ class App
 
     // Changed
     $mycontroller = new ("Controller\\" . $this->controller)();
-    // print_r($arr);
-    // die();
     $mymethod = $arr[1] ?? $arr[0];
+    $mymethod = str_replace('-', '_', $mymethod);
 
 
     if (!empty($mymethod)) {
@@ -38,7 +35,6 @@ class App
         unset($arr[1]);
       }
     }
-
     $arr = array_values($arr);
     call_user_func_array([$mycontroller, $this->method], $arr);
   }
