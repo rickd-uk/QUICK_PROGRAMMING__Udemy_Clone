@@ -1,5 +1,7 @@
 <?php
 
+namespace Controller;
+
 /**
  * _404 class
  */

@@ -172,4 +172,4 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 	set_tab()
 </script>
 
-<?php \Controller\Controller::view_static('admin/footer') ?>
+<?php Controller::view_static('admin/footer') ?>

@@ -645,4 +645,4 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Dashboard');
 
 </main><!-- End #main -->
 
-<?php \Controller\Controller::view_static('admin/footer') ?>
+<?php Controller::view_static('admin/footer') ?>

@@ -15,7 +15,7 @@ class Login extends Controller
   {
     $data['title'] = "Login";
     $data['errors'] = [];
-    $user = new \Model\User();
+    $user = new User();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       // validate
