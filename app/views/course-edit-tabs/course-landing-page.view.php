@@ -117,7 +117,7 @@
         Upload your course image here. It must meet our course image quality standards to be accepted.
 
         <br><br>
-        <input onchange="upload_course_image(this.files[0])" id="js-img-ul-input" type="file" accept="image/png, image/jpg, image/jpeg">
+        <input onchange="upload_course_image(this.files[0])" id="js-img-ul-input" type="file" accept="image/png, image/jpg, image/jpeg, image/webp">
         <div class="progress my-4">
           <div id="progress-bar-image" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
         </div>

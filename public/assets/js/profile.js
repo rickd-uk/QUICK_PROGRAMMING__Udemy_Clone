@@ -49,7 +49,7 @@ function save_profile(e) {
 
 	// validate image
 	if (image_added) {
-		var allowed = ['jpeg', 'jpg', 'png']
+		var allowed = ['jpeg', 'jpg', 'png', 'webp']
 		if (typeof obj.image == 'object') {
 			var ext = obj.image.name.split('.').pop()
 		}

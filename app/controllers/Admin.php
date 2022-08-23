@@ -49,7 +49,7 @@ class Admin extends Controller
 
         if (array_key_exists('image', $_FILES)) {
 
-          // Saves course image
+          // Saves profile image
           $this->save_image($row, $user);
           if ($this->updated_image) {
             $_POST['image'] = $this->img_filename;

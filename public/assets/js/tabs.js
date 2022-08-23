@@ -151,7 +151,7 @@ function upload_course_image(file) {
 		return
 	}
 
-	let allowed_types = ['jpg', 'jpeg', 'png']
+	let allowed_types = ['jpg', 'jpeg', 'png', 'webp']
 	// Remove the last item from split filename i.e. the extension
 	let ext = file.name.split('.').pop()
 	ext = ext.toLowerCase()

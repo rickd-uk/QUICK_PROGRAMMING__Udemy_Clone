@@ -39,7 +39,7 @@ class Utility
       file_put_contents($dir . "index.php", "");
       file_put_contents("uploads/index.php", "");
     }
-    $allowed_images = ['image/jpeg', 'image/png'];
+    $allowed_images = ['image/jpeg', 'image/png', 'image/webp'];
     $image = $_FILES['image'];
 
     if (!empty($image['name'])) {
