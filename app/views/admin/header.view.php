@@ -36,6 +36,8 @@ use \Model\Auth;  ?>
   <link href="<?= ROOT ?>/assets/css/main.css?3324" rel="stylesheet">
 
   <script src="<?= ROOT ?>/assets/js/main.js"></script>
+  <script src="<?= ROOT ?>/assets/js/errors.js"></script>
+
   <!-- <script defer src="<?= ROOT ?>/assets/js/video_ul.js"></script> -->
 
   <!-- =======================================================

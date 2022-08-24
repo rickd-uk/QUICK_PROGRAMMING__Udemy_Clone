@@ -97,10 +97,8 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 		</div>
 	</div>
 
-	<script src="<?= ROOT ?>/assets/js/tabs.js? <?= time() ?>" />
 
-	//
-	<script src="<?= ROOT ?>/assets/js/save.js?32423" />
+
 	<script src="<?= ROOT ?>/assets/js/video_ul.js?324" />
 
 <?php else : ?>
@@ -168,8 +166,12 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 <?php endif; ?>
 
 
+
 <script>
 	set_tab()
 </script>
+
+<script src="<?= ROOT ?>/assets/js/tabs.js?" />
+<script src="<?= ROOT ?>/assets/js/save.js?" />
 
 <?php Controller::view_static('admin/footer') ?>

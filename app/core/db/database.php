@@ -32,10 +32,10 @@ class Database
           return $result;
         }
       } catch (PDOException $e) {
-        ss($e);
         echo "Error: " . $e;
       }
     }
-    return false;
+    #TODO:  changed from false
+    return [];
   }
 }

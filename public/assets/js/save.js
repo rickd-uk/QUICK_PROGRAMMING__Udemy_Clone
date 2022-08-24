@@ -1,5 +1,3 @@
-//TODO: Not Efficient Revisit later
-
 function save_content() {
 	const content = document.querySelector('#tabs-content')
 	const inputs = content.querySelectorAll('input, textarea,select')
@@ -15,9 +13,6 @@ function save_content() {
 	get_course_data(obj)
 }
 
-let course_img_uploading = false
-let ajax_course_image = null
-
 function upload_course_image(file) {
 	let img_ul_info = document.querySelector('#js-img-ul-info')
 	let img_ul_input = document.querySelector('#js-img-ul-input')
@@ -29,7 +24,7 @@ function upload_course_image(file) {
 		return
 	}
 
-	let allowed_types = ['jpg', 'jpeg', 'png']
+	let allowed_types = ['jpg', 'jpeg', 'png', 'webp']
 	// Remove the last item from split filename i.e. the extension
 	let ext = file.name.split('.').pop()
 	ext = ext.toLowerCase()
@@ -117,8 +112,6 @@ function upload_course_image(file) {
 	myform.append('data_type', 'upload_course_image')
 	myform.append('tab_name', tab_courses)
 	myform.append('image', file)
-
-	console.log(myform)
 
 	// append csrf code
 	$csrf_code = document.querySelector('#js-csrf_code').value

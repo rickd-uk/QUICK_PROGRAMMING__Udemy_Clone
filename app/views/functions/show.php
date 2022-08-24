@@ -35,6 +35,8 @@ function display($row, $field)
 }
 
 
+
+
 function show_error_msg($errors, $field)
 {
   if (!empty($errors[$field])) : ?>

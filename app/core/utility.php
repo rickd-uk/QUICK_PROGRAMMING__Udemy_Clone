@@ -86,4 +86,14 @@ class Utility
       $course->update($id, ['course_image_tmp' => $file_name, 'csrf_code' => $_POST['csrf_code']]);
     }
   }
+
+  protected static function make_dir_add_index($dir)
+  {
+    $root_dir = explode('/', $dir)[1];
+    if (!file_exists($dir)) {
+      mkdir($dir, 0777, true);
+      file_put_contents($dir . "index.php", "<?php //silence");
+      $root_dir && file_put_contents("$root_dir/index.php", "<?php //silence");
+    }
+  }
 }

@@ -5,19 +5,19 @@ namespace Controller;
 if (!defined('ROOT')) die('direct script access denied');
 
 use \Model\Auth;
+use \Model\Slider;
+use \Core\Utility;
 
 /**
  * admin class
  */
 class Admin extends Controller
 {
-  private $destination = '';
+  protected $destination = '';
 
-  private $img_filename = '';
+  protected $img_filename = '';
 
-  private $updated_image = false;
-
-
+  protected $updated_image = false;
 
   public function index()
   {
@@ -44,6 +44,7 @@ class Admin extends Controller
 
     // if profile updated & data retrieved from db
     if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
+
 
       if ($user->edit_validate($_POST, $id)) {
 
@@ -220,46 +221,81 @@ class Admin extends Controller
 
 
 
-
-
-
-
-  public function slider_images($id = null)
+  public function slider_images()
   {
     Auth::login_to_view();
 
     // get id from url or logged in user
-    $id = $id == null ? Auth::getId() : $id;
+    $id = Auth::getId() ?? 0;
 
-    $user = new \Model\User();
-    // get profile data for selected / logged in user
-    $data['row'] = $row = $user->where(['id' => $id], 'ASC', 'one');
+    $slider = new Slider();
+    $data['rows'] = [];
+    $rows = $slider->where(['disabled' => 0]);
 
-    // if profile updated & data retrieved from db
-    if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
 
-      if ($user->edit_validate($_POST, $id)) {
+    if ($rows) {
+      foreach ($rows as $key => $obj) {
+        $num = $obj->id;
+        $data['rows'][$num] = $obj;
+      }
+    }
 
-        if (array_key_exists('image', $_FILES)) {
+    $id = $_POST['id'] ?? 0;
 
-          // Saves course image
-          $this->save_image($row, $user);
-          if ($this->updated_image) {
-            $_POST['image'] = $this->img_filename;
+    $row = $slider->where(['id' => $id], '', 'one');
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+
+      // Admin::make_dir_add_index(UL_IMG);
+      $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+
+      if (!empty($_FILES['image']['name'])) {
+
+        if ($_FILES['image']['error'] == 0) {
+
+          if (in_array($_FILES['image']['type'], $allowed)) {
+
+            $filename = time() . $_FILES['image']['name'];
+            $destination = SLIDER_IMG_UL_DIR . $filename;
+
+            $_POST['image'] = $filename;
+          } else {
+            $slider->errors['image'] = "This file type is not allowed";
+          }
+        } else {
+          $slider->errors['image'] = "Could not upload image";
+        }
+      }
+
+
+      if ($slider->validate($_POST, $id)) {
+
+        if (!empty($destination)) {
+          move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+
+          resize_image($destination);
+          if ($row && file_exists($row->image)) {
+            unlink($row->image);
           }
         }
 
-        $user->update($id, $_POST);
+        if ($row) {
+          unset($_POST['id']);
 
+          $slider->update($id, $_POST);
+        } else {
 
-        //display_message("Profile saved successfully");
-        //redirect('admin/profile/' . $id);
+          $slider->insert($_POST);
+        }
       }
-      if (empty($user->errors)) {
-        $arr['message'] = "Profile saved successfully";
+
+
+      if (empty($slider->errors)) {
+        $arr['message'] = "Image saved successfully";
       } else {
         $arr['message'] = "Please correct these errors";
-        $arr['errors'] = $user->errors;
+        $arr['errors'] = $slider->errors;
       }
 
       echo json_encode($arr);
@@ -267,8 +303,8 @@ class Admin extends Controller
       die;
     }
 
-    $data['title'] = "Profile";
-    $data['errors'] = $user->errors;
+    $data['title'] = "Slider images";
+    $data['errors'] = $slider->errors;
     $this->view('admin/slider-images', $data);
   }
 }

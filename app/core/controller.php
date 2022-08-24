@@ -6,7 +6,9 @@ namespace Controller;
  * controller class
  */
 
-class Controller extends \Core\Utility
+use \Core\Utility;
+
+class Controller extends Utility
 {
   public function view($view, $data = [])
   {

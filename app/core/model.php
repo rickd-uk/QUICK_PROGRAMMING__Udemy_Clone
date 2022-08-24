@@ -83,11 +83,14 @@ class Model extends Database
     $keys = array_keys($data);
     $query = "SELECT * FROM " . $this->table . " where ";
 
+
     // add the keys to build the wuery
     foreach ($keys as $key) {
       $query .= $key . "=:" . $key . " && ";
     }
     $query = trim($query, "&& ");
+
+
 
     // if one record is required then limit it
     if ($get === 'one') {
@@ -95,11 +98,13 @@ class Model extends Database
     } else {
       $query .= " ORDER BY id $order LIMIT $limit";
     }
+
     // result of query
     $res = $this->query($query, $data);
 
+
     // if it is an array process it
-    if (is_array($res)) {
+    if (is_array($res) && !empty($res)) {
 
       // Calls the protected functions in the course model
       // run afterSelect functions
@@ -108,6 +113,9 @@ class Model extends Database
           $res = $this->$func($res);
         }
       }
+      // $get === 'one' ? ss('$res[0]') : ss('$res');
+
+
 
       // if one record is needed then return first in array
       return $get === 'one' ? $res[0] : $res;

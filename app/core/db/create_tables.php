@@ -187,8 +187,9 @@ class Create_Table extends Database
       `image` varchar(2048) NOT NULL,
       `title` varchar(100) NOT NULL,
       `description` varchar(255) NOT NULL,
+      `disabled` tinyint(1) NOT NULL DEFAULT '0',
       PRIMARY KEY (`id`)
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
-    ";
+     ";
   }
 }

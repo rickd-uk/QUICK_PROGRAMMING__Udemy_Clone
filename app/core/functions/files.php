@@ -63,9 +63,11 @@ function resize_image($filename, $max_size = 700)
 
 function get_image($file, $db = 'users')
 {
+
   $file_path = UL_DIR . $db . '/' . $file;
 
-  if (file_exists($file_path)) {
+
+  if (!empty($file) && file_exists($file_path)) {
     return ROOT . '/' . $file_path;
   }
   return ROOT . IMG_ASSETS . IMG_PLACEHOLDER;

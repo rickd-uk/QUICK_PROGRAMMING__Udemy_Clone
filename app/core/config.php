@@ -17,10 +17,12 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 
   // image dirs
   define('UL_DIR', 'uploads/');
+  define('UL_IMG', '/uploads/images/');
   define('IMG_ASSETS', '/assets/images/');
   define('IMG_PLACEHOLDER', 'image_placeholder.jpg');
   define('USERS_UL_DIR', 'uploads/users/');
   define('COURSES_UL_DIR', 'uploads/courses/');
+  define('SLIDER_IMG_UL_DIR', 'uploads/slider_images/');
 } else {
 
   // db config for web host

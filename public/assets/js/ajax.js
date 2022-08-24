@@ -13,6 +13,7 @@ function send_data(obj, progbar = 'js-progress') {
 			if (ajax.status == 200) {
 				// network success, pass on ajax response
 				handle_result(ajax.responseText)
+				uploading = false
 			} else {
 				// error occurred
 				alert('error occurred')
