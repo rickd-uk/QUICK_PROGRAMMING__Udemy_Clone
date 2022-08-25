@@ -4,7 +4,6 @@ namespace Core;
 
 use \Database;
 
-
 /**
  * add data class
  */

@@ -116,11 +116,14 @@ class Create_Table extends Database
   {
     return "
     CREATE TABLE IF NOT EXISTS `categories` (
-      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-      `title` varchar(50) NOT NULL,
-      `description` text NOT NULL,
-      PRIMARY KEY (`id`)
-     ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `category` varchar(30) NOT NULL,
+      `disabled` tinyint(1) NOT NULL DEFAULT '0',
+      `slug` varchar(100) NOT NULL,
+      PRIMARY KEY (`id`),
+      KEY `category` (`category`),
+      KEY `disabled` (`disabled`)
+     ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8
     ";
   }
 

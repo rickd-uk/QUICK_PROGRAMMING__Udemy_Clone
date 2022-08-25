@@ -1,6 +1,8 @@
 
 <?php
 
+use \Model\Category;
+
 function str_to_url($url)
 {
   $url = str_replace("'", "", $url);
@@ -11,4 +13,15 @@ function str_to_url($url)
   $url = preg_replace('~[^-a-z0-9_]+~', '', $url);
 
   return $url;
+}
+
+function make_slug_for_categories()
+{
+  $categories = get_categories();
+  $category = new Category();
+
+  foreach ($categories as $row) {
+    $slug = str_to_url($row->category);
+    $category->update($row->id, ['slug' => $slug]);
+  }
 }

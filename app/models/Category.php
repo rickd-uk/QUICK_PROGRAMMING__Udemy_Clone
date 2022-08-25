@@ -11,7 +11,7 @@ class Category extends Model
   protected $table = "categories";
 
   protected $allowedCols = [
-    'category', 'disabled',
+    'category', 'disabled', 'slug'
   ];
 
   public function validate($data)

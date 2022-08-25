@@ -12,28 +12,27 @@ if (!defined("ROOT")) die("direct script access denied");
  * home class
  */
 
+use \Model\Course;
+
+
 class Home extends Controller
 {
   public function index()
   {
-    $ct = new Create_Table();
-    $ct->for('test');
-
-    $ad = new Add_Data();
-    $ad->to('test');
-
-    // $add_data = new Add_Data();
-    // $add_data->languages();
-
     // $ct = new Create_Table();
-    // $db->user();
+    // $ct->for('test');
 
+    // $ad = new Add_Data();
+    // $ad->to('test');
     $data['title'] = "Home";
 
-    $course = new \Model\Course();
+    $course = new Course();
+
+
     // Read all courses
     //TODO: Was set to 'DESC' before
-    $data['rows'] = $course->where(['approved' => 0], 7);
+    $data['rows'] = $course->where(['approved' => 0]);
+
 
     // Read all courses, order by trending value
     $query = "SELECT * FROM courses WHERE approved = 0 ORDER BY trending DESC LIMIT  5";

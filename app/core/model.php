@@ -76,6 +76,7 @@ class Model extends Database
 
     $data['id'] = $id;
 
+
     $this->query($query, $data);
   }
 
