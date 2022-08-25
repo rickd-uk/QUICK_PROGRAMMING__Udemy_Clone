@@ -2,7 +2,7 @@
 
 
 /**
- * db_tasks class
+ * Create_Table class
  */
 
 class Create_Table extends Database
@@ -10,12 +10,12 @@ class Create_Table extends Database
   public function for($table)
   {
     if (method_exists($this, $table)) {
-      $query = $this->$table();
+      $query = Create_Table::$table();
       $this->query($query);
     }
   }
 
-  private function db()
+  private static function db()
   {
     return "
     CREATE DATABASE IF NOT EXISTS `udemy` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -23,7 +23,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function test()
+  private static function test()
   {
     return "
     CREATE TABLE IF NOT EXISTS `test` (
@@ -37,7 +37,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function user()
+  private static function user()
   {
     return "
     CREATE TABLE IF NOT EXISTS `users` (
@@ -65,7 +65,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function courses()
+  private static function courses()
   {
     return "
     CREATE TABLE IF NOT EXISTS `courses` (
@@ -112,7 +112,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function categories()
+  private static function categories()
   {
     return "
     CREATE TABLE IF NOT EXISTS `categories` (
@@ -127,7 +127,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function prices()
+  private static function prices()
   {
     return "
     CREATE TABLE IF NOT EXISTS `prices` (
@@ -142,7 +142,7 @@ class Create_Table extends Database
      ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8";
   }
 
-  private function currencies()
+  private static function currencies()
   {
     return "
     CREATE TABLE IF NOT EXISTS `currencies` (
@@ -156,7 +156,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function course_levels()
+  private static function course_levels()
   {
     return "
     CREATE TABLE IF NOT EXISTS `course_levels` (
@@ -168,7 +168,7 @@ class Create_Table extends Database
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
   }
-  private function languages()
+  private static function languages()
   {
     return "
     CREATE TABLE IF NOT EXISTS `languages` (
@@ -182,7 +182,7 @@ class Create_Table extends Database
     ";
   }
 
-  private function slider_images()
+  private static function slider_images()
   {
     return "
     CREATE TABLE IF NOT EXISTS `slider_images` (

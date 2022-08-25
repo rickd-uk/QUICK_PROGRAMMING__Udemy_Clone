@@ -1,8 +1,6 @@
 <?php
 
-namespace Core;
 
-use \Database;
 
 /**
  * add data class
@@ -12,12 +10,12 @@ class Add_Data extends Database
   public function to($table)
   {
     if (method_exists($this, $table)) {
-      $query = $this->$table();
+      $query = Add_Data::$table();
       $this->query($query);
     }
   }
 
-  private function test()
+  private static function test()
   {
     return <<<EOT
     INSERT INTO test (symbol, language) VALUES('af_ZA',"Afrikaans");
@@ -39,7 +37,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  private function users()
+  private static function users()
   {
     return <<<EOT
     INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `role`, `date`, `about`, `company`, `job`, `country`, `address`, `phone`, `slug`, `image`, `facebook_link`, `instagram_link`, `twitter_link`, `linkedin_link`) VALUES
@@ -48,7 +46,7 @@ class Add_Data extends Database
     (4, 'sdfdf', 'dfsdf', 'sdfsdfs@dfs.com', '$2y$10$Hh8YkkcVBqyv0/IfgbjqxOzIcoWn5Tvq44YfVHNFEClAgU7r.3MT6', 'user', '2022-08-14  ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
     EOT;
   }
-  private function categories()
+  private static function categories()
   {
     return <<<EOT
     INSERT INTO `categories` (`id`, `category`, `disabled`) VALUES
@@ -69,7 +67,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  private function languages()
+  private static function languages()
   {
 
     return <<<EOT
@@ -181,7 +179,7 @@ class Add_Data extends Database
   }
 
 
-  private function course_levels()
+  private static function course_levels()
   {
     return  <<<EOT
     INSERT INTO `course_levels` (`id`, `level`, `disabled`) 
@@ -192,7 +190,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  private function currencies()
+  private static function currencies()
   {
     return  <<<EOT
     INSERT INTO `currencies` (`id`, `currency`, `symbol`, `disabled`) VALUES
@@ -200,7 +198,7 @@ class Add_Data extends Database
     EOT;
   }
 
-  private function prices()
+  private static function prices()
   {
     return  <<<EOT
     INSERT INTO `prices` (`id`, `name`, `price`, `disabled`) VALUES

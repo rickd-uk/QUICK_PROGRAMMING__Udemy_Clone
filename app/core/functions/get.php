@@ -10,6 +10,7 @@ function get_categories($id = null)
     $category->limit = 1;
     return $data['categories'] = $category->where(['disabled' => 0, 'id' => $id]);
   }
+  $category->order = 'ASC';
   $category->limit = 20;
   return $data['categories'] = $category->where(['disabled' => 0]);
 }

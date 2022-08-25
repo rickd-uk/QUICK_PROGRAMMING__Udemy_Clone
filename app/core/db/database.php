@@ -1,7 +1,5 @@
 <?php
 
-require 'create_tables.php';
-require 'add_data.php';
 
 class Database
 {

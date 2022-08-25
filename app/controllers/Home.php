@@ -2,9 +2,8 @@
 
 namespace Controller;
 
-use Core\Add_Data;
-use Create_Table;
 use Model\Slider;
+use \Model\Course;
 
 if (!defined("ROOT")) die("direct script access denied");
 
@@ -12,18 +11,17 @@ if (!defined("ROOT")) die("direct script access denied");
  * home class
  */
 
-use \Model\Course;
+
 
 
 class Home extends Controller
 {
   public function index()
   {
-    // $ct = new Create_Table();
-    // $ct->for('test');
+    create_table('new');
+    create_data('new');
 
-    // $ad = new Add_Data();
-    // $ad->to('test');
+
     $data['title'] = "Home";
 
     $course = new Course();
