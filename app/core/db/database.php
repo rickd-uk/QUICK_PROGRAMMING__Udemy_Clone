@@ -27,6 +27,17 @@ class Database
         $result = $stm->fetchAll($type);
 
         if (is_array($result) && count($result) > 0) {
+
+          // Calls the protected functions in the course model
+          // run afterSelect functions
+          if (property_exists($this, 'afterSelect')) {
+
+            foreach ($this->afterSelect as $func) {
+
+              $result = $this->$func($result);
+            }
+          }
+
           return $result;
         }
       } catch (PDOException $e) {

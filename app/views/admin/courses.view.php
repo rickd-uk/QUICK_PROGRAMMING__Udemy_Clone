@@ -60,6 +60,37 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 		</div>
 	</div>
 
+<?php elseif ($action == 'delete') : ?>
+
+
+	<div class="card">
+		<div class="card-body">
+			<h3 class="card-title">Delete Course</h3>
+			<h5 class="alert alert-danger text-center">Are you sure you want to delete?</h5>
+
+			<h5 class="">Course Title: <?= esc($row->title) ?></h5>
+			<h5 class="">Primary Subject: <?= esc($row->primary_subject) ?></h5>
+			<h5 class="">Category: <?= esc($row->category_row->category) ?></h5>
+			<h5 class="">Date: <?= format_date($row->date) ?></h5>
+
+			<?php if (!empty($row)) : ?>
+				<form method="POST">
+					<a href="<?= ROOT ?>/admin/courses">
+						<button class=" btn btn-primary float-start">Back</button>
+					</a>
+					<button class=" btn btn-danger float-end">Delete</button>
+		</div>
+
+		</form>
+		<div class="my-5">
+
+		<?php else : ?>
+			<div>That course was not found</div>
+		<?php endif; ?>
+		</div>
+	</div>
+
+
 <?php elseif ($action == 'edit') : ?>
 
 	<link href="<?= ROOT ?>/assets/css/courses.css?<?= get_date() ?>" rel="stylesheet">

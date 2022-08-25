@@ -135,13 +135,28 @@ class Admin extends Controller
         }
         $data['errors'] = $course->errors;
       }
+    } elseif ($action == 'delete') {
+      // $categories = $category->findAll('ASC');
+      // $languages = $language->findAll('ASC');
+      // $levels = $level->findAll('ASC');
+      // $prices = $price->findAll('ASC');
+      // $currencies = $currency->findAll('ASC');
+
+      // get course info
+      $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
+        $course->delete($row->id);
+        display_message('Course delete successfully');
+        redirect('admin/courses');
+      }
     } elseif ($action == 'edit') {
 
-      $categories = $category->findAll('ASC');
-      $languages = $language->findAll('ASC');
-      $levels = $level->findAll('ASC');
-      $prices = $price->findAll('ASC');
-      $currencies = $currency->findAll('ASC');
+      // $categories = $category->findAll('ASC');
+      // $languages = $language->findAll('ASC');
+      // $levels = $level->findAll('ASC');
+      // $prices = $price->findAll('ASC');
+      // $currencies = $currency->findAll('ASC');
 
       // get course info
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
@@ -217,6 +232,8 @@ class Admin extends Controller
     }
     $this->view('admin/courses', $data);
   }
+
+
   public function slider_images()
   {
     Auth::login_to_view();

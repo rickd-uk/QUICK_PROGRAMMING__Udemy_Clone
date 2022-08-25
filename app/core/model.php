@@ -118,9 +118,6 @@ class Model extends Database
         }
       }
       // $get === 'first' ? ss('$res[0]') : ss('$res');
-
-
-
       // if first record is needed then return first in array
       return $get === 'first' ? $res[0] : $res;
     }
