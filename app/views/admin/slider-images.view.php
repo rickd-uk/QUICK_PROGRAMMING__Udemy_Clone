@@ -39,15 +39,15 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                   <div class="col-md-8 col-lg-9">
                     <div class="d-flex ">
 
-                      <img class="js-image-preview" src="<?= get_image($rows[1]->image ?? '', 'slider_images')  ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
-                      <div class="js-filename m-2">Selected File: None</div>
+                      <img class="js-image-preview" src="<?= get_image($rows[1]->image ?? '', 'slider_images')  ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover background-color: red;" />
+                      <div class="js-filename m-2"></div>
                     </div>
 
 
                     <div class="pt-2">
                       <label href="#" class="btn btn-primary btn-sm" title="Upload new slider-images image">
                         <i class="text-white bi bi-upload"></i>
-                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/jpeg" />
+                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/jpeg, image/webp" />
                       </label>
                       <?php show_error_msg($errors, 'image'); ?>
                       <small class="js-error-image text-danger"></small>
@@ -98,14 +98,14 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <div class="d-flex ">
 
                       <img class="js-image-preview" src="<?= get_image($rows[2]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
-                      <div class="js-filename m-2">Selected File: None</div>
+                      <div class="js-filename m-2"></div>
                     </div>
 
 
                     <div class="pt-2">
                       <label href="#" class="btn btn-primary btn-sm" title="Upload new slider-images image">
                         <i class="text-white bi bi-upload"></i>
-                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png,  image/jpeg" />
+                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png,  image/jpeg, image/webp" />
                       </label>
                       <?php show_error_msg($errors, 'image'); ?>
                       <small class="js-error-image text-danger"></small>
@@ -155,14 +155,14 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <div class="d-flex ">
 
                       <img class="js-image-preview" src="<?= get_image($rows[3]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
-                      <div class="js-filename m-2">Selected File: None</div>
+                      <div class="js-filename m-2"></div>
                     </div>
 
 
                     <div class="pt-2">
                       <label href="#" class="btn btn-primary btn-sm" title="Upload new slider-images image">
                         <i class="text-white bi bi-upload"></i>
-                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/jpeg" />
+                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/jpeg , image/webp" />
                       </label>
                       <?php show_error_msg($errors, 'image'); ?>
                       <small class="js-error-image text-danger"></small>
@@ -212,14 +212,14 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <div class="d-flex ">
 
                       <img class="js-image-preview" src="<?= get_image($rows[4]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
-                      <div class="js-filename m-2">Selected File: None</div>
+                      <div class="js-filename m-2"></div>
                     </div>
 
 
                     <div class="pt-2">
                       <label href="#" class="btn btn-primary btn-sm" title="Upload new slider-images image">
                         <i class="text-white bi bi-upload"></i>
-                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/jpeg" />
+                        <input class="js-slider-images-img-input" onchange="load_image(event, this.files[0])" type="file" name="image" style="display: none;" accept="image/jpeg, image/png, image/jpeg, image/webp" />
                       </label>
                       <?php show_error_msg($errors, 'image'); ?>
                       <small class="js-error-image text-danger"></small>

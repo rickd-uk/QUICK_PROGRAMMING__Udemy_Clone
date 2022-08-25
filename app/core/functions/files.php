@@ -3,20 +3,28 @@
 
 function resize_image($filename, $max_size = 700)
 {
-  $ext = explode(".", $filename);
-  $ext = strtolower(end($ext));
+  // $ext = explode(".", $filename);
+  // $ext = strtolower(end($ext));
   $jpg_quality = 90;
 
+  $type = mime_content_type($filename);
+
   if (file_exists($filename)) {
-    switch ($ext) {
-      case 'png':
+
+
+
+
+    switch ($type) {
+      case 'image/webp':
+        $image = imagecreatefromwebp($filename);
+        break;
+      case 'image/png':
         $image = imagecreatefrompng($filename);
         break;
-      case 'gif':
+      case 'image/gif':
         $image = imagecreatefromgif($filename);
         break;
-      case 'jpg':
-      case 'jpeg':
+      case 'image/jpeg':
         $image = imagecreatefromjpeg($filename);
         break;
       default:
@@ -27,14 +35,23 @@ function resize_image($filename, $max_size = 700)
     $src_h = imagesy($image);
 
     if ($src_w > $src_h) {
+
+      if ($src_w > $max_size) {
+        $max_size = $src_w;
+      }
       $dst_w = $max_size;
       $dst_h = ($src_h / $src_w) * $max_size;
     } else {
+      if ($src_h < $max_size) {
+        $max_size = $src_h;
+      }
       $dst_h = $max_size;
       $dst_w = ($src_w / $src_h) * $max_size;
     }
 
     $dst_img = imagecreatetruecolor($dst_w, $dst_h);
+    // imagealphablending($dst_img, false);
+    // imagesavealpha($dst_img, true);
 
     // destination img, source img, distance x, distance y, source x, source y, 
     // destination width, destination height
@@ -42,15 +59,19 @@ function resize_image($filename, $max_size = 700)
 
     imagedestroy($image);
 
-    switch ($ext) {
-      case 'png':
+    switch ($type) {
+      case 'image/webp':
+        imagewebp($dst_img, $filename);
+        break;
+      case 'image/png':
+        imagealphablending($dst_img, false);
+        imagesavealpha($dst_img, true);
         imagepng($dst_img, $filename);
         break;
-      case 'gif':
+      case 'image/gif':
         imagegif($dst_img, $filename);
         break;
-      case 'jpg':
-      case 'jpeg':
+      case 'image/jpeg':
         imagejpeg($dst_img, $filename, $jpg_quality);
         break;
       default:

@@ -217,10 +217,6 @@ class Admin extends Controller
     }
     $this->view('admin/courses', $data);
   }
-
-
-
-
   public function slider_images()
   {
     Auth::login_to_view();
@@ -249,16 +245,14 @@ class Admin extends Controller
 
       // Admin::make_dir_add_index(UL_IMG);
       $allowed = ['image/jpeg', 'image/png', 'image/webp'];
+      $filename = time() . $_FILES['image']['name'];
+
 
       if (!empty($_FILES['image']['name'])) {
 
         if ($_FILES['image']['error'] == 0) {
 
           if (in_array($_FILES['image']['type'], $allowed)) {
-
-            $filename = time() . $_FILES['image']['name'];
-            $destination = SLIDER_IMG_UL_DIR . $filename;
-
             $_POST['image'] = $filename;
           } else {
             $slider->errors['image'] = "This file type is not allowed";
@@ -270,13 +264,22 @@ class Admin extends Controller
 
 
       if ($slider->validate($_POST, $id)) {
+        // $path is slider dir & filename
+        $img_path = SLIDER_IMG_UL_DIR . $filename;
 
-        if (!empty($destination)) {
-          move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+        // If there is a filename
+        if (!empty($filename)) {
+          // Move file from temp to previosly set dir
+          move_uploaded_file($_FILES['image']['tmp_name'], $img_path);
 
-          resize_image($destination);
-          if ($row && file_exists($row->image)) {
-            unlink($row->image);
+          // Resize image based on file extension
+          resize_image($img_path);
+
+          // if there is a previous image in dir then delete it
+          $row && $img_path_db = SLIDER_IMG_UL_DIR . $row->image;
+
+          if (file_exists($img_path_db)) {
+            unlink($img_path_db);
           }
         }
 

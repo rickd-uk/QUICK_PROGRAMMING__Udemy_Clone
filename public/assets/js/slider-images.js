@@ -62,7 +62,7 @@ function save_slider_images(e, id) {
 	// validate image
 	if (image_added) {
 		document.querySelector('.js-error-image').innerHTML = ''
-		var allowed = ['jpeg', 'jpg', 'png']
+		var allowed = ['jpeg', 'jpg', 'png', 'webp']
 		if (typeof obj.image == 'object') {
 			var ext = obj.image.name.split('.').pop()
 		}
