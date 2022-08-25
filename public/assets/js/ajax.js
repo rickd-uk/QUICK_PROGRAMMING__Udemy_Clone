@@ -2,10 +2,13 @@ function send_data(obj, progbar = 'js-progress') {
 	const progress = document.querySelector('.' + progbar)
 	progress.style = 'display: block;'
 
+	console.log('OBJ:    ', obj)
+
 	const myForm = new FormData()
 	for (key in obj) {
 		myForm.append(key, obj[key])
 	}
+
 	let ajax = new XMLHttpRequest()
 
 	ajax.addEventListener('readystatechange', () => {

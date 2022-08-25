@@ -21,7 +21,7 @@ class Login extends Controller
       // validate
       $row = $user->where(([
         'email' => $_POST['email']
-      ]), '', 'one');
+      ]), 'one');
 
       if ($row) {
 

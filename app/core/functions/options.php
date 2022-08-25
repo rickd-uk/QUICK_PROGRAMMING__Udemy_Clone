@@ -1,6 +1,5 @@
 <?php
 
-
 function set_selected($key, $value, $default = '')
 {
   if (!empty($_POST[$key])) {

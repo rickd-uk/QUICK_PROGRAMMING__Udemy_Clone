@@ -21,7 +21,6 @@ function load_image(file) {
 }
 
 window.onload = function () {
-	log(window)
 	show_tab(tab)
 }
 

@@ -22,7 +22,8 @@ class Course extends Controller
 
     $course = new \Model\Course();
     // Read all courses
-    $data['rows'] = $course->where(['approved' => 0], 'DESC', '', 7);
+    //TODO: Was set to 'DESC' before
+    $data['rows'] = $course->where(['approved' => 0]);
 
     // Read all courses, order by trending value
     $query = "SELECT * FROM courses WHERE approved = 0 ORDER BY trending DESC LIMIT  5";

@@ -1,11 +1,11 @@
 let tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : '#slider-images-overview'
 let uploading = false
 
-function show_tab(tab_name) {
-	const someTabTriggerEl = document.querySelector(tab_name + '-tab')
-	const tab = new bootstrap.Tab(someTabTriggerEl)
-	tab.show()
-}
+// function show_tab(tab_name) {
+// 	const someTabTriggerEl = document.querySelector(tab_name + '-tab')
+// 	const tab = new bootstrap.Tab(someTabTriggerEl)
+// 	tab.show()
+// }
 
 function set_tab(tab_name) {
 	tab = tab_name
@@ -23,10 +23,9 @@ function load_image(e, file) {
 	form.querySelector('.js-image-preview').src = mylink
 }
 
-window.onload = function () {
-	log(window)
-	show_tab(tab)
-}
+// window.onload = function () {
+// 	show_tab(tab)
+// }
 
 // upload functions
 function save_slider_images(e, id) {
@@ -73,6 +72,7 @@ function save_slider_images(e, id) {
 		}
 	} else {
 		//TODO: Validate no image set
+		obj.image = ''
 		document.querySelector('.js-error-image').innerHTML = 'An image is required'
 	}
 	console.log(obj)

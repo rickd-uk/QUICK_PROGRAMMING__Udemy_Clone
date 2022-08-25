@@ -4,6 +4,7 @@ namespace Controller;
 
 use Core\Add_Data;
 use Create_Table;
+use Model\Slider;
 
 if (!defined("ROOT")) die("direct script access denied");
 
@@ -31,7 +32,8 @@ class Home extends Controller
 
     $course = new \Model\Course();
     // Read all courses
-    $data['rows'] = $course->where(['approved' => 0], 'DESC', '', 7);
+    //TODO: Was set to 'DESC' before
+    $data['rows'] = $course->where(['approved' => 0], 7);
 
     // Read all courses, order by trending value
     $query = "SELECT * FROM courses WHERE approved = 0 ORDER BY trending DESC LIMIT  5";
@@ -49,8 +51,14 @@ class Home extends Controller
 
       $data['rows1'] = array_splice($data['rows'], 0, $half_rows);
       $data['rows2'] = $data['rows'];
-      // ss($data['rows']);
     }
+
+    // Load slider images
+    $slider = new Slider();
+    $slider->order = 'ASC';
+    $data['images'] = $slider->where(['disabled' => 0]);
+
+
 
     $this->view('home', $data);
   }

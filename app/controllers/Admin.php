@@ -40,7 +40,7 @@ class Admin extends Controller
 
     $user = new \Model\User();
     // get profile data for selected / logged in user
-    $data['row'] = $row = $user->where(['id' => $id], 'ASC', 'one');
+    $data['row'] = $row = $user->where(['id' => $id],  'first');
 
     // if profile updated & data retrieved from db
     if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
@@ -123,7 +123,7 @@ class Admin extends Controller
 
           $course->insert($_POST);
 
-          $row = $course->where(['user_id' => $user_id, 'published' => 0], 'DESC', 'one');
+          $row = $course->where(['user_id' => $user_id, 'published' => 0], 'first');
 
           display_message("Your course was successfully created");
 
@@ -144,7 +144,7 @@ class Admin extends Controller
       $currencies = $currency->findAll('ASC');
 
       // get course info
-      $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], '', 'one');
+      $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
 
 
 
@@ -238,37 +238,40 @@ class Admin extends Controller
 
     $id = $_POST['id'] ?? 0;
 
-    $row = $slider->where(['id' => $id], '', 'one');
+    $row = $slider->where(['id' => $id], 'first');
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-
-
-      // Admin::make_dir_add_index(UL_IMG);
       $allowed = ['image/jpeg', 'image/png', 'image/webp'];
-      $filename = time() . $_FILES['image']['name'];
+      $filename = '';
 
 
       if (!empty($_FILES['image']['name'])) {
+        $filename = time() . $_FILES['image']['name'];
 
+        // If there is no problem with the image
         if ($_FILES['image']['error'] == 0) {
-
+          // And image is of allowed type
           if (in_array($_FILES['image']['type'], $allowed)) {
+            // Add image file name to the global POST -> to be inserted into db
             $_POST['image'] = $filename;
           } else {
+            // Image type outside of allowed type
             $slider->errors['image'] = "This file type is not allowed";
           }
         } else {
+          // Some undefined problem with image
           $slider->errors['image'] = "Could not upload image";
         }
       }
 
 
+
       if ($slider->validate($_POST, $id)) {
         // $path is slider dir & filename
-        $img_path = SLIDER_IMG_UL_DIR . $filename;
 
         // If there is a filename
         if (!empty($filename)) {
+          $img_path = SLIDER_IMG_UL_DIR . $filename;
           // Move file from temp to previosly set dir
           move_uploaded_file($_FILES['image']['tmp_name'], $img_path);
 

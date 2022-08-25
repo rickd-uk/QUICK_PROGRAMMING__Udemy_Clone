@@ -6,6 +6,9 @@ use \Database;
 
 class Model extends Database
 {
+  public $order = 'DESC';
+  public $limit = 10;
+  public $offset = 0;
   protected $table = "";
 
   protected $errors = [];
@@ -77,8 +80,8 @@ class Model extends Database
   }
 
   // $get '' by default which returns multiple records
-  // if $get is 'one' then one record is retrieved
-  public function where($data, $order = 'DESC', $get = '', $limit = 10, $offset = 0)
+  // if $get is 'first' then one record is retrieved
+  public function where($data, $get = '')
   {
     $keys = array_keys($data);
     $query = "SELECT * FROM " . $this->table . " where ";
@@ -93,10 +96,10 @@ class Model extends Database
 
 
     // if one record is required then limit it
-    if ($get === 'one') {
-      $query .= " ORDER BY id $order LIMIT 1";
+    if ($get === 'first') {
+      $query .= " ORDER BY id $this->order LIMIT 1";
     } else {
-      $query .= " ORDER BY id $order LIMIT $limit";
+      $query .= " ORDER BY id $this->order LIMIT $this->limit OFFSET $this->offset";
     }
 
     // result of query
@@ -113,20 +116,20 @@ class Model extends Database
           $res = $this->$func($res);
         }
       }
-      // $get === 'one' ? ss('$res[0]') : ss('$res');
+      // $get === 'first' ? ss('$res[0]') : ss('$res');
 
 
 
-      // if one record is needed then return first in array
-      return $get === 'one' ? $res[0] : $res;
+      // if first record is needed then return first in array
+      return $get === 'first' ? $res[0] : $res;
     }
 
     return false;
   }
 
-  public function findAll($order = 'ASC')
+  public function findAll()
   {
-    $query = "SELECT * FROM " . $this->table . " ORDER BY ID " . $order;
+    $query = "SELECT * FROM " . $this->table . " ORDER BY ID " . $this->order . " LIMIT " . $this->limit . " OFFSET " . $this->offset;
     $res = $this->query($query);
 
     if (is_array($res)) {
