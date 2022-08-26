@@ -20,6 +20,7 @@ class Category extends Controller
     $data['title'] = "Category";
 
     $query = "SELECT c.*, category, cat.slug as cat_slug FROM `courses` AS c JOIN categories AS cat ON cat.id = c.category_id WHERE cat.slug = :slug";
+
     $data['rows'] = $course->query($query, ['slug' => $slug]);
 
 

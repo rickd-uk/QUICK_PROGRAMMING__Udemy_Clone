@@ -52,6 +52,7 @@ class Model extends Database
     $data = $this->remove_unwanted_cols($data);
 
     $keys = array_keys($data);
+
     // $values = array_values($data);
 
     $query = "INSERT INTO " . $this->table;

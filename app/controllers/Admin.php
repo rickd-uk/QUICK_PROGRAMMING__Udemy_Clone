@@ -334,13 +334,9 @@ class Admin extends Controller
     $data['errors'] = $slider->errors;
     $this->view('admin/slider-images', $data);
   }
-
-
   public function categories($action = null, $id = null)
   {
     Auth::login_to_view();
-    // Get name of current function
-    $cur_function = __FUNCTION__;
 
     $user_id = Auth::getId() ?? null;
     $course = new \Model\Course();
@@ -350,9 +346,6 @@ class Admin extends Controller
     $price = new \Model\Price();
     $currency = new \Model\Currency();
 
-    // Get ul dir using the current function name
-    $img_dir = UL_DIR . $cur_function . '/';
-
     $data = [];
     $data['errors'] = [];
     $data['action'] = $action;
@@ -360,36 +353,19 @@ class Admin extends Controller
 
     // Is the user adding a course
     if ($action == 'add') {
-      $category = new \Model\Category();
-      $data['categories'] = $category->findAll('ASC');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $tab_name = $_POST['tab_name'] ?? '';
-        if ($course->validate($_POST)) {
 
-          // added ?? '' to stop vscode warning 'use of unassigned variable'
-          $user_id = Auth::getId() ?? '';
+        if ($category->validate($_POST)) {
 
-          // DEFAULT data for Categories
-          // Set current date time as default
-          $_POST['date'] = get_date();
-          $_POST['user_id'] = $user_id;
-          // Set price at Free as default
-          $_POST['price_id'] = 1;
+          $_POST['slug'] = str_to_url($_POST['category']);
+          $category->insert($_POST);
 
-          $course->insert($_POST);
-
-          $row = $course->where(['user_id' => $user_id, 'published' => 0], 'first');
-
-          display_message("Your course was successfully created");
-
-          if ($row) {
-            redirect('admin/courses/edit/' . $row->id);
-          } else {
-            redirect('admin/courses');
-          }
+          display_message("Your category was successfully created");
+          redirect('admin/categories');
         }
-        $data['errors'] = $course->errors;
+        $data['errors'] = $category->errors;
+        ss($_POST);
       }
     } elseif ($action == 'delete') {
       $categories = $category->findAll('ASC');
@@ -398,13 +374,13 @@ class Admin extends Controller
       $prices = $price->findAll('ASC');
       $currencies = $currency->findAll('ASC');
 
-      // get course info
-      $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
+      // get category info
+      $data['row'] = $row = $category->where(['user_id' => $user_id, 'id' => $id], 'first');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
-        $course->delete($row->id);
+        $category->delete($row->id);
         display_message('Course delete successfully');
-        redirect('admin/courses');
+        redirect('admin/categories');
       }
     } elseif ($action == 'edit') {
 
@@ -460,7 +436,7 @@ class Admin extends Controller
                 $course->update($id, $_POST);
                 $info['data'] = "Course saved successfully";
                 #TODO: Redirect To add page    
-                //redirect('admin/courses');
+                //redirect('admin/categories');
               } else {
                 $info['errors'] = $course->errors;
                 $info['data'] = "There are some problems";

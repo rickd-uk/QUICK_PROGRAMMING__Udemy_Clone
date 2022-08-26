@@ -12,48 +12,24 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
     <div class="card-body">
       <h5 class="card-title">New Categories</h5>
 
-      <?php isset($_POST['category_id']) &&  show($_POST['category_id']) ?>
-      <!-- No Labels Form -->
       <form method="POST" class="row g-3">
-        <?php csrf() ?>
-        <?php $_POST['tab_name'] = 'course-landing-page' ?>
-
         <div class="col-md-12">
-          <input name="title" type="text" value="<?= set_value('title'); ?>" class="form-control <?= !empty($errors['title']) ? 'border-danger' : ''; ?>" placeholder="Course title">
-          <?php show_error_msg($errors, 'title'); ?>
+          <input name="category" type="text" value="<?= set_value('category'); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
+          <?php show_error_msg($errors, 'category'); ?>
         </div>
 
         <div class="col-md-12">
-          <input name="primary_subject" type="text" value="<?= set_value('primary_subject'); ?>" class="form-control <?= !empty($errors['primary_subject']) ? 'border-danger' : ''; ?>" placeholder="Primary Subject e.g.  Photography, Blogging, etc.">
-          <?php show_error_msg($errors, 'primary_subject'); ?>
-        </div>
-
-
-        <div class="col-md-12">
-          <select name="category_id" id="inputState" class="form-select <?= !empty($errors['category_id']) ? 'border-danger' : ''; ?>">
-
-            <option value="">Course Category...</option>
-            <?php if (!empty($categories)) : ?>
-              <?php foreach ($categories as $cat) : ?>
-                <option value="<?= $cat->id ?>" <?= keep_selected($cat->id, $_POST); ?>><?= esc($cat->category) ?></option>
-              <?php endforeach; ?>
-            <?php endif; ?>
-
+          <select name="disabled" class="form-select">
+            <option value="0" selected="">Yes</option>
+            <option value="1">No</option>
           </select>
-
-          <?php show_error_msg($errors, 'category_id'); ?>
         </div>
-
         <div class="text-center d-flex justify-content-between pt-2">
-
-
 
           <a href="<?= ROOT ?>/admin/courses">
             <button type="button" class="btn btn-secondary">Cancel</button>
           </a>
           <button type="submit" class="btn btn-primary ">Save</button>
-
-
         </div>
       </form><!-- End No Labels Form -->
 
@@ -61,8 +37,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
   </div>
 
 <?php elseif ($action == 'delete') : ?>
-
-
   <div class="card">
     <div class="card-body">
       <h3 class="card-title">Delete Course</h3>
@@ -139,9 +113,9 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">My Courses
+      <h5 class="card-title">My Categories
 
-        <a href="<?= ROOT ?>/admin/courses/add">
+        <a href="<?= ROOT ?>/admin/categories/add">
           <button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i>
             New Category</button>
         </a>
