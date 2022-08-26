@@ -38,15 +38,6 @@ use \Model\Auth;  ?>
   <script src="<?= ROOT ?>/assets/js/main.js"></script>
   <script src="<?= ROOT ?>/assets/js/errors.js"></script>
 
-
-  <!-- <script defer src="<?= ROOT ?>/assets/js/video_ul.js"></script> -->
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.3.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -219,17 +210,18 @@ use \Model\Auth;  ?>
 
         </li><!-- End Messages Nav -->
 
+
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="<?= ROOT ?>/niceadmin/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="<?= ROOT ?>/<?= display_img_from_session() ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2"><?= substr(Auth::getFirstName(), 0, 1) . ". " . Auth::getLastName() ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6><?= Auth::getFirstName() . " " . Auth::getLastName() ?></h6>
-              <span>Web Designer</span>
+              <span><?= get_session_data('job')  ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -298,6 +290,14 @@ use \Model\Auth;  ?>
           <span>My Courses</span>
         </a>
       </li><!-- End Profile Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " href="<?= ROOT ?>/admin/categories">
+          <i class="bi bi-list"></i>
+          <span>Categories</span>
+        </a>
+      </li><!-- End Profile Nav -->
+
 
       <li class="nav-item">
         <a class="nav-link " href="<?= ROOT ?>/admin/lessons">

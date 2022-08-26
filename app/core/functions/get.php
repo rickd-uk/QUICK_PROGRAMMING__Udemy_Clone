@@ -14,3 +14,8 @@ function get_categories($id = null)
   $category->limit = 20;
   return $data['categories'] = $category->where(['disabled' => 0]);
 }
+
+function get_session_data($index, $root = 'USER_DATA')
+{
+  return $_SESSION[$root]->$index;
+}

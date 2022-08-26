@@ -21,7 +21,7 @@ function set_courses_tab(div) {
 function show_tab(tab_name) {
 	// show loader while waitings
 	var contentDiv = document.querySelector('#tabs-content')
-	show_loader(contentDiv)
+	contentDiv && show_loader(contentDiv)
 
 	//change active tab
 	var div = document.querySelector('#' + tab_name)
@@ -114,11 +114,13 @@ function get_course_data(obj) {
 	ajax.send(myform)
 }
 
+console.log(window.location.href)
+
 function show_loader(item) {
 	item.innerHTML = '<img class="loader" src="<?=ROOT?>/assets/images/loader.gif">'
 }
 
-show_tab(tab_courses)
+// show_tab(tab_courses)
 
 // ======================================================
 // SAVE

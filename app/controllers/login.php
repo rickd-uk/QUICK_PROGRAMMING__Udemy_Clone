@@ -28,6 +28,9 @@ class Login extends Controller
         if (password_verify($_POST['password'], $row->password)) {
           //authenticate
           Auth::authenticate($row);
+          unset($row->password);
+
+          $_SESSION['USER_DATA']->image = $row->image;
 
           redirect('home');
         }

@@ -5,6 +5,8 @@ use \Controller\Controller;
 Controller::view_static('admin/header', $data);
 Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
 
+
+
 <?php if (!empty($row)) : ?>
   <section class="section profile">
     <div class="row">
@@ -13,7 +15,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="<?= ROOT ?>/<?= USERS_UL_DIR . display($row, 'image') ?>" style="" alt="Profile" class="profile-image rounded-circle">
+            <img src="<?= ROOT ?>/<?= display_img($row, 'image') ?>" style="" alt="Profile" class="profile-image rounded-circle">
             <h2><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></h2>
             <h3><?= display($row, 'role') ?></h3>
             <div class="social-links mt-2">
@@ -109,7 +111,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
 
 
                       <div class="d-flex">
-                        <img class="js-image-preview" src="<?= ROOT ?>/<?= USERS_UL_DIR . display($row, 'image') ?>" alt="Profile" style="width:200px; max-width: 200px; height: 200px; object-fit: cover">
+                        <img class="js-image-preview" src="<?= ROOT ?>/<?= display_img($row, 'image') ?>" alt="Profile" style="width:200px; max-width: 200px; height: 200px; object-fit: cover">
                         <!-- <div class="js-filename m-2">Selected File: None</div> -->
                       </div>
 
@@ -159,7 +161,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
                   <div class="row mb-3">
                     <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="job" type="text" class="form-control" id="job" vvalue="<?= set_value('job', $row->job) ?>">
+                      <input name="job" type="text" class="form-control" id="job" value="<?= set_value('job', $row->job) ?>">
                     </div>
                   </div>
 

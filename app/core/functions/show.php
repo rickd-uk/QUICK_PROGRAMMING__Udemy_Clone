@@ -34,6 +34,22 @@ function display($row, $field)
   return esc($row->$field);
 }
 
+function display_img($row, $field)
+{
+  return esc(USERS_UL_DIR . $row->$field ?? DEFAULT_PROFILE_IMG);
+}
+
+function display_img_from_session()
+{
+  $img = get_session_data('image');
+  if ($img) {
+    return esc(USERS_UL_DIR . $img ?? DEFAULT_PROFILE_IMG);
+  }
+  return DEFAULT_PROFILE_IMG;
+}
+
+
+
 
 function show_error_msg($errors, $field)
 {

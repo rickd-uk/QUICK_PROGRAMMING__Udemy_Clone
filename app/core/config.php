@@ -23,6 +23,8 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
   define('USERS_UL_DIR', 'uploads/users/');
   define('COURSES_UL_DIR', 'uploads/courses/');
   define('SLIDER_IMG_UL_DIR', 'uploads/slider_images/');
+
+  define('DEFAULT_PROFILE_IMG', '/assets/images/default_profile.jpg');
 } else {
 
   // db config for web host
