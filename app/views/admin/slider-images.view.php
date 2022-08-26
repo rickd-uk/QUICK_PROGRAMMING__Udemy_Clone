@@ -6,6 +6,7 @@ Controller::view_static('admin/header', $data);
 Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
 
 
+
 <section class="section slider-images">
   <div class="row">
 
@@ -39,7 +40,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                   <div class="col-md-8 col-lg-9">
                     <div class="d-flex ">
 
-                      <img class="js-image-preview" src="<?= get_image($rows[1]->image ?? '', 'slider_images')  ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover background-color: red;" />
+                      <img id="slider-img-1" class="js-image-preview" src="<?= get_image($rows[1]->image ?? '', 'slider_images')  ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover background-color: red;" />
                       <div class="js-filename m-2"></div>
                     </div>
 
@@ -83,7 +84,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <button type="button" class="btn btn-primary float-start">Back</button>
                   </a>
 
-                  <button type="button" onclick="save_slider_images(event, 1)" class="btn btn-danger float-end">Save Changes</button>
+                  <button type="button" onclick="save_slider_images(event, 1, img[0])" class="btn btn-danger float-end">Save Changes</button>
                 </div>
               </form><!-- End slider-images Edit Form -->
 
@@ -97,7 +98,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                   <div class="col-md-8 col-lg-9">
                     <div class="d-flex ">
 
-                      <img class="js-image-preview" src="<?= get_image($rows[2]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
+                      <img id="slider-img-2" class="js-image-preview" src="<?= get_image($rows[2]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
                       <div class="js-filename m-2"></div>
                     </div>
 
@@ -141,7 +142,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <button type="button" class="btn btn-primary float-start">Back</button>
                   </a>
 
-                  <button type="button" onclick="save_slider_images(event, 2)" class="btn btn-danger float-end">Save Changes</button>
+                  <button type="button" onclick="save_slider_images(event, 2, img[1])" class="btn btn-danger float-end">Save Changes</button>
                 </div>
               </form><!-- End slider-images Edit Form -->
 
@@ -154,7 +155,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                   <div class="col-md-8 col-lg-9">
                     <div class="d-flex ">
 
-                      <img class="js-image-preview" src="<?= get_image($rows[3]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
+                      <img id="slider-img-3" class="js-image-preview" src="<?= get_image($rows[3]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
                       <div class="js-filename m-2"></div>
                     </div>
 
@@ -198,7 +199,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <button type="button" class="btn btn-primary float-start">Back</button>
                   </a>
 
-                  <button type="button" onclick="save_slider_images(event, 3)" class="btn btn-danger float-end">Save Changes</button>
+                  <button type="button" onclick="save_slider_images(event, 3, img[2])" class="btn btn-danger float-end">Save Changes</button>
                 </div>
               </form><!-- End slider-images Edit Form -->
 
@@ -211,7 +212,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                   <div class="col-md-8 col-lg-9">
                     <div class="d-flex ">
 
-                      <img class="js-image-preview" src="<?= get_image($rows[4]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
+                      <img id="slider-img-4" class="js-image-preview" src="<?= get_image($rows[4]->image ?? '', 'slider_images') ?>" alt="slider-images" style="min-width: 100%; height: 300px; object-fit: cover" />
                       <div class="js-filename m-2"></div>
                     </div>
 
@@ -255,7 +256,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
                     <button type="button" class="btn btn-primary float-start">Back</button>
                   </a>
 
-                  <button type="button" onclick="save_slider_images(event, 4)" class="btn btn-danger float-end">Save Changes</button>
+                  <button type="button" onclick="save_slider_images(event, 4, img[3])" class="btn btn-danger float-end">Save Changes</button>
                 </div>
               </form><!-- End slider-images Edit Form -->
 
@@ -272,7 +273,8 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Slider Images') ?>
 </section>
 
 <script src="<?= ROOT ?>/assets/js/slider-images.js"></script>
-<script src="<?= ROOT ?>/assets/js/ajax.js" />
+<script src="<?= ROOT ?>/assets/js/ajax.js"></script>
+
 
 
 

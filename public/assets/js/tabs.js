@@ -2,6 +2,8 @@ var tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem
 
 var dirty = false
 
+set_tab()
+
 function set_courses_tab(div) {
 	if (dirty) {
 		//ask user to save when switching tabs

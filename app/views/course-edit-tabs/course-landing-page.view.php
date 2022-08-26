@@ -1,3 +1,7 @@
+<?php
+
+use \Controller\Controller; ?>
+
 <form>
   <div class="col-md-8 mx-auto" style="padding-top: 40px">
     <?php csrf() ?>

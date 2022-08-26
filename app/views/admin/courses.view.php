@@ -95,6 +95,8 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 
 	<link href="<?= ROOT ?>/assets/css/courses.css?<?= get_date() ?>" rel="stylesheet">
 
+
+
 	<div class="card">
 		<div class="card-body">
 			<h3 class="card-title">Edit Course</h3>
@@ -125,12 +127,13 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 			<?php else : ?>
 				<div>That course was not found</div>
 			<?php endif; ?>
+
+
 		</div>
 	</div>
 
 
 
-	<script src="<?= ROOT ?>/assets/js/video_ul.js?324" />
 
 <?php else : ?>
 
@@ -158,6 +161,8 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 						<th scope="col">Action</th>
 					</tr>
 				</thead>
+
+
 
 				<?php if (!empty($rows)) : ?>
 					<tbody>
@@ -198,11 +203,9 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 
 
 
-<script>
-	set_tab()
-</script>
+<script src="<?= ROOT ?>/assets/js/tabs.js"></script>
+<script src="<?= ROOT ?>/assets/js/save.js"></script>
+<script src="<?= ROOT ?>/assets/js/video_ul.js?324"></script>
 
-<script src="<?= ROOT ?>/assets/js/tabs.js?" />
-<script src="<?= ROOT ?>/assets/js/save.js?" />
 
 <?php Controller::view_static('admin/footer') ?>

@@ -7,7 +7,7 @@ use \Database;
 class Model extends Database
 {
   public $order = 'DESC';
-  public $limit = 10;
+  public $limit = 200;
   public $offset = 0;
   protected $table = "";
 
@@ -142,5 +142,14 @@ class Model extends Database
       return $res;
     }
     return false;
+  }
+
+
+  public function delete(int $id): bool
+  {
+    $query = "DELETE FROM " . $this->table . " WHERE id = :id LIMIT 1";
+    $this->query($query, ['id' => $id]);
+
+    return true;
   }
 }

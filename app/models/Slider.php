@@ -14,13 +14,13 @@ class Slider extends Model
     'id', 'image', 'title', 'description', 'disabled'
   ];
 
-  public function validate($data)
+  public function validate($data, $id, $img_empty)
   {
     $this->errors = [];
 
     $this->validate_empty($data, 'title');
     $this->validate_empty($data, 'description');
-    $this->validate_empty($data, 'image');
+    $img_empty && $this->validate_empty($data, 'image');
 
     if (empty($this->errors)) {
       return true;

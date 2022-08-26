@@ -38,6 +38,7 @@ use \Model\Auth;  ?>
   <script src="<?= ROOT ?>/assets/js/main.js"></script>
   <script src="<?= ROOT ?>/assets/js/errors.js"></script>
 
+
   <!-- <script defer src="<?= ROOT ?>/assets/js/video_ul.js"></script> -->
 
   <!-- =======================================================

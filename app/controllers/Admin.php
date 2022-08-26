@@ -136,11 +136,11 @@ class Admin extends Controller
         $data['errors'] = $course->errors;
       }
     } elseif ($action == 'delete') {
-      // $categories = $category->findAll('ASC');
-      // $languages = $language->findAll('ASC');
-      // $levels = $level->findAll('ASC');
-      // $prices = $price->findAll('ASC');
-      // $currencies = $currency->findAll('ASC');
+      $categories = $category->findAll('ASC');
+      $languages = $language->findAll('ASC');
+      $levels = $level->findAll('ASC');
+      $prices = $price->findAll('ASC');
+      $currencies = $currency->findAll('ASC');
 
       // get course info
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
@@ -152,11 +152,12 @@ class Admin extends Controller
       }
     } elseif ($action == 'edit') {
 
-      // $categories = $category->findAll('ASC');
-      // $languages = $language->findAll('ASC');
-      // $levels = $level->findAll('ASC');
-      // $prices = $price->findAll('ASC');
-      // $currencies = $currency->findAll('ASC');
+      $categories = $category->findAll('ASC');
+      $languages = $language->findAll('ASC');
+      $levels = $level->findAll('ASC');
+      $prices = $price->findAll('ASC');
+      $currencies = $currency->findAll('ASC');
+
 
       // get course info
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
@@ -187,8 +188,6 @@ class Admin extends Controller
 
                 // Check there is temp image, that the path exists and CSRF codes match (i.e. legitimate request)
                 if ($tmp_img != '' && file_exists($tmp_img_path) && $row->csrf_code == $_POST['csrf_code']) {
-
-
 
                   // Remove course image if it exists
                   if ($row->course_image && file_exists($course_img_path)) {
@@ -233,6 +232,12 @@ class Admin extends Controller
     $this->view('admin/courses', $data);
   }
 
+  private static function check_for_img($row)
+  {
+    //Checks whether there is an image already in the db
+    if (empty($row->image)) return true;
+    return false;
+  }
 
   public function slider_images()
   {
@@ -244,7 +249,6 @@ class Admin extends Controller
     $slider = new Slider();
     $data['rows'] = [];
     $rows = $slider->where(['disabled' => 0]);
-
 
     if ($rows) {
       foreach ($rows as $key => $obj) {
@@ -260,7 +264,6 @@ class Admin extends Controller
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       $allowed = ['image/jpeg', 'image/png', 'image/webp'];
       $filename = '';
-
 
       if (!empty($_FILES['image']['name'])) {
         $filename = time() . $_FILES['image']['name'];
@@ -281,9 +284,10 @@ class Admin extends Controller
         }
       }
 
+      $img_empty = Admin::check_for_img($row);
 
 
-      if ($slider->validate($_POST, $id)) {
+      if ($slider->validate($_POST, $id, $img_empty)) {
         // $path is slider dir & filename
 
         // If there is a filename

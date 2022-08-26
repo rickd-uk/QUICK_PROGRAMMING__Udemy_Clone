@@ -1,6 +1,19 @@
 let tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : '#slider-images-overview'
 let uploading = false
 
+function find_images_in_class(class_to_find, placeholder_name) {
+	var slider_images_src = []
+
+	sl1 = document.querySelectorAll(class_to_find)
+	sl1.forEach((el) => {
+		img_name = el.src.split('/').at(-1).split('.').at(-2)
+		slider_images_src.push(img_name == placeholder_name ? false : true)
+	})
+	return slider_images_src
+}
+
+img = find_images_in_class('.js-image-preview', 'image_placeholder')
+
 // function show_tab(tab_name) {
 // 	const someTabTriggerEl = document.querySelector(tab_name + '-tab')
 // 	const tab = new bootstrap.Tab(someTabTriggerEl)
@@ -11,7 +24,6 @@ function set_tab(tab_name) {
 	tab = tab_name
 	sessionStorage.setItem('tab', tab_name)
 }
-
 function load_image(e, file) {
 	// Show file name - !! Not Necessary now, but keep for future
 	//document.querySelector('.js-filename').innerHTML = 'Select Files:' + file.name
@@ -22,13 +34,12 @@ function load_image(e, file) {
 	const mylink = window.URL.createObjectURL(file)
 	form.querySelector('.js-image-preview').src = mylink
 }
-
 // window.onload = function () {
 // 	show_tab(tab)
 // }
 
 // upload functions
-function save_slider_images(e, id) {
+function save_slider_images(e, id, img_set) {
 	if (uploading) {
 		alert('Please wait for other image to finish uploading')
 		return
@@ -71,11 +82,12 @@ function save_slider_images(e, id) {
 			return
 		}
 	} else {
-		//TODO: Validate no image set
-		obj.image = ''
-		document.querySelector('.js-error-image').innerHTML = 'An image is required'
+		if (!img_set) {
+			document.querySelector('.js-error-image').innerHTML = 'An image is required'
+		} else {
+			obj.img = ''
+		}
 	}
-	console.log(obj)
 
 	// validate
 	if (obj.title == '') {
@@ -102,7 +114,13 @@ function save_slider_images(e, id) {
 function handle_result(result) {
 	console.log(result)
 
-	let obj = JSON.parse(result)
+	try {
+		let obj = JSON.parse(result)
+	} catch (error) {
+		console.error(error)
+		return
+	}
+
 	if (typeof obj == 'object') {
 		// object was created
 		if (typeof obj.errors == 'object') {
@@ -118,3 +136,5 @@ function handle_result(result) {
 		}
 	}
 }
+
+console.log(uploading)

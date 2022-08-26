@@ -27,6 +27,8 @@
 <!-- Template Main JS File -->
 <script src="<?= ROOT ?>/niceadmin/assets/js/main.js"></script>
 
+
+
 </body>
 
 </html>
