@@ -23,7 +23,6 @@ class Category extends Controller
 
     $data['rows'] = $course->query($query, ['slug' => $slug]);
 
-
     if ($data['rows']) {
       $data['first_row'] = $data['rows'][0];
       // Remove first post so it won't be repeated

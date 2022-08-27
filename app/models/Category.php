@@ -18,12 +18,9 @@ class Category extends Model
   {
     $this->errors = [];
 
-    if (empty($data['category'])) {
-      $this->errors['category'] = "Enter category";
-    } else
-    if (!preg_match("/^[a-zA-Z ]+$/", trim($data['category']))) {
-      $this->errors['category'] = "Category can only have letters and spaces";
-    }
+    $this->validate_empty($data, 'category', 'Enter course title')
+      || $this->validate_text($data, 'category', "/^[a-zA-Z ']+$/", "Course titles can only have letters, spaces and '_'");
+
     if (empty($this->errors)) {
       return true;
     }

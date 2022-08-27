@@ -89,6 +89,7 @@ class Model extends Database
     $query = "SELECT * FROM " . $this->table . " where ";
 
 
+
     // add the keys to build the wuery
     foreach ($keys as $key) {
       $query .= $key . "=:" . $key . " && ";
@@ -104,6 +105,7 @@ class Model extends Database
       $query .= " ORDER BY id $this->order LIMIT $this->limit OFFSET $this->offset";
     }
 
+
     // result of query
     $res = $this->query($query, $data);
 
@@ -118,17 +120,19 @@ class Model extends Database
           $res = $this->$func($res);
         }
       }
+
       // $get === 'first' ? ss('$res[0]') : ss('$res');
       // if first record is needed then return first in array
       return $get === 'first' ? $res[0] : $res;
     }
 
+
     return false;
   }
 
-  public function findAll()
+  public function findAll($order =  'DESC')
   {
-    $query = "SELECT * FROM " . $this->table . " ORDER BY ID " . $this->order . " LIMIT " . $this->limit . " OFFSET " . $this->offset;
+    $query = "SELECT * FROM " . $this->table . " ORDER BY ID " . $order . " LIMIT " . $this->limit . " OFFSET " . $this->offset;
     $res = $this->query($query);
 
     if (is_array($res)) {

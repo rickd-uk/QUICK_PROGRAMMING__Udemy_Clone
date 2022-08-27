@@ -368,98 +368,31 @@ class Admin extends Controller
         ss($_POST);
       }
     } elseif ($action == 'delete') {
-      $categories = $category->findAll('ASC');
-      $languages = $language->findAll('ASC');
-      $levels = $level->findAll('ASC');
-      $prices = $price->findAll('ASC');
-      $currencies = $currency->findAll('ASC');
-
-      // get category info
-      $data['row'] = $row = $category->where(['user_id' => $user_id, 'id' => $id], 'first');
+      // Get category info
+      $data['row'] = $row = $category->where(['id' => $id], 'first');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         $category->delete($row->id);
-        display_message('Course delete successfully');
+        display_message("Your category was successfully deleted");
         redirect('admin/categories');
       }
+      $data['errors'] = $category->errors;
     } elseif ($action == 'edit') {
-
-      $categories = $category->findAll('ASC');
-      $languages = $language->findAll('ASC');
-      $levels = $level->findAll('ASC');
-      $prices = $price->findAll('ASC');
-      $currencies = $currency->findAll('ASC');
-
-
-      // get course info
-      $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
-
-
+      // Get category info
+      $data['row'] = $row = $category->where(['id' => $id], 'first');
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
-        $tab_name = $_POST['tab_name'];
+        if ($category->validate($_POST)) {
+          $category->update($row->id, $_POST);
 
-        if (Admin::is_data_type($_POST, 'read')) {
-          if ($tab_name == "course-landing-page") {
-            // Return course landing page data
-            include views_path("course-edit-tabs/course-landing-page");
-          } else if ($tab_name == "course-messages") {
-            // Return course landing page data
-            include views_path("course-edit-tabs/course-messages");
-          }
-        } else
-          // Save course landing page data
-          if ($this->is_data_type($_POST, 'save')) {
-
-            // Check if form is valid
-            if ($_SESSION['csrf_code'] == $_POST['csrf_code']) {
-              if ($course->edit_validate($_POST, $id, $_POST['tab_name'])) {
-                $tmp_img = $row->course_image_tmp;
-                $tmp_img_path = $img_dir . $tmp_img;
-                $course_img_path = $img_dir . $row->course_image;
-
-                // Check there is temp image, that the path exists and CSRF codes match (i.e. legitimate request)
-                if ($tmp_img != '' && file_exists($tmp_img_path) && $row->csrf_code == $_POST['csrf_code']) {
-
-                  // Remove course image if it exists
-                  if ($row->course_image && file_exists($course_img_path)) {
-                    unlink($course_img_path);
-                  }
-
-
-                  // Set course image and remove ref to temp image, effectively tmp_img -> course_img transfer
-                  $_POST['course_image'] = $tmp_img;
-                  $_POST['course_image_tmp'] = '';
-                }
-
-                // Update the course info
-                $course->update($id, $_POST);
-                $info['data'] = "Course saved successfully";
-                #TODO: Redirect To add page    
-                //redirect('admin/categories');
-              } else {
-                $info['errors'] = $course->errors;
-                $info['data'] = "There are some problems";
-              }
-            } else {
-              $info['errors'] = ['key' => 'value'];
-              $info['data'] = 'This form is not valid';
-              $info['data_type'] = $_POST['data_type'];
-            } // csrf_codes DO NOT MATCH!
-            $info['data_type'] = "save";
-            echo json_encode($info);
-          }
-          // Upload Course Image
-          else
-          if ($this->is_data_type($_POST, 'upload_course_image')) {
-            Admin::upload_course_image($id, $row, $course, $img_dir);
-            $course;
-          }
-        die;
+          display_message("Your category was successfully edited");
+          redirect('admin/categories');
+        }
+        $data['errors'] = $category->errors;
       }
     } else {
       // category view
-      $data['rows'] = $category->where(['disabled' => 0]);
+      $data['rows'] = $category->findAll();
     }
     $this->view('admin/categories', $data);
   }

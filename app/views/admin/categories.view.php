@@ -26,7 +26,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
         </div>
         <div class="text-center d-flex justify-content-between pt-2">
 
-          <a href="<?= ROOT ?>/admin/courses">
+          <a href="<?= ROOT ?>/admin/categories">
             <button type="button" class="btn btn-secondary">Cancel</button>
           </a>
           <button type="submit" class="btn btn-primary ">Save</button>
@@ -39,28 +39,31 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 <?php elseif ($action == 'delete') : ?>
   <div class="card">
     <div class="card-body">
-      <h3 class="card-title">Delete Course</h3>
+      <h3 class="card-title">Delete category</h3>
       <h5 class="alert alert-danger text-center">Are you sure you want to delete?</h5>
 
-      <h5 class="">Course Title: <?= esc($row->title) ?></h5>
-      <h5 class="">Primary Subject: <?= esc($row->primary_subject) ?></h5>
-      <h5 class="">Category: <?= esc($row->category_row->category) ?></h5>
-      <h5 class="">Date: <?= format_date($row->date) ?></h5>
-
       <?php if (!empty($row)) : ?>
-        <form method="POST">
-          <a href="<?= ROOT ?>/admin/courses">
-            <button class=" btn btn-primary float-start">Back</button>
-          </a>
-          <button class=" btn btn-danger float-end">Delete</button>
-    </div>
+        <form method="POST" class="row g-3">
+          <div class="col-md-12">
+            <b>Category: </b><?= set_value('category', $row->category); ?>
+          </div>
+          <div class="col-md-12">
+            <b>Active:</b> <?= set_value('disabled', $row->disabled ? 'No' : 'Yes') ?>
+          </div>
 
-    </form>
-    <div class="my-5">
 
-    <?php else : ?>
-      <div>That course was not found</div>
-    <?php endif; ?>
+          <div class="text-center d-flex justify-content-between pt-2">
+
+            <a href="<?= ROOT ?>/admin/categories">
+              <button type="button" class="btn btn-primary">Back</button>
+            </a>
+            <button type="submit" class="btn btn-danger ">Delete</button>
+          </div>
+        </form><!-- End No Labels Form -->
+
+      <?php else : ?>
+        <div>That course was not found</div>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -69,40 +72,34 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 
   <link href="<?= ROOT ?>/assets/css/courses.css?<?= get_date() ?>" rel="stylesheet">
 
-
-
   <div class="card">
     <div class="card-body">
       <h3 class="card-title">Edit Course</h3>
       <?php if (!empty($row)) : ?>
-        <h5 class="card-title"><?= esc($row->title) ?></h5>
 
-        <!-- Tabs -->
-        <div class="tabs-holder">
-          <div onclick="set_courses_tab(this)" id="intended-learners" class="my-tab active-tab">Intended Learners</div>
-          <div onclick="set_courses_tab(this)" id="curriculum" class="my-tab">Curriculum</div>
-          <div onclick="set_courses_tab(this)" id="course-landing-page" class="my-tab">Course Landing Page</div>
-          <div onclick="set_courses_tab(this)" id="promotions" class="my-tab">Promotions</div>
-          <div onclick="set_courses_tab(this)" id="course-messages" class="my-tab">Course Messages</div>
-        </div>
-        <!-- end tabs -->
-        <div oninput="something_changed(event)">
-          <div id="tabs-content">
-            <img class="loader" src="<?= ROOT ?>/assets/images/loader.gif">
+        <form method="POST" class="row g-3">
+          <div class="col-md-12">
+            <input name="category" type="text" value="<?= set_value('category', $row->category); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
+            <?php show_error_msg($errors, 'category'); ?>
           </div>
-        </div>
 
-        <div class="my-5">
-          <a href="<?= ROOT ?>/admin/courses">
-            <button class=" btn btn-primary float-start">Back</button>
-          </a>
-          <button onclick="save_content()" class="js-save-btn btn btn-success float-end disabled">Save</button>
-        </div>
+          <div class="col-md-12">
+            <select name="disabled" class="form-select">
+              <option <?= set_selected('disabled', '0', $row->disabled) ?>value="0" selected="">Yes</option>
+              <option <?= set_selected('disabled', '1', $row->disabled) ?>value="1">No</option>
+            </select>
+          </div>
+          <div class="text-center d-flex justify-content-between pt-2">
+
+            <a href="<?= ROOT ?>/admin/categories">
+              <button type="button" class="btn btn-secondary">Cancel</button>
+            </a>
+            <button type="submit" class="btn btn-primary ">Save</button>
+          </div>
+        </form><!-- End No Labels Form -->
       <?php else : ?>
         <div>That course was not found</div>
       <?php endif; ?>
-
-
     </div>
   </div>
 
@@ -144,11 +141,11 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
                 <td><?= esc($row->slug ?? 'Unknown') ?></td>
 
                 <td>
-                  <a href="<?= ROOT ?>/admin/courses/edit/<?= $row->id ?>">
+                  <a href="<?= ROOT ?>/admin/categories/edit/<?= $row->id ?>">
                     <i class="bi bi-pencil-square text-primary"></i>
                   </a>
                   &nbsp;&nbsp;
-                  <a href="<?= ROOT ?>/admin/courses/delete/<?= $row->id ?>">
+                  <a href="<?= ROOT ?>/admin/categories/delete/<?= $row->id ?>">
                     <i class="bi bi-trash-fill text-danger"></i>
                   </a>
                 </td>
@@ -170,8 +167,8 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 
 
 
-<script src="<?= ROOT ?>/assets/js/tabs.js"></script>
-<script src="<?= ROOT ?>/assets/js/save.js"></script>
+<!-- <script src="<?= ROOT ?>/assets/js/tabs.js"></script>
+<script src="<?= ROOT ?>/assets/js/save.js"></script> -->
 <!-- <script src="<?= ROOT ?>/assets/js/video_ul.js?324"></script> -->
 
 
