@@ -15,6 +15,8 @@ class Home extends Controller
 {
   public function index()
   {
+
+    ss(env('TEST2'));
     // Create table & Insert data (ONLY FOR TESTING)
     // create_table('new');
     // create_data('new');
