@@ -5,33 +5,45 @@ use \Controller\Controller;
 Controller::view_static('admin/header', $data);
 Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 ?>
-
-
 <?php if ($action == 'add') : ?>
   <div class="card col-md-5 mx-auto">
     <div class="card-body">
-      <h5 class="card-title">New Categories</h5>
+      <h5 class="card-title">New Category</h5>
 
-      <form method="POST" class="row g-3">
+      <?php if (user_can('add_categories')) : ?>
+        <form method="POST" class="row g-3">
+          <div class="col-md-12">
+            <input name="category" type="text" value="<?= set_value('category'); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
+            <?php show_error_msg($errors, 'category'); ?>
+          </div>
+
+          <div class="col-md-12">
+            <select name="disabled" class="form-select">
+              <option value="0" selected="">Yes</option>
+              <option value="1">No</option>
+            </select>
+          </div>
+          <div class="text-center d-flex justify-content-between pt-2">
+            <a href="<?= ROOT ?>/admin/categories">
+              <button type="button" class="btn btn-secondary">Cancel</button>
+            </a>
+            <button type="submit" class="btn btn-primary ">Save</button>
+          </div>
+        </form><!-- End No Labels Form -->
+      <?php else : ?>
         <div class="col-md-12">
-          <input name="category" type="text" value="<?= set_value('category'); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
-          <?php show_error_msg($errors, 'category'); ?>
+          <div class="alert alert-danger text-center">You don't have permission!</div>
+
+          <div class="text-center d-flex justify-content-between pt-2">
+
+            <a href="<?= ROOT ?>/admin/categories">
+              <button type="button" class="btn btn-secondary">Back</button>
+            </a>
+
+          </div>
         </div>
 
-        <div class="col-md-12">
-          <select name="disabled" class="form-select">
-            <option value="0" selected="">Yes</option>
-            <option value="1">No</option>
-          </select>
-        </div>
-        <div class="text-center d-flex justify-content-between pt-2">
-
-          <a href="<?= ROOT ?>/admin/categories">
-            <button type="button" class="btn btn-secondary">Cancel</button>
-          </a>
-          <button type="submit" class="btn btn-primary ">Save</button>
-        </div>
-      </form><!-- End No Labels Form -->
+      <?php endif; ?>
 
     </div>
   </div>
@@ -40,30 +52,43 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
   <div class="card">
     <div class="card-body">
       <h3 class="card-title">Delete category</h3>
-      <h5 class="alert alert-danger text-center">Are you sure you want to delete?</h5>
 
-      <?php if (!empty($row)) : ?>
-        <form method="POST" class="row g-3">
-          <div class="col-md-12">
-            <b>Category: </b><?= set_value('category', $row->category); ?>
-          </div>
-          <div class="col-md-12">
-            <b>Active:</b> <?= set_value('disabled', $row->disabled ? 'No' : 'Yes') ?>
-          </div>
+      <?php if (user_can('delete_categories')) : ?>
+        <h5 class="alert alert-danger text-center">Are you sure you want to delete?</h5>
+
+        <?php if (!empty($row)) : ?>
+          <form method="POST" class="row g-3">
+            <div class="col-md-12">
+              <b>Category: </b><?= set_value('category', $row->category); ?>
+            </div>
+            <div class="col-md-12">
+              <b>Active:</b> <?= set_value('disabled', $row->disabled ? 'No' : 'Yes') ?>
+            </div>
 
 
-          <div class="text-center d-flex justify-content-between pt-2">
+            <div class="text-center d-flex justify-content-between pt-2">
 
-            <a href="<?= ROOT ?>/admin/categories">
-              <button type="button" class="btn btn-primary">Back</button>
-            </a>
-            <button type="submit" class="btn btn-danger ">Delete</button>
-          </div>
-        </form><!-- End No Labels Form -->
+              <a href="<?= ROOT ?>/admin/categories">
+                <button type="button" class="btn btn-primary">Back</button>
+              </a>
+              <button type="submit" class="btn btn-danger ">Delete</button>
+            </div>
+          </form><!-- End No Labels Form -->
+        <?php else : ?>
+          <div>That course was not found</div>
+        <?php endif; ?>
 
       <?php else : ?>
-        <div>That course was not found</div>
+        <div class="alert alert-danger text-center">You don't have permission!</div>
+        <div class="text-center d-flex justify-content-between pt-2">
+          <a href="<?= ROOT ?>/admin/categories">
+            <button type="button" class="btn btn-primary">Back</button>
+          </a>
+
+        </div>
       <?php endif; ?>
+
+
     </div>
   </div>
 
@@ -75,31 +100,48 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
   <div class="card">
     <div class="card-body">
       <h3 class="card-title">Edit Course</h3>
+
       <?php if (!empty($row)) : ?>
 
-        <form method="POST" class="row g-3">
-          <div class="col-md-12">
-            <input name="category" type="text" value="<?= set_value('category', $row->category); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
-            <?php show_error_msg($errors, 'category'); ?>
-          </div>
+        <?php if (user_can('edit_categories')) : ?>
 
-          <div class="col-md-12">
-            <select name="disabled" class="form-select">
-              <option <?= set_selected('disabled', '0', $row->disabled) ?>value="0" selected="">Yes</option>
-              <option <?= set_selected('disabled', '1', $row->disabled) ?>value="1">No</option>
-            </select>
-          </div>
+          <form method="POST" class="row g-3">
+            <div class="col-md-12">
+              <input name="category" type="text" value="<?= set_value('category', $row->category); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
+              <?php show_error_msg($errors, 'category'); ?>
+            </div>
+
+            <div class="col-md-12">
+              <select name="disabled" class="form-select">
+                <option <?= set_selected('disabled', '0', $row->disabled) ?>value="0" selected="">Yes</option>
+                <option <?= set_selected('disabled', '1', $row->disabled) ?>value="1">No</option>
+              </select>
+            </div>
+            <div class="text-center d-flex justify-content-between pt-2">
+
+              <a href="<?= ROOT ?>/admin/categories">
+                <button type="button" class="btn btn-secondary">Cancel</button>
+              </a>
+              <button type="submit" class="btn btn-primary ">Save</button>
+            </div>
+          </form><!-- End No Labels Form -->
+
+        <?php else : ?>
+          <div class="alert alert-danger text-center">You don't have permission!</div>
           <div class="text-center d-flex justify-content-between pt-2">
-
             <a href="<?= ROOT ?>/admin/categories">
-              <button type="button" class="btn btn-secondary">Cancel</button>
+              <button type="button" class="btn btn-primary">Back</button>
             </a>
-            <button type="submit" class="btn btn-primary ">Save</button>
+
           </div>
-        </form><!-- End No Labels Form -->
+        <?php endif; ?>
+
+
       <?php else : ?>
         <div>That course was not found</div>
       <?php endif; ?>
+
+
     </div>
   </div>
 

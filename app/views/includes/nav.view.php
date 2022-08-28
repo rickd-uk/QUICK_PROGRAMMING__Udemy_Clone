@@ -6,9 +6,10 @@ $categories = get_categories();
 
 // make_slug_for_categories();
 ?>
+
 <!-- ======= Header ======= -->
-<header id="header" class="header d-flex align-items-center fixed-top">
-  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<header id="header" class="header d-flex align-items-center fixed-top ">
+  <div class="container-fluid container-xl d-flex align-items-end justify-content-between">
 
     <a href="<?= ROOT ?>" class="logo d-flex align-items-center">
       <!-- Uncomment the line below if you also wish to use an image logo -->
@@ -16,7 +17,7 @@ $categories = get_categories();
       <h1><?= APP_NAME ?></h1>
     </a>
 
-    <nav id="navbar" class="navbar">
+    <nav id="navbar" class="navbar navbar-expand-sm ">
       <ul>
         <li><a href="<?= ROOT ?>">Blog</a></li>
         <li><a href="single-post">Single Post</a></li>

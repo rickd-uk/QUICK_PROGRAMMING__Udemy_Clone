@@ -203,7 +203,7 @@ class Admin extends Controller
                 // Update the course info
                 $course->update($id, $_POST);
                 $info['data'] = "Course saved successfully";
-                #TODO: Redirect To add page    
+                #TODO: Redirect To add page
                 //redirect('admin/courses');
               } else {
                 $info['errors'] = $course->errors;
@@ -339,12 +339,7 @@ class Admin extends Controller
     Auth::login_to_view();
 
     $user_id = Auth::getId() ?? null;
-    $course = new \Model\Course();
     $category = new \Model\Category();
-    $language = new \Model\Language();
-    $level = new \Model\Level();
-    $price = new \Model\Price();
-    $currency = new \Model\Currency();
 
     $data = [];
     $data['errors'] = [];
@@ -355,17 +350,18 @@ class Admin extends Controller
     if ($action == 'add') {
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (user_can('add_categories')) {
+          if ($category->validate($_POST)) {
+            $_POST['slug'] = str_to_url($_POST['category']);
+            $category->insert($_POST);
 
-        if ($category->validate($_POST)) {
-
-          $_POST['slug'] = str_to_url($_POST['category']);
-          $category->insert($_POST);
-
-          display_message("Your category was successfully created");
-          redirect('admin/categories');
+            display_message("Your category was successfully created");
+            redirect('admin/categories');
+          }
+        } else {
+          $category->errors['category'] = "You are not allowed to do this";
         }
         $data['errors'] = $category->errors;
-        ss($_POST);
       }
     } elseif ($action == 'delete') {
       // Get category info

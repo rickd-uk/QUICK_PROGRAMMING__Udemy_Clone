@@ -182,9 +182,9 @@ class Add_Data extends Database
   private static function course_levels()
   {
     return  <<<EOT
-    INSERT INTO `course_levels` (`id`, `level`, `disabled`) 
-    VALUES(1, 'Beginner Level', 0), 
-    (2, 'Intermediate Level', 0), 
+    INSERT INTO `course_levels` (`id`, `level`, `disabled`)
+    VALUES(1, 'Beginner Level', 0),
+    (2, 'Intermediate Level', 0),
     (3, 'Expert Level', 0),
     (4, 'All Levels', 0);
     EOT;
