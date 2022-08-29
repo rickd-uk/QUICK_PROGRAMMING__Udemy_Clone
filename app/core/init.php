@@ -11,7 +11,7 @@ spl_autoload_register(function ($class_name) {
 
 
 require 'config.php';
-require 'permissions.php';
+require 'roles.php';
 require 'autoload.php';
 require 'db/database.php';
 require 'model.php';

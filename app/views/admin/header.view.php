@@ -298,6 +298,13 @@ use \Model\Auth;  ?>
         </a>
       </li><!-- End Profile Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link " href="<?= ROOT ?>/admin/roles">
+          <i class="bi bi-people"></i>
+          <span>Roles</span>
+        </a>
+      </li><!-- End Profile Nav -->
+
 
       <li class="nav-item">
         <a class="nav-link " href="<?= ROOT ?>/admin/lessons">

@@ -21,7 +21,7 @@ class Controller extends Utility
       echo "could not find view file: " . $filename;
     }
   }
-  public static function view_static($view, $data = [])
+  public static function view_static($view, $data = ['', ''])
   {
     extract($data);
     $filename = "../app/views/" . $view . ".view.php";

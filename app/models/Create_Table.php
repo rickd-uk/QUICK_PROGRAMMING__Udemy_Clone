@@ -195,4 +195,17 @@ class Create_Table extends Database
      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
      ";
   }
+
+  private static function roles()
+  {
+    return "
+    CREATE TABLE IF NOT EXISTS `roles` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `role` varchar(30) NOT NULL,
+    `disabled` tinyint(1) NOT NULL DEFAULT '0',
+    PRIMARY KEY (`id`),
+    KEY `disabled` (`disabled`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ";
+  }
 }

@@ -392,4 +392,65 @@ class Admin extends Controller
     }
     $this->view('admin/categories', $data);
   }
+
+
+
+  public function roles($action = null, $id = null)
+  {
+    Auth::login_to_view();
+
+    $user_id = Auth::getId() ?? null;
+    $role = new \Model\Role();
+
+    $data = [];
+    $data['errors'] = [];
+    $data['action'] = $action;
+    $data['id'] = $id;
+
+    // Is the user adding a course
+    if ($action == 'add') {
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (user_can('add_categories')) {
+          if ($role->validate($_POST)) {
+            $_POST['slug'] = str_to_url($_POST['role']);
+            $role->insert($_POST);
+
+            display_message("Your role was successfully created");
+            redirect('admin/roles');
+          }
+        } else {
+          $role->errors['role'] = "You are not allowed to do this";
+        }
+        $data['errors'] = $role->errors;
+      }
+    } elseif ($action == 'delete') {
+      // Get role info
+      $data['row'] = $row = $role->where(['id' => $id], 'first');
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
+        $role->delete($row->id);
+        display_message("Your role was successfully deleted");
+        redirect('admin/roles');
+      }
+      $data['errors'] = $role->errors;
+    } elseif ($action == 'edit') {
+      // Get role info
+      $data['row'] = $row = $role->where(['id' => $id], 'first');
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
+        if ($role->validate($_POST)) {
+          $role->update($row->id, $_POST);
+
+          display_message("Your role was successfully edited");
+          redirect('admin/roles');
+        }
+        $data['errors'] = $role->errors;
+      }
+    } else {
+      // role view
+      $data['rows'] = $role->findAll();
+    }
+    $this->view('admin/roles', $data);
+  }
 }

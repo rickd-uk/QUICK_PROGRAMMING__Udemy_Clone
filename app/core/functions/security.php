@@ -13,16 +13,20 @@ function user_can(string $permission): bool
 {
   $permission = strtolower($permission);
 
-  if (Auth::is_logged_in()) {
-  }
-  $roles['user'] = ['edit_categories'];
-  $roles['admin'] = ['edit_categories', 'add_categories'];
-
-  $role = Auth::getRole();
-  if (in_array($permission, $roles[$role])) {
+  if (Auth::is_admin()) {
     return true;
   }
 
+
+  if (Auth::is_logged_in()) {
+    $roles['user'] = ['edit_categories'];
+    $roles['admin'] = ['add_categories', 'edit_categories', 'delete_categories'];
+
+    $role = Auth::getRole();
+    if (in_array($permission, $roles[$role])) {
+      return true;
+    }
+  }
 
   return false;
 }

@@ -3,18 +3,18 @@
 use \Controller\Controller;
 
 Controller::view_static('admin/header', $data);
-Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
+Controller::view_breadcrumbs('admin/breadcrumbs', 'roles');
 ?>
 <?php if ($action == 'add') : ?>
   <div class="card col-md-5 mx-auto">
     <div class="card-body">
-      <h5 class="card-title">New Category</h5>
+      <h5 class="card-title">New Role</h5>
 
-      <?php if (user_can('add_categories')) : ?>
+      <?php if (user_can('add_permissions')) : ?>
         <form method="POST" class="row g-3">
           <div class="col-md-12">
-            <input name="category" type="text" value="<?= set_value('category'); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
-            <?php show_error_msg($errors, 'category'); ?>
+            <input name="role" type="text" value="<?= set_value('role'); ?>" class="form-control <?= !empty($errors['role']) ? 'border-danger' : ''; ?>" placeholder="role">
+            <?php show_error_msg($errors, 'role'); ?>
           </div>
 
           <div class="col-md-12">
@@ -24,14 +24,14 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
             </select>
           </div>
           <div class="text-center d-flex justify-content-between pt-2">
-            <a href="<?= ROOT ?>/admin/categories">
+            <a href="<?= ROOT ?>/admin/roles">
               <button type="button" class="btn btn-secondary">Cancel</button>
             </a>
             <button type="submit" class="btn btn-primary ">Save</button>
           </div>
         </form><!-- End No Labels Form -->
       <?php else : ?>
-        <?php Controller::view_static('admin/includes/no-permission', ['categories', '']) ?>
+        <?php Controller::view_static('admin/includes/no-permission', ['roles', '']) ?>
       <?php endif; ?>
 
     </div>
@@ -40,7 +40,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 <?php elseif ($action == 'delete') : ?>
   <div class="card">
     <div class="card-body">
-      <h3 class="card-title">Delete category</h3>
+      <h3 class="card-title">Delete role</h3>
 
       <?php if (user_can('delete_categories')) : ?>
         <h5 class="alert alert-danger text-center">Are you sure you want to delete?</h5>
@@ -48,16 +48,14 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
         <?php if (!empty($row)) : ?>
           <form method="POST" class="row g-3">
             <div class="col-md-12">
-              <b>Category: </b><?= set_value('category', $row->category); ?>
+              <b>Role: </b><?= set_value('role', $row->role); ?>
             </div>
             <div class="col-md-12">
               <b>Active:</b> <?= set_value('disabled', $row->disabled ? 'No' : 'Yes') ?>
             </div>
 
-
             <div class="text-center d-flex justify-content-between pt-2">
-
-              <a href="<?= ROOT ?>/admin/categories">
+              <a href="<?= ROOT ?>/admin/roles">
                 <button type="button" class="btn btn-primary">Back</button>
               </a>
               <button type="submit" class="btn btn-danger ">Delete</button>
@@ -68,14 +66,13 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
         <?php endif; ?>
 
       <?php else : ?>
-        <?php Controller::view_static('admin/includes/no-permission', ['categories', '']) ?>
+        <?php Controller::view_static('admin/includes/no-permission', ['roles', '']) ?>
       <?php endif; ?>
     </div>
   </div>
 
 
 <?php elseif ($action == 'edit') : ?>
-
   <link href="<?= ROOT ?>/assets/css/courses.css?<?= get_date() ?>" rel="stylesheet">
 
   <div class="card">
@@ -83,13 +80,12 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
       <h3 class="card-title">Edit Course</h3>
 
       <?php if (!empty($row)) : ?>
-
-        <?php if (user_can('edit_categories')) : ?>
+        <?php if (user_can('edit_permissions')) : ?>
 
           <form method="POST" class="row g-3">
             <div class="col-md-12">
-              <input name="category" type="text" value="<?= set_value('category', $row->category); ?>" class="form-control <?= !empty($errors['category']) ? 'border-danger' : ''; ?>" placeholder="category">
-              <?php show_error_msg($errors, 'category'); ?>
+              <input name="role" type="text" value="<?= set_value('role', $row->role); ?>" class="form-control <?= !empty($errors['role']) ? 'border-danger' : ''; ?>" placeholder="role">
+              <?php show_error_msg($errors, 'role'); ?>
             </div>
 
             <div class="col-md-12">
@@ -100,7 +96,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
             </div>
             <div class="text-center d-flex justify-content-between pt-2">
 
-              <a href="<?= ROOT ?>/admin/categories">
+              <a href="<?= ROOT ?>/admin/roles">
                 <button type="button" class="btn btn-secondary">Cancel</button>
               </a>
               <button type="submit" class="btn btn-primary ">Save</button>
@@ -108,36 +104,33 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
           </form><!-- End No Labels Form -->
 
         <?php else : ?>
-          <?php Controller::view_static('admin/includes/no-permission', ['categories', '']) ?>
+          <?php Controller::view_static('admin/includes/no-permission', ['roles', '']) ?>
         <?php endif; ?>
-
 
       <?php else : ?>
         <div>That course was not found</div>
       <?php endif; ?>
     </div>
   </div>
+
 <?php else : ?>
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">My Categories
-
-        <a href="<?= ROOT ?>/admin/categories/add">
+      <h5 class="card-title">My Roles
+        <a href="<?= ROOT ?>/admin/roles/add">
           <button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i>
-            New Category</button>
+            New Roles</button>
         </a>
       </h5>
-
       <?php if (user_can('view_categories')) : ?>
-
         <!-- Table with stripped rows -->
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Category</th>
+              <th scope="col">Role</th>
               <th scope="col">Active</th>
-              <th scope="col">Slug</th>
+              <th scope="col">Permissions</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
@@ -147,16 +140,16 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
               <?php foreach ($rows as $row) : ?>
                 <tr>
                   <th scope="row"><?= esc($row->id) ?></th>
-                  <td><?= esc($row->category) ?></td>
+                  <td><?= esc($row->role) ?></td>
                   <td><?= esc($row->disabled ? 'No' : 'Yes') ?></td>
-                  <td><?= esc($row->slug ?? 'Unknown') ?></td>
+                  <td></td>
 
                   <td>
-                    <a href="<?= ROOT ?>/admin/categories/edit/<?= $row->id ?>">
+                    <a href="<?= ROOT ?>/admin/roles/edit/<?= $row->id ?>">
                       <i class="bi bi-pencil-square text-primary"></i>
                     </a>
                     &nbsp;&nbsp;
-                    <a href="<?= ROOT ?>/admin/categories/delete/<?= $row->id ?>">
+                    <a href="<?= ROOT ?>/admin/roles/delete/<?= $row->id ?>">
                       <i class="bi bi-trash-fill text-danger"></i>
                     </a>
                   </td>
@@ -173,7 +166,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
         <!-- End Table with stripped rows -->
 
       <?php else : ?>
-        <?php Controller::view_static('admin/includes/no-permission', ['', 'no_back_btn']) ?>
+        <?php Controller::view_static('admin/includes/no-permission', ['roles', 'no_back_btn',]) ?>
       <?php endif; ?>
 
     </div>
@@ -181,11 +174,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 
 <?php endif; ?>
 
-
-
-<!-- <script src="<?= ROOT ?>/assets/js/tabs.js"></script>
-<script src="<?= ROOT ?>/assets/js/save.js"></script> -->
-<!-- <script src="<?= ROOT ?>/assets/js/video_ul.js?324"></script> -->
 
 
 <?php Controller::view_static('admin/footer') ?>

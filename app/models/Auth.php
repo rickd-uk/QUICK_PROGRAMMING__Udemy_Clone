@@ -5,7 +5,7 @@ namespace Model;
 if (!defined('ROOT')) die('direct script access denied');
 
 /**
- * 
+ *
  * authentication class
  */
 class Auth
@@ -56,7 +56,9 @@ class Auth
   public static function is_admin()
   {
     if (self::session_data_exists()) {
-      $_SESSION['USER_DATA']->role == 'admin' ? true : false;
+      if ($_SESSION['USER_DATA']->role == 'admin') {
+        return true;
+      }
     }
     return false;
   }
