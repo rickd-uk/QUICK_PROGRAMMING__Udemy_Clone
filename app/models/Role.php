@@ -10,9 +10,7 @@ class Role extends Model
   public $errors = [];
   protected $table = "roles";
   protected $afterSelect = [
-
-    //TODO:
-    // 'get_permissions'
+    'get_permissions'
   ];
   protected $allowedCols = [
     'role', 'disabled'
@@ -29,5 +27,22 @@ class Role extends Model
       return true;
     }
     return false;
+  }
+
+  protected function get_permissions($data)
+  {
+    if (!empty($data[0]->id)) {
+
+      foreach ($data as $key => $row) {
+        $query = "SELECT permission FROM permissions_map WHERE role_id = :role_id";
+        $res = $this->query($query, ['role_id' => $row->id]);
+
+        if ($res) {
+          $data[$key]->permissions = array_column($res, 'permission');
+        }
+      }
+    }
+
+    return $data;
   }
 }

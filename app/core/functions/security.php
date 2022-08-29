@@ -11,6 +11,7 @@ function csrf(): void
 
 function user_can(string $permission): bool
 {
+  $role = Auth::getRole();
   $permission = strtolower($permission);
 
   if (Auth::is_admin()) {
@@ -18,11 +19,12 @@ function user_can(string $permission): bool
   }
 
 
+
   if (Auth::is_logged_in()) {
     $roles['user'] = ['edit_categories'];
     $roles['admin'] = ['add_categories', 'edit_categories', 'delete_categories'];
 
-    $role = Auth::getRole();
+
     if (in_array($permission, $roles[$role])) {
       return true;
     }

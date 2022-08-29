@@ -208,4 +208,18 @@ class Create_Table extends Database
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8
     ";
   }
+
+  private static function permissions_map()
+  {
+    return "
+          CREATE TABLE IF NOT EXISTS `permissions_map` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `role_id` int(11) NOT NULL,
+    `permission` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `role_id` (`role_id`),
+    KEY `permission` (`permission`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+        ";
+  }
 }

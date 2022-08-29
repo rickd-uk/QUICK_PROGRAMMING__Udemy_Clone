@@ -65,7 +65,6 @@ class Auth
 
   public static function __callStatic($funcname, $arg)
   {
-
     $key = str_replace("get", "", strtolower($funcname));
     if (self::session_data_exists()) {
       return self::get_session_data()->$key;
@@ -79,6 +78,9 @@ class Auth
   {
   }
   private static function getid()
+  {
+  }
+  private static function getRole()
   {
   }
 }

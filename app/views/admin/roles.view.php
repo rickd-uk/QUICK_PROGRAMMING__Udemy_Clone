@@ -159,58 +159,62 @@ function add_divider($num, $permission)
       </h5>
       <?php if (user_can('view_roles')) : ?>
         <!-- Table with stripped rows -->
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Role</th>
-                <th scope="col">Active</th>
-                <th scope="col" style="width: 600px;">Permissions</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
+        <form method="POST">
+          <button class="btn btn-primary "><i class="bi bi-hdd-fill"></i>
+            Save Permissions</button>
+          <br>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Active</th>
+                  <th scope="col" style="width: 600px;">Permissions</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
 
-            <?php if (!empty($rows)) : ?>
-              <tbody>
-                <?php foreach ($rows as $row) : ?>
-                  <tr>
-                    <th scope="row"><?= esc($row->id) ?></th>
-                    <td><?= esc($row->role) ?></td>
-                    <td><?= esc($row->disabled ? 'No' : 'Yes') ?></td>
-                    <td>
-                      <div class="row">
-                        <?php $num = 0; ?>
-                        <?php foreach (PERMISSIONS as $permission) : ?>
-                          <?php $num++ ?>
-                          <div class="col-md-4 form-check form-switch">
+              <?php if (!empty($rows)) : ?>
+                <tbody>
+                  <?php foreach ($rows as $row) : ?>
+                    <tr>
+                      <th scope="row"><?= esc($row->id) ?></th>
+                      <td><?= esc($row->role) ?></td>
+                      <td><?= esc($row->disabled ? 'No' : 'Yes') ?></td>
+                      <td>
+                        <div class="row">
+                          <?php $num = 0; ?>
+                          <?php foreach (PERMISSIONS as $permission) : ?>
+                            <?php $num++ ?>
+                            <div class="col-md-4 form-check form-switch">
+                              <input name="<?= $row->id . '_' . $num ?>" value="<?= $permission ?>" class="form-check-input" type="checkbox" id="<?= $row->id . $num ?>CheckChecked">
+                              <label class="form-check-label" for="<?= $row->id . $num ?>CheckChecked"><?= str_replace('_', ' ', $permission) ?></label>
+                            </div>
+                          <?php endforeach; ?>
+                        </div>
+                      </td>
+                      <td>
+                        <a href="<?= ROOT ?>/admin/roles/edit/<?= $row->id ?>">
+                          <i class="bi bi-pencil-square text-primary"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a href="<?= ROOT ?>/admin/roles/delete/<?= $row->id ?>">
+                          <i class="bi bi-trash-fill text-danger"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
 
-                            <input class="form-check-input" type="checkbox" id="<?= $row->id ?><?= $num ?>CheckChecked">
-                            <label class="form-check-label" for="<?= $row->id ?><?= $num ?>CheckChecked"><?= str_replace('_', ' ', $permission) ?></label>
-                          </div>
-                        <?php endforeach; ?>
-                      </div>
-                    </td>
-                    <td>
-                      <a href="<?= ROOT ?>/admin/roles/edit/<?= $row->id ?>">
-                        <i class="bi bi-pencil-square text-primary"></i>
-                      </a>
-                      &nbsp;&nbsp;
-                      <a href="<?= ROOT ?>/admin/roles/delete/<?= $row->id ?>">
-                        <i class="bi bi-trash-fill text-danger"></i>
-                      </a>
-                    </td>
-                  </tr>
-                <?php endforeach; ?>
-
-              </tbody>
-            <?php else : ?>
-              <tr>
-                <td colspan="10">No records found!</td>
-              </tr>
-            <?php endif; ?>
-          </table>
-        </div>
+                </tbody>
+              <?php else : ?>
+                <tr>
+                  <td colspan="10">No records found!</td>
+                </tr>
+              <?php endif; ?>
+            </table>
+          </div>
+        </form>
 
         <!-- End Table with stripped rows -->
 

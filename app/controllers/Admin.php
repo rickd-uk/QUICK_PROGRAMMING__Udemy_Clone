@@ -450,6 +450,22 @@ class Admin extends Controller
     } else {
       // role view
       $data['rows'] = $role->findAll();
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        foreach ($_POST as $key => $permission) {
+          if (\preg_match("/[0-9]+\_[0-9]+/", $key)) {
+            $role_id = preg_replace("/\_[0-9]+/", '', $key);
+            // Insert into permissions_table
+            $arr = [];
+            $arr['role_id'] = $role_id;
+            $arr['permission'] = $permission;
+
+            $query = "INSERT INTO permissions_map (role_id, permission) VALUES (:role_id, :permission)";
+            $role->query($query, $arr);
+          }
+        }
+      }
     }
     $this->view('admin/roles', $data);
   }
