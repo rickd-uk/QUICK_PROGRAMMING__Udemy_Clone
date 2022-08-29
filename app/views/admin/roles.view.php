@@ -4,6 +4,14 @@ use \Controller\Controller;
 
 Controller::view_static('admin/header', $data);
 Controller::view_breadcrumbs('admin/breadcrumbs', 'roles');
+
+
+//$func = new DB_Functions();
+
+// To reset auto increment if there are no records
+// $func->reset_id_on_empty_table('roles');
+// $func->reset_id_next('roles');
+
 ?>
 <?php if ($action == 'add') : ?>
   <div class="card col-md-5 mx-auto">
@@ -18,7 +26,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'roles');
           </div>
 
           <div class="col-md-12">
-            <select name="disabled" class="form-select">
+            <label><b>Active:</b></label><select name="disabled" class="form-select">
               <option value="0" selected="">Yes</option>
               <option value="1">No</option>
             </select>

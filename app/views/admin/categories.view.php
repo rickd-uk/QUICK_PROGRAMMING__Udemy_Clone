@@ -18,7 +18,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
           </div>
 
           <div class="col-md-12">
-            <select name="disabled" class="form-select">
+            <label><b>Active:</b></label><select name="disabled" class="form-select">
               <option value="0" selected="">Yes</option>
               <option value="1">No</option>
             </select>
@@ -93,6 +93,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
             </div>
 
             <div class="col-md-12">
+              <label><b>Active:</b></label>
               <select name="disabled" class="form-select">
                 <option <?= set_selected('disabled', '0', $row->disabled) ?>value="0" selected="">Yes</option>
                 <option <?= set_selected('disabled', '1', $row->disabled) ?>value="1">No</option>

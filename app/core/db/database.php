@@ -41,7 +41,8 @@ class Database
           return $result;
         }
       } catch (PDOException $e) {
-        echo "Error: " . $e;
+        return false;
+        //echo "Error: " . $e;
       }
     }
     #TODO:  changed from false

@@ -9,11 +9,11 @@ spl_autoload_register(function ($class_name) {
   }
 });
 
-
 require 'config.php';
 require 'roles.php';
 require 'autoload.php';
 require 'db/database.php';
+require 'db/db_functions.php';
 require 'model.php';
 require 'functions/index.php';
 require 'utility.php';
