@@ -15,16 +15,19 @@ class DB_Functions extends Database
       $query = "ALTER TABLE " . $table . " AUTO_INCREMENT = 1";
       $res = $this->query($query);
       if (empty($res)) {
-        // say somthing
+        // say something
       }
     }
   }
+
   public function reset_id_next($table)
   {
     $query = "ALTER TABLE " . $table . " AUTO_INCREMENT = 1";
+    echo $query;
     $res = $this->query($query);
     if (empty($res)) {
-      // say somthing
+      // say something
+      echo 'RESET SUCCESSFUL';
     }
   }
 }

@@ -18,14 +18,23 @@ function user_can(string $permission): bool
     return true;
   }
 
-
+  $db = new Database();
 
   if (Auth::is_logged_in()) {
-    $roles['user'] = ['edit_categories'];
-    $roles['admin'] = ['add_categories', 'edit_categories', 'delete_categories'];
 
+    $query = "SELECT permission FROM permissions_map WHERE disabled = 0 &&  role_id = (
+      SELECT id FROM roles WHERE role = :role
+    )";
+    $myroles = $db->query($query, ['role' => $role]);
 
-    if (in_array($permission, $roles[$role])) {
+    if ($myroles) {
+
+      $myroles = array_column($myroles, 'permission');
+    } else {
+      $myroles = [];
+    }
+
+    if (in_array($permission, $myroles)) {
       return true;
     }
   }

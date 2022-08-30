@@ -131,6 +131,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
 
       <?php if (user_can('view_categories')) : ?>
 
+
         <!-- Table with stripped rows -->
         <table class="table table-striped">
           <thead>
@@ -176,17 +177,11 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
       <?php else : ?>
         <?php Controller::view_static('admin/includes/no-permission', ['', 'no_back_btn']) ?>
       <?php endif; ?>
-
     </div>
   </div>
 
 <?php endif; ?>
-
-
-
 <!-- <script src="<?= ROOT ?>/assets/js/tabs.js"></script>
 <script src="<?= ROOT ?>/assets/js/save.js"></script> -->
 <!-- <script src="<?= ROOT ?>/assets/js/video_ul.js?324"></script> -->
-
-
 <?php Controller::view_static('admin/footer') ?>

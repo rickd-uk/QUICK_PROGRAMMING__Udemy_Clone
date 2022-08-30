@@ -31,18 +31,19 @@ class Role extends Model
 
   protected function get_permissions($data)
   {
-    if (!empty($data[0]->id)) {
+
+    if (!empty($data[0]->id) && !empty($data[0]->role)) {
 
       foreach ($data as $key => $row) {
-        $query = "SELECT permission FROM permissions_map WHERE role_id = :role_id";
+        $query = "SELECT permission FROM permissions_map WHERE role_id = :role_id && disabled = 0 ";
         $res = $this->query($query, ['role_id' => $row->id]);
+
 
         if ($res) {
           $data[$key]->permissions = array_column($res, 'permission');
         }
       }
     }
-
     return $data;
   }
 }

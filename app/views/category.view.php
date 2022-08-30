@@ -18,8 +18,6 @@ $this->view('includes/nav', $data);
       <div class="section-header d-flex justify-content-between align-items-center mb-5">
         <h2><?= $first_row->category ?></h2>
       </div>
-
-
       <div class="row g-5">
         <div class="col-lg-4">
           <div class="post-entry-1 lg">
@@ -64,11 +62,7 @@ $this->view('includes/nav', $data);
                   </div>
                 <?php endforeach; ?>
               <?php endif; ?>
-
-
             </div>
-
-
           </div>
         </div>
 

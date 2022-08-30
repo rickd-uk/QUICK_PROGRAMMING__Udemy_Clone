@@ -6,8 +6,15 @@ define('PERMISSIONS', [
   'edit_categories',
   'delete_categories',
 
+  'view_permissions',
+  'add_permissions',
+  'edit_permissions',
+  'delete_permissions',
+
   'view_roles',
   'add_roles',
   'edit_roles',
   'delete_roles'
+
+
 ]);

@@ -453,18 +453,32 @@ class Admin extends Controller
 
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        // Disable all permissions
+        $query = "UPDATE permissions_map SET disabled = 1 WHERE id > 0";
+        $role->query($query);
+
         foreach ($_POST as $key => $permission) {
           if (\preg_match("/[0-9]+\_[0-9]+/", $key)) {
             $role_id = preg_replace("/\_[0-9]+/", '', $key);
-            // Insert into permissions_table
+
             $arr = [];
             $arr['role_id'] = $role_id;
             $arr['permission'] = $permission;
 
-            $query = "INSERT INTO permissions_map (role_id, permission) VALUES (:role_id, :permission)";
+            // Check if record exists (then no need to insert it)
+            $query = "SELECT id FROM permissions_map WHERE permission = :permission && role_id = :role_id LIMIT 1";
+            $record_exists = $role->query($query, $arr);
+            if ($record_exists) {
+              // update
+              $query = "UPDATE permissions_map SET disabled = 0 WHERE  permission = :permission && role_id = :role_id LIMIT 1";
+            } else {
+              // Insert into permissions_table
+              $query = "INSERT INTO permissions_map (role_id, permission) VALUES (:role_id, :permission)";
+            }
             $role->query($query, $arr);
           }
         }
+        redirect('admin/roles');
       }
     }
     $this->view('admin/roles', $data);

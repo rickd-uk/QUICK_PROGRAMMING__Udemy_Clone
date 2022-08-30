@@ -11,6 +11,9 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'roles');
 // To reset auto increment if there are no records
 // $func->reset_id_on_empty_table('roles');
 // $func->reset_id_next('roles');
+
+// reset_autoincrement('permissions_map');
+
 $prev = '';
 
 function add_divider($num, $permission)
@@ -33,8 +36,6 @@ function add_divider($num, $permission)
     }
     return false;
   }
-
-
   // <hr class="solid">
 }
 
@@ -186,9 +187,10 @@ function add_divider($num, $permission)
                         <div class="row">
                           <?php $num = 0; ?>
                           <?php foreach (PERMISSIONS as $permission) : ?>
-                            <?php $num++ ?>
+                            <?php $num++;
+                            $row->permissions = $row->permissions ?? [] ?>
                             <div class="col-md-4 form-check form-switch">
-                              <input name="<?= $row->id . '_' . $num ?>" value="<?= $permission ?>" class="form-check-input" type="checkbox" id="<?= $row->id . $num ?>CheckChecked">
+                              <input <?= in_array($permission, $row->permissions) ? 'checked' : '' ?> name="<?= $row->id . '_' . $num ?>" value="<?= $permission ?>" class="form-check-input" type="checkbox" id="<?= $row->id . $num ?>CheckChecked">
                               <label class="form-check-label" for="<?= $row->id . $num ?>CheckChecked"><?= str_replace('_', ' ', $permission) ?></label>
                             </div>
                           <?php endforeach; ?>
