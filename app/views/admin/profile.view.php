@@ -3,7 +3,9 @@
 use \Controller\Controller;
 
 Controller::view_static('admin/header', $data);
-Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile') ?>
+Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile');
+
+?>
 
 <?php if (!empty($row)) : ?>
   <section class="section profile">
