@@ -36,7 +36,10 @@ function display($row, $field)
 
 function display_img($row, $field)
 {
-  return esc(USERS_UL_DIR . $row->$field ?? DEFAULT_PROFILE_IMG);
+  if (!empty($row->$field)) {
+    return (esc(ROOT . '/' . USERS_UL_DIR . $row->$field));
+  }
+  return esc(ROOT . DEFAULT_PROFILE_IMG);
 }
 
 function display_img_from_session()
@@ -47,8 +50,6 @@ function display_img_from_session()
   }
   return DEFAULT_PROFILE_IMG;
 }
-
-
 
 
 function show_error_msg($errors, $field)

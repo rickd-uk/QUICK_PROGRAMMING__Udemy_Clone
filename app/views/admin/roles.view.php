@@ -189,6 +189,15 @@ function add_divider($num, $permission)
                           <?php foreach (PERMISSIONS as $permission) : ?>
                             <?php $num++;
                             $row->permissions = $row->permissions ?? [] ?>
+
+                            <?php if (strtolower($row->role) == 'admin') :  ?>
+                              <div class="col-md-4 form-check form-switch">
+                                <input disabled checked class="form-check-input" type="checkbox" id="<?= $row->id . $num ?>CheckChecked">
+                                <label class="form-check-label" for="<?= $row->id . $num ?>CheckChecked">All Permissions</label>
+                              </div>
+                              <?php break; ?>
+                            <?php endif; ?>
+
                             <div class="col-md-4 form-check form-switch">
                               <input <?= in_array($permission, $row->permissions) ? 'checked' : '' ?> name="<?= $row->id . '_' . $num ?>" value="<?= $permission ?>" class="form-check-input" type="checkbox" id="<?= $row->id . $num ?>CheckChecked">
                               <label class="form-check-label" for="<?= $row->id . $num ?>CheckChecked"><?= str_replace('_', ' ', $permission) ?></label>

@@ -2,6 +2,8 @@
 
 namespace Model;
 
+
+
 if (!defined('ROOT')) die('direct script access denied');
 
 /**
@@ -52,12 +54,20 @@ class Auth
   {
     return self::session_data_exists();
   }
-
   public static function is_admin()
   {
     if (self::session_data_exists()) {
-      if ($_SESSION['USER_DATA']->role == 'admin') {
-        return true;
+      $query = "SELECT role from roles WHERE id = :id LIMIT 1";
+
+      $id = $_SESSION['USER_DATA']->role_id;
+
+      $db = new \Database();
+      $row = $db->query($query, ['id' => $id]);
+
+      if ($row) {
+        if (strtolower($row[0]->role) == 'admin') {
+          return true;
+        }
       }
     }
     return false;
@@ -80,7 +90,7 @@ class Auth
   private static function getid()
   {
   }
-  private static function getRole()
+  private static function getRole_ID()
   {
   }
 }

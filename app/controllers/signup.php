@@ -16,13 +16,18 @@ class Signup extends Controller
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
       if ($user->validate($_POST)) {
 
-        $_POST['role'] = 'user';
+        $_POST['role_id'] = 1;
         $_POST['date'] = get_date();
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $user->insert($_POST);
+        $res = $user->insert($_POST);
 
-        display_message("Your profile was successfully created");
+
+        if ($res) {
+          display_message("Your profile was successfully created");
+        } else {
+          display_message("There was a problem creating your account");
+        }
         redirect('login');
       }
     }

@@ -212,7 +212,6 @@ use \Model\Auth;  ?>
 
 
         <li class="nav-item dropdown pe-3">
-
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="<?= ROOT ?>/<?= display_img_from_session() ?>" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2"><?= substr(Auth::getFirstName(), 0, 1) . ". " . Auth::getLastName() ?></span>
@@ -291,20 +290,23 @@ use \Model\Auth;  ?>
         </a>
       </li><!-- End Profile Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link " href="<?= ROOT ?>/admin/categories">
-          <i class="bi bi-list"></i>
-          <span>Categories</span>
-        </a>
-      </li><!-- End Profile Nav -->
+      <?php if (user_can('view_categories')) : ?>
+        <li class="nav-item">
+          <a class="nav-link " href="<?= ROOT ?>/admin/categories">
+            <i class="bi bi-list"></i>
+            <span>Categories</span>
+          </a>
+        </li><!-- End Categories Nav -->
+      <?php endif; ?>
 
-      <li class="nav-item">
-        <a class="nav-link " href="<?= ROOT ?>/admin/roles">
-          <i class="bi bi-people"></i>
-          <span>Roles</span>
-        </a>
-      </li><!-- End Profile Nav -->
-
+      <?php if (user_can('view_roles')) : ?>
+        <li class="nav-item">
+          <a class="nav-link " href="<?= ROOT ?>/admin/roles">
+            <i class="bi bi-people"></i>
+            <span>Roles</span>
+          </a>
+        </li><!-- End Roles Nav -->
+      <?php endif; ?>
 
       <li class="nav-item">
         <a class="nav-link " href="<?= ROOT ?>/admin/lessons">

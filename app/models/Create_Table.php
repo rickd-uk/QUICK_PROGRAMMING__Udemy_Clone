@@ -37,16 +37,16 @@ class Create_Table extends Database
     ";
   }
 
-  private static function user()
+  private static function users()
   {
     return "
-    CREATE TABLE IF NOT EXISTS `users` (
+          CREATE TABLE IF NOT EXISTS `users` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `firstname` varchar(30) NOT NULL,
       `lastname` varchar(30) NOT NULL,
       `email` varchar(100) NOT NULL,
       `password` varchar(255) NOT NULL,
-      `role` varchar(20) NOT NULL,
+      `role_id` int(11) NOT NULL DEFAULT '1',
       `date` date DEFAULT NULL,
       `about` varchar(2048) DEFAULT NULL,
       `company` varchar(50) DEFAULT NULL,
@@ -54,14 +54,19 @@ class Create_Table extends Database
       `country` varchar(30) DEFAULT NULL,
       `address` varchar(1024) DEFAULT NULL,
       `phone` varchar(10) DEFAULT NULL,
-      `slug` varchar(100) NOT NULL,
+      `slug` varchar(100) DEFAULT NULL,
+      `image` varchar(1024) DEFAULT NULL,
+      `facebook_link` varchar(500) DEFAULT NULL,
+      `instagram_link` varchar(500) DEFAULT NULL,
+      `twitter_link` varchar(500) DEFAULT NULL,
+      `linkedin_link` varchar(500) DEFAULT NULL,
       PRIMARY KEY (`id`),
       KEY `firstname` (`firstname`),
       KEY `lastname` (`lastname`),
       KEY `date` (`date`),
       KEY `email` (`email`),
       KEY `slug` (`slug`)
-     ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8
     ";
   }
 

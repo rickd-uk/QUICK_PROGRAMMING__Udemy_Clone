@@ -3,6 +3,7 @@
 namespace Model;
 
 use \Database;
+use Exception;
 
 class Model extends Database
 {
@@ -50,7 +51,6 @@ class Model extends Database
   public function insert($data)
   {
     $data = $this->remove_unwanted_cols($data);
-
     $keys = array_keys($data);
 
     // $values = array_values($data);
@@ -58,7 +58,13 @@ class Model extends Database
     $query = "INSERT INTO " . $this->table;
     $query .= "(" . implode(",", $keys) . ") VALUES (:" . implode(", :", $keys) . ")";
 
-    $this->query($query, $data);
+    try {
+      $res = $this->query($query, $data);
+      if (!$res) return false;
+    } catch (Exception $err) {
+      return false;
+    }
+    return true;
   }
 
   public function update($id, $data)
@@ -87,16 +93,11 @@ class Model extends Database
   {
     $keys = array_keys($data);
     $query = "SELECT * FROM " . $this->table . " where ";
-
-
-
     // add the keys to build the wuery
     foreach ($keys as $key) {
       $query .= $key . "=:" . $key . " && ";
     }
     $query = trim($query, "&& ");
-
-
 
     // if one record is required then limit it
     if ($get === 'first') {
@@ -104,11 +105,8 @@ class Model extends Database
     } else {
       $query .= " ORDER BY id $this->order LIMIT $this->limit OFFSET $this->offset";
     }
-
-
     // result of query
     $res = $this->query($query, $data);
-
 
     // if it is an array process it
     if (is_array($res) && !empty($res)) {
@@ -120,13 +118,10 @@ class Model extends Database
           $res = $this->$func($res);
         }
       }
-
       // $get === 'first' ? ss('$res[0]') : ss('$res');
       // if first record is needed then return first in array
       return $get === 'first' ? $res[0] : $res;
     }
-
-
     return false;
   }
 
@@ -136,7 +131,6 @@ class Model extends Database
     $res = $this->query($query);
 
     if (is_array($res)) {
-
       // Calls the protected functions in the course model
       // run afterSelect functions
       if (property_exists($this, 'afterSelect')) {

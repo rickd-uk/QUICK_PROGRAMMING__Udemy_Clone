@@ -11,7 +11,7 @@ function csrf(): void
 
 function user_can(string $permission): bool
 {
-  $role = Auth::getRole();
+  $role = Auth::getRole_ID();
   $permission = strtolower($permission);
 
   if (Auth::is_admin()) {
@@ -22,9 +22,9 @@ function user_can(string $permission): bool
 
   if (Auth::is_logged_in()) {
 
-    $query = "SELECT permission FROM permissions_map WHERE disabled = 0 &&  role_id = (
-      SELECT id FROM roles WHERE role = :role
-    )";
+    $query = "SELECT permission FROM permissions_map WHERE disabled = 0 &&  role_id = :role_id";
+
+
     $myroles = $db->query($query, ['role' => $role]);
 
     if ($myroles) {
