@@ -12,13 +12,13 @@ class Database
   public function query($query, $data = [], $type = 'obj')
   {
     $con = $this->connect();
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stm = $con->prepare($query);
 
     if ($stm) {
 
       try {
         $stm->execute($data);
-
         if ($type == 'obj') {
           $type = PDO::FETCH_OBJ;
         } else if ($type == 'arr') {
