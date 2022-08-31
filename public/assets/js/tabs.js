@@ -114,13 +114,15 @@ function get_course_data(obj) {
 	ajax.send(myform)
 }
 
-console.log(window.location.href)
+// console.log(window.location.href)
 
 function show_loader(item) {
 	item.innerHTML = '<img class="loader" src="<?=ROOT?>/assets/images/loader.gif">'
 }
 
-// show_tab(tab_courses)
+window.onload = function () {
+	show_tab(tab_courses)
+}
 
 // ======================================================
 // SAVE

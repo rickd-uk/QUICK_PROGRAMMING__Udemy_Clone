@@ -43,7 +43,7 @@ $categories = get_categories();
                 Hi <?= Auth::getfirstname() ?>
               </span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="<?= ROOT ?>/admin">Dashboard</a></li>
+              <li><a href="<?= ROOT ?>/admin/dashboard">Dashboard</a></li>
               <li><a href="<?= ROOT ?>/admin/profile">Profile</a></li>
               <li><a href="<?= ROOT ?>/admin/settings">Settings</a></li>
               <li><a href="<?= ROOT ?>/logout">Logout</a></li>

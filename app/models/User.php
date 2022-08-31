@@ -14,7 +14,9 @@ class User extends Model
     'email', 'firstname', 'lastname', 'password', 'role', 'date',
     'about', 'company', 'job', 'country', 'address', 'phone', 'slug', 'image',
     'facebook_link', 'instagram_link', 'twitter_link', 'linkedin_link'
-
+  ];
+  protected $afterSelect = [
+    'get_role'
   ];
 
   private function check_field($data, $name, $err_msg, $filter = null)
@@ -144,7 +146,28 @@ class User extends Model
     if (empty($this->errors)) {
       return true;
     }
-
     return false;
+  }
+
+
+  protected function get_role($data)
+  {
+    // Check that data contains email & a role_id, so it is user table
+    if (!empty($data[0]->email) && !empty($data[0]->role_id)) {
+      foreach ($data as $key => $row) {
+
+        // Look for the role that matches the user
+        $query = "SELECT role FROM roles WHERE id = :id LIMIT 1";
+        $res = $this->query($query, ['id' => $row->role_id]);
+
+        // If it is found add it
+        if ($res) {
+          $data[$key]->role_name = $res[0]->role;
+        }
+        // Remove password
+        $data[$key]->password = '';
+      }
+    }
+    return $data;
   }
 }

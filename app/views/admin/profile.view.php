@@ -17,7 +17,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Profile');
 
             <img src="<?= display_img($row, 'image') ?>" style="" alt="Profile" class="profile-image rounded-circle">
             <h2><?= display($row, 'firstname') . ' ' . display($row, 'lastname') ?></h2>
-            <h3><?= display($row, 'role_id') ?></h3>
+            <h3><?= display($row, 'role_name') ?></h3>
             <div class="social-links mt-2">
               <a href="#" class="facebook"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>

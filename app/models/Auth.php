@@ -57,15 +57,9 @@ class Auth
   public static function is_admin()
   {
     if (self::session_data_exists()) {
-      $query = "SELECT role from roles WHERE id = :id LIMIT 1";
-
-      $id = $_SESSION['USER_DATA']->role_id;
-
-      $db = new \Database();
-      $row = $db->query($query, ['id' => $id]);
-
-      if ($row) {
-        if (strtolower($row[0]->role) == 'admin') {
+      $user_data = $_SESSION['USER_DATA'];
+      if (!empty($user_data->role_name)) {
+        if (strtolower($user_data->role_name) == 'admin') {
           return true;
         }
       }

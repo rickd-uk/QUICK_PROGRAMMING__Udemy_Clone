@@ -80,7 +80,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 					</a>
 					<button class=" btn btn-danger float-end">Delete</button>
 		</div>
-
 		</form>
 		<div class="my-5">
 
@@ -94,15 +93,11 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 <?php elseif ($action == 'edit') : ?>
 
 	<link href="<?= ROOT ?>/assets/css/courses.css?<?= get_date() ?>" rel="stylesheet">
-
-
-
 	<div class="card">
 		<div class="card-body">
 			<h3 class="card-title">Edit Course</h3>
 			<?php if (!empty($row)) : ?>
 				<h5 class="card-title"><?= esc($row->title) ?></h5>
-
 				<!-- Tabs -->
 				<div class="tabs-holder">
 					<div onclick="set_courses_tab(this)" id="intended-learners" class="my-tab active-tab">Intended Learners</div>
@@ -127,12 +122,11 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 			<?php else : ?>
 				<div>That course was not found</div>
 			<?php endif; ?>
-
-
 		</div>
 	</div>
 
-
+	<script src="<?= ROOT ?>/assets/js/tabs.js?32342"></script>
+	<script src="<?= ROOT ?>/assets/js/save.js"></script>
 
 
 <?php else : ?>
@@ -202,10 +196,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 <?php endif; ?>
 
 
-
-<script src="<?= ROOT ?>/assets/js/tabs.js"></script>
-<script src="<?= ROOT ?>/assets/js/save.js"></script>
-<script src="<?= ROOT ?>/assets/js/video_ul.js?324"></script>
+<script src="<?= ROOT ?>/assets/js/video_ul.js"></script>
 
 
 <?php Controller::view_static('admin/footer') ?>

@@ -1,6 +1,8 @@
 <?php
 
 define('PERMISSIONS', [
+  'view_admin_area',
+
   'view_categories',
   'add_categories',
   'edit_categories',
@@ -14,7 +16,11 @@ define('PERMISSIONS', [
   'view_roles',
   'add_roles',
   'edit_roles',
-  'delete_roles'
+  'delete_roles',
 
+  'edit_slider_images',
+  'view_dashboard',
 
+  'view_sales',
+  'delete_sales'
 ]);

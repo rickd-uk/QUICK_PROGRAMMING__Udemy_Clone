@@ -274,14 +274,16 @@ use \Model\Auth;  ?>
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
-    <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link " href="<?= ROOT ?>/admin">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <?php if (user_can('view_dashboard')) : ?>
+        <li class="nav-item">
+          <a class="nav-link " href="<?= ROOT ?>/admin/dashboard">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+      <?php endif; ?>
 
       <li class="nav-item">
         <a class="nav-link " href="<?= ROOT ?>/admin/courses">
@@ -322,12 +324,14 @@ use \Model\Auth;  ?>
         </a>
       </li><!-- End Profile Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link " href="<?= ROOT ?>/admin/sales">
-          <i class="bi bi-cash-coin"></i>
-          <span>Sales</span>
-        </a>
-      </li><!-- End Profile Nav -->
+      <?php if (user_can('view_sales')) : ?>
+        <li class="nav-item">
+          <a class="nav-link " href="<?= ROOT ?>/admin/sales">
+            <i class="bi bi-cash-coin"></i>
+            <span>Sales</span>
+          </a>
+        </li><!-- End Profile Nav -->
+      <?php endif; ?>
 
       <li class="nav-item">
         <a class="nav-link " href="<?= ROOT ?>/admin/profile">
@@ -337,12 +341,14 @@ use \Model\Auth;  ?>
       </li><!-- End Profile Nav -->
 
 
-      <li class="nav-item">
-        <a class="nav-link " href="<?= ROOT ?>/admin/slider-images">
-          <i class="bi bi-images"></i>
-          <span>Slider Images</span>
-        </a>
-      </li><!-- End Profile Nav -->
+      <?php if (user_can('edit_slider_images')) : ?>
+        <li class="nav-item">
+          <a class="nav-link " href="<?= ROOT ?>/admin/slider-images">
+            <i class="bi bi-images"></i>
+            <span>Slider Images</span>
+          </a>
+        </li><!-- End Profile Nav -->
+      <?php endif; ?>
 
       <li class="nav-heading">Go to</li>
 

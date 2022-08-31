@@ -25,6 +25,17 @@ class Admin extends Controller
       display_message('Please login to view the admin section');
       redirect('login');
     }
+    $data['title'] = "Page not found";
+
+    $this->view('admin/404', $data);
+  }
+
+  public function dashboard()
+  {
+    if (!Auth::is_logged_in()) {
+      display_message('Please login to view the admin section');
+      redirect('login');
+    }
 
     $data['title'] = "Dashboard";
 
