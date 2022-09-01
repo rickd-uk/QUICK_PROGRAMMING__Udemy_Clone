@@ -109,7 +109,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 				<!-- end tabs -->
 				<div oninput="something_changed(event)">
 					<div id="tabs-content">
-						<img class="loader" src="<?= ROOT ?>/assets/images/loader.gif">
+						<!-- <img class="loader" src="<?= ROOT ?>/assets/images/loader.gif"> -->
 					</div>
 				</div>
 
@@ -125,9 +125,9 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 		</div>
 	</div>
 
-	<script src="<?= ROOT ?>/assets/js/tabs.js?32342"></script>
-	<script src="<?= ROOT ?>/assets/js/save.js"></script>
-
+	<script src="<?= ROOT ?>/assets/js/tabs.js?<?= time() ?>"></script>
+	<script src="<?= ROOT ?>/assets/js/save.js?<?= time() ?>"></script>
+	<script src="<?= ROOT ?>/assets/js/intended-learners.js?<?= time() ?>"></script>
 
 <?php else : ?>
 
@@ -195,8 +195,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 
 <?php endif; ?>
 
-
-<script src="<?= ROOT ?>/assets/js/video_ul.js"></script>
-
+<script src="<?= ROOT ?>/assets/js/video_ul.js?<?= time() ?>"></script>
 
 <?php Controller::view_static('admin/footer') ?>

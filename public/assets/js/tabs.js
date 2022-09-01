@@ -1,8 +1,8 @@
-var tab_courses = sessionStorage.getItem('tab_courses') ? sessionStorage.getItem('tab_courses') : 'intended-learners'
+var tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : 'intended-learners'
 
 var dirty = false
 
-set_tab()
+// set_tab()
 
 function set_courses_tab(div) {
 	if (dirty) {
@@ -11,8 +11,8 @@ function set_courses_tab(div) {
 			return
 		}
 	}
-	tab_courses = div.id
-	sessionStorage.setItem('tab_courses', div.id)
+	tab = div.id
+	sessionStorage.setItem('tab', div.id)
 
 	dirty = false
 	show_tab(div.id)
@@ -36,7 +36,7 @@ function show_tab(tab_name) {
 	// send_data misnomer
 
 	get_course_data({
-		tab_name: tab_courses,
+		tab_name: tab,
 		data_type: 'read',
 	})
 	disable_save_btn(true)
@@ -69,13 +69,21 @@ function handle_result(result) {
 			}
 		}
 	} else {
+		// Load tab content
 		const contentDiv = document.querySelector('#tabs-content')
 		contentDiv.innerHTML = result
+
+		// Do things after tab is loaded
+		tab = sessionStorage.getItem('tab')
+		console.log(tab)
+		if (tab == 'intended-learners') {
+			add_new('js-students-learn')
+		}
 	}
 }
 
 function something_changed(e) {
-	dirty = tab_courses
+	dirty = tab
 	disable_save_btn(false)
 }
 
@@ -121,7 +129,7 @@ function show_loader(item) {
 }
 
 window.onload = function () {
-	show_tab(tab_courses)
+	show_tab(tab)
 }
 
 // ======================================================

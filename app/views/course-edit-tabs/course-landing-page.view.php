@@ -110,8 +110,6 @@ use \Controller\Controller; ?>
       </div>
     </div>
 
-
-
     <div class="my-4 row">
       <div class="col-md-4">
         <img id="js-img-ul-preview" src="<?= get_image($row->course_image, 'courses') ?>" style="max-width: 100%; height: 200px; object-fit: contain;" alt="">

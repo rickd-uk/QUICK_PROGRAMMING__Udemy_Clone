@@ -181,7 +181,5 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'Categories');
   </div>
 
 <?php endif; ?>
-<!-- <script src="<?= ROOT ?>/assets/js/tabs.js"></script>
-<script src="<?= ROOT ?>/assets/js/save.js"></script> -->
-<!-- <script src="<?= ROOT ?>/assets/js/video_ul.js?324"></script> -->
+
 <?php Controller::view_static('admin/footer') ?>

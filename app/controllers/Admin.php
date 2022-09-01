@@ -177,8 +177,6 @@ class Admin extends Controller
       // get course info
       $data['row'] = $row = $course->where(['user_id' => $user_id, 'id' => $id], 'first');
 
-
-
       if ($_SERVER['REQUEST_METHOD'] == 'POST' && $row) {
         $tab_name = $_POST['tab_name'];
 
@@ -189,6 +187,9 @@ class Admin extends Controller
           } else if ($tab_name == "course-messages") {
             // Return course landing page data
             include views_path("course-edit-tabs/course-messages");
+          } else if ($tab_name == "intended-learners") {
+            // Return course landing page data
+            include views_path("course-edit-tabs/intended-learners");
           }
         } else
           // Save course landing page data
@@ -208,8 +209,6 @@ class Admin extends Controller
                   if ($row->course_image && file_exists($course_img_path)) {
                     unlink($course_img_path);
                   }
-
-
                   // Set course image and remove ref to temp image, effectively tmp_img -> course_img transfer
                   $_POST['course_image'] = $tmp_img;
                   $_POST['course_image_tmp'] = '';

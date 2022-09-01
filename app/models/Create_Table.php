@@ -229,4 +229,21 @@ class Create_Table extends Database
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8
         ";
   }
+
+  private static function courses_meta()
+  {
+    return "
+      CREATE TABLE IF NOT EXISTS `courses_meta` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `course_id` int(11) NOT NULL,
+      `data_type` varchar(100) NOT NULL,
+      `value` varchar(1024) NOT NULL,
+      `disabled` tinyint(1) NOT NULL DEFAULT '0',
+      PRIMARY KEY (`id`),
+      KEY `disabled` (`disabled`),
+      KEY `data_type` (`data_type`),
+      KEY `course_id` (`course_id`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ";
+  }
 }

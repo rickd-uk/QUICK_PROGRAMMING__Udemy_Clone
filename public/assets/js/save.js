@@ -4,7 +4,7 @@ function save_content() {
 
 	let obj = {}
 	obj.data_type = 'save'
-	obj.tab_name = tab_courses
+	obj.tab_name = tab
 
 	for (let i = 0; i < inputs.length; i++) {
 		let key = inputs[i].name
@@ -110,7 +110,7 @@ function upload_course_image(file) {
 
 	// Append data to send as a form post
 	myform.append('data_type', 'upload_course_image')
-	myform.append('tab_name', tab_courses)
+	myform.append('tab_name', tab)
 	myform.append('image', file)
 
 	// append csrf code

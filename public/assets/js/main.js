@@ -7,5 +7,5 @@ function show_loader(item) {
 }
 
 function set_tab(tab = 'course-landing-page') {
-	sessionStorage.setItem('tab_courses', tab)
+	sessionStorage.setItem('tab', tab)
 }

@@ -98,7 +98,7 @@ function upload_course_video(file) {
 
 	// Append data to send as a form post
 	myform.append('data_type', 'upload_course_video')
-	myform.append('tab_name', tab_courses)
+	myform.append('tab_name', tab)
 	myform.append('video', file)
 
 	// append csrf code
