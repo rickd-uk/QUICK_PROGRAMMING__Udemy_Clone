@@ -25,7 +25,7 @@
 <script src="<?= ROOT ?>/niceadmin/assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<!-- <script src="<?= ROOT ?>/niceadmin/assets/js/main.js"></script> -->
+<script src="<?= ROOT ?>/niceadmin/assets/js/main.js"></script>
 
 
 

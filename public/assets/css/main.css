@@ -17,3 +17,11 @@
 	--link-selected-color: #4154f1;
 	--tab-border-color: #bbb;
 }
+
+.ml-3 {
+	margin-left: 3px;
+}
+
+.mr-3 {
+	margin-right: 3px;
+}

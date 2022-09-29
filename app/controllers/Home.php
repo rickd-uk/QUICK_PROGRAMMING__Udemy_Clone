@@ -31,6 +31,7 @@ class Home extends Controller
     $data['trending'] = $course->query($query);
 
     if ($data['rows']) {
+
       $data['first_row'] = $data['rows'][0];
       // Remove first post so it won't be repeated
       unset($data['rows'][0]);

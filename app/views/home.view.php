@@ -7,7 +7,7 @@ $this->view('includes/header', $data);
 $this->view('includes/nav', $data);
 
 
-// ss($first_row->user_row);
+// ss($first_row);
 // ss($first_row->user_row->firstname);
 ?>
 

@@ -103,7 +103,7 @@ function save_slider_images(e, id, img_set) {
 		document.querySelector('.js-error-description').innerHTML = ''
 	}
 
-	send_data(obj)
+	ajax.send_data(obj)
 
 	// hide progress bar after 1.5s
 	// setTimeout(() => {
@@ -125,7 +125,7 @@ function handle_result(result) {
 		// object was created
 		if (typeof obj.errors == 'object') {
 			// errors
-			display_errors(obj.errors)
+			errors.display(obj.errors)
 		} else {
 			const progress = document.querySelector('.js-progress')
 			progress.style = 'display: block;'
@@ -136,5 +136,3 @@ function handle_result(result) {
 		}
 	}
 }
-
-console.log(uploading)

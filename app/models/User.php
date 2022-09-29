@@ -165,7 +165,7 @@ class User extends Model
           $data[$key]->role_name = $res[0]->role;
         }
         // Remove password
-        $data[$key]->password = '';
+        // $data[$key]->password = '';
       }
     }
     return $data;

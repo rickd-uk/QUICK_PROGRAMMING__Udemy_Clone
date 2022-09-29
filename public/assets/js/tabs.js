@@ -1,8 +1,6 @@
-var tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : 'intended-learners'
+let tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : 'intended-learners'
 
-var dirty = false
-
-// set_tab()
+let dirty = false
 
 function set_courses_tab(div) {
 	if (dirty) {
@@ -77,7 +75,7 @@ function handle_result(result) {
 		tab = sessionStorage.getItem('tab')
 		console.log(tab)
 		if (tab == 'intended-learners') {
-			add_new('js-students-learn')
+			intended_learners.add_new('js-students-learn')
 		}
 	}
 }

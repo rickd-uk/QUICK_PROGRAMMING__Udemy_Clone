@@ -61,8 +61,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 	</div>
 
 <?php elseif ($action == 'delete') : ?>
-
-
 	<div class="card">
 		<div class="card-body">
 			<h3 class="card-title">Delete Course</h3>
@@ -74,10 +72,11 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 			<h5 class="">Date: <?= format_date($row->date) ?></h5>
 
 			<?php if (!empty($row)) : ?>
+				<a href="<?= ROOT ?>/admin/courses">
+					<button class=" btn btn-primary float-start">Back</button>
+				</a>
 				<form method="POST">
-					<a href="<?= ROOT ?>/admin/courses">
-						<button class=" btn btn-primary float-start">Back</button>
-					</a>
+
 					<button class=" btn btn-danger float-end">Delete</button>
 		</div>
 		</form>
@@ -134,7 +133,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 	<div class="card">
 		<div class="card-body">
 			<h5 class="card-title">My Courses
-
 				<a href="<?= ROOT ?>/admin/courses/add">
 					<button class="btn btn-primary float-end"><i class="bi bi-camera-video-fill"></i>
 						New Course</button>
@@ -156,8 +154,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 					</tr>
 				</thead>
 
-
-
 				<?php if (!empty($rows)) : ?>
 					<tbody>
 						<?php foreach ($rows as $row) : ?>
@@ -171,7 +167,7 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 								<td><?= esc($row->primary_subject) ?></td>
 								<td><?= format_date(esc($row->date)) ?></td>
 								<td>
-									<a href="<?= ROOT ?>/admin/courses/edit/<?= $row->id ?>">
+									<a onClick="set_tab('course-landing-page')" href="<?= ROOT ?>/admin/courses/edit/<?= $row->id ?>">
 										<i class="bi bi-pencil-square text-primary"></i>
 									</a>
 									&nbsp;&nbsp;
@@ -181,7 +177,6 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 								</td>
 							</tr>
 						<?php endforeach; ?>
-
 					</tbody>
 				<?php else : ?>
 					<tr>
@@ -195,6 +190,10 @@ Controller::view_breadcrumbs('admin/breadcrumbs', 'My Courses');
 
 <?php endif; ?>
 
+
 <script src="<?= ROOT ?>/assets/js/video_ul.js?<?= time() ?>"></script>
+<script src="<?= ROOT ?>/assets/js/modal.js?<?= time() ?>"></script>
+
+<link href="<?= ROOT ?>/assets/css/modal.css?<?= time() ?>" rel="stylesheet">
 
 <?php Controller::view_static('admin/footer') ?>

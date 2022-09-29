@@ -84,7 +84,7 @@ class Auth
   private static function getid()
   {
   }
-  private static function getRole_ID()
-  {
-  }
+  // private static function getRole_ID()
+  // {
+  // }
 }

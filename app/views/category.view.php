@@ -5,10 +5,7 @@
  */
 $this->view('includes/header', $data);
 $this->view('includes/nav', $data);
-
-
 ?>
-
 
 <?php if (!empty($first_row)) :  ?>
   <!-- ======= Post Grid Section ======= -->

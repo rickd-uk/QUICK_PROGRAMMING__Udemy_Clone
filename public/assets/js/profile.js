@@ -23,7 +23,6 @@ function load_image(file) {
 window.onload = function () {
 	show_tab(tab)
 }
-
 // upload functions
 function save_profile(e) {
 	console.log(e)
@@ -58,7 +57,7 @@ function save_profile(e) {
 			return
 		}
 	}
-	send_data(obj)
+	ajax.send_data(obj)
 
 	// hide progress bar after 1.5s
 	setTimeout(() => {
@@ -74,7 +73,7 @@ function handle_result(result) {
 		// object was created
 		if (typeof obj.errors == 'object') {
 			// errors
-			display_errors(obj.errors)
+			errors.display(obj.errors)
 		} else {
 			const progress = document.querySelector('.js-progress')
 			progress.style = 'display: block;'
@@ -83,12 +82,5 @@ function handle_result(result) {
 				window.location.reload()
 			}, 2000)
 		}
-	}
-}
-
-function display_errors(errors) {
-	document.querySelector('.js-progress').style = 'display: none;'
-	for (key in errors) {
-		document.querySelector('.js-error-' + key).innerHTML = errors[key]
 	}
 }
