@@ -1,8 +1,76 @@
 'use strict'
 
+class MsgModal {
+	constructor(modalTitle, modalText) {
+		this.modalTitle = modalTitle || 'Add a title'
+		this.modalText = modalText || 'Add your own text'
+
+		this.parent = document.body
+		this.modal = undefined
+
+		this._createModal()
+	}
+
+	response() {
+		return new Promise((resolve, reject) => {
+			if (!this.modal || !this.closeButton) {
+				reject('There was a problem creating the modal window!')
+				return
+			}
+			this.closeButton.addEventListener('click', () => {
+				resolve(null)
+				this._destroyModal()
+			})
+		})
+	}
+
+	_createModal() {
+		// Background dialog
+		this.modal = document.createElement('dialog')
+		this.modal.classList.add('thin-ui-modal-dialog')
+		this.modal.show()
+
+		// Message window
+		const window = document.createElement('div')
+		window.classList.add('thin-ui-modal-window')
+		this.modal.appendChild(window)
+
+		// Title
+		const title = document.createElement('div')
+		title.classList.add('thin-ui-modal-title')
+		window.appendChild(title)
+
+		// Title text
+		const titleText = document.createElement('div')
+		titleText.textContent = this.modalTitle
+		title.appendChild(titleText)
+
+		// Close
+		this.closeButton = document.createElement('button')
+		this.closeButton.type = 'button'
+		this.closeButton.innerHTML = '&times;'
+		this.closeButton.classList.add('thin-ui-modal-close')
+		title.appendChild(this.closeButton)
+
+		// Main text
+		const text = document.createElement('div')
+		text.classList.add('thin-ui-modal-text')
+		text.textContent = this.modalText
+		window.appendChild(text)
+
+		// Let's rock
+		this.parent.appendChild(this.modal)
+	}
+
+	_destroyModal() {
+		this.parent.removeChild(this.modal)
+		delete this
+	}
+}
+
 class SimpleModal {
 	constructor(modalTitle, modalText, acceptText, cancelText) {
-		this.modalTitle = modalTitle || 'Hello world!'
+		this.modalTitle = modalTitle || 'Default Title!'
 		this.modalText = modalText || 'Are you sure you want to do this?'
 		this.acceptText = acceptText || 'Yes'
 		this.cancelText = cancelText || 'No'

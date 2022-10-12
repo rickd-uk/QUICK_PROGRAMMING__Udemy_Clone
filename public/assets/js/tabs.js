@@ -2,6 +2,8 @@ let tab = sessionStorage.getItem('tab') ? sessionStorage.getItem('tab') : 'inten
 
 let dirty = false
 
+const students_learn_min_inputs = 4
+
 function set_courses_tab(div) {
 	if (dirty) {
 		//ask user to save when switching tabs
@@ -75,7 +77,9 @@ function handle_result(result) {
 		tab = sessionStorage.getItem('tab')
 		console.log(tab)
 		if (tab == 'intended-learners') {
-			intended_learners.add_new('js-students-learn')
+			for (let i = 0; i < students_learn_min_inputs; i++) {
+				intended_learners.add_new('js-students-learn')
+			}
 		}
 	}
 }
